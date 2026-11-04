@@ -1,0 +1,66 @@
+// Blind set B1 render driver (L27; written from the set's README §2 only, committed BEFORE the one run).
+// For every entry of render-cases.json: the app's path for a stored card = validate (normalise, never auto-correct) →
+// renderMatrix (bwip-js matrix + quiet zones) → layout (integer module scale; 1D bar height = max(width/4, 64 px)) →
+// toPng (the engine's own PNG writer). One PNG per module width 2/3/4 px × contrast full (#000 on #fff) / dim (#333 on
+// #bbb), named `<id>__m<px>__<full|dim>.png`. A value the engine refuses or cannot render gets NO PNG (the set's scorer
+// counts it as "absent"); the reason is logged. Usage (from the repo root):
+//   node --import ./scripts/node/ts-hooks.mjs test/blind-1/render-driver.ts <render-cases.json> <png dir>
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+import { FORMATS, isFormatId } from '@/engine/barcode/formats';
+import { layout } from '@/engine/barcode/layout';
+import { toPng } from '@/engine/barcode/png';
+import { renderMatrix } from '@/engine/barcode/render';
+import { validate } from '@/engine/barcode/validate';
+
+type RenderCase = { id: string; format: string; value: string };
+
+const CONTRASTS = [
+  { name: 'full', fg: 0x00, bg: 0xff },
+  { name: 'dim', fg: 0x33, bg: 0xbb },
+] as const;
+const SCALES = [2, 3, 4] as const;
+
+const [casesPath, outDir] = process.argv.slice(2);
+if (!casesPath || !outDir) {
+  console.error('usage: render-driver.ts <render-cases.json> <png dir>');
+  process.exit(2);
+}
+mkdirSync(outDir, { recursive: true });
+const cases = (JSON.parse(readFileSync(casesPath, 'utf8')) as { cases: RenderCase[] }).cases;
+let written = 0;
+const notes: string[] = [];
+for (const c of cases) {
+  if (!isFormatId(c.format) || c.format === 'none') {
+    notes.push(`${c.id}: unknown format ${c.format} — no PNG`);
+    continue;
+  }
+  const v = validate(c.value, c.format);
+  if (!v.ok) {
+    notes.push(`${c.id}: validate refused (${v.error}${v.suggestion ? `, suggestion ${v.suggestion.reason}` : ''}) — no PNG`);
+    continue;
+  }
+  if (v.value !== c.value) notes.push(`${c.id}: validate normalised the value to ${JSON.stringify(v.value.slice(0, 40))} (rendered that)`);
+  let m;
+  try {
+    m = renderMatrix(v.value, c.format);
+  } catch (e) {
+    notes.push(`${c.id}: renderMatrix threw ${e instanceof Error ? e.message.slice(0, 160) : String(e)} — no PNG`);
+    continue;
+  }
+  for (const px of SCALES) {
+    // a viewport exactly the symbol's size at `px` → layout picks modulePx = px (1D: square viewport so it never rotates)
+    const w = m.modulesWide * px;
+    const vp = m.kind === '2d' ? { widthPx: w, heightPx: m.modulesHigh * px } : { widthPx: w, heightPx: w };
+    const l = layout(m, vp, FORMATS[c.format].minModulePx);
+    if (l.modulePx !== px || l.rotate) notes.push(`${c.id}: layout gave ${l.modulePx}px rotate=${l.rotate} for ${px}px`);
+    for (const con of CONTRASTS) {
+      const { png } = toPng(m, { modulePx: px, barHeightPx: m.kind === '1d' ? l.heightPx : undefined, fg: con.fg, bg: con.bg });
+      writeFileSync(join(outDir, `${c.id}__m${px}__${con.name}.png`), png);
+      written++;
+    }
+  }
+}
+console.log(`render driver: ${cases.length} values, ${written} PNGs written to ${outDir}`);
+for (const n of notes) console.log(`  ${n}`);

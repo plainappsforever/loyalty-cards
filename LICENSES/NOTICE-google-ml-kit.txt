@@ -1,0 +1,7 @@
+Google ML Kit barcode scanning (Android only)
+
+The Android app contains Google's ML Kit barcode-scanning library 17.3.0 with its bundled model
+(com.google.mlkit:barcode-scanning), used for live camera scanning and for reading codes from photos. It runs on the
+phone with the model inside the app. ML Kit is not open source; it is provided by Google under the ML Kit Terms of
+Service (https://developers.google.com/ml-kit/terms) and the Google APIs Terms of Service
+(https://developers.google.com/terms). On iPhone, Apple's Vision framework (part of iOS) reads barcodes instead.

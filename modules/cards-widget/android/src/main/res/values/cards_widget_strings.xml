@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cards_widget_grid_label">Cards</string>
+    <string name="cards_widget_grid_description">Four of your cards. Tap one to show its code.</string>
+    <string name="cards_widget_barcode_label">Barcode</string>
+    <string name="cards_widget_barcode_description">Your first card\'s barcode, ready at the till. Tap to open the card.</string>
+</resources>

@@ -1,0 +1,23 @@
+# Flows share one simulator and one database, so run them sequentially in this order (by flow name).
+# Open-with (A14) runs separately: scripts/e2e-open-with.sh <ios|android> (it hands a file to the app between two flows).
+flows:
+  - "*"
+executionOrder:
+  continueOnFailure: true
+  flowsOrder:
+    - "Zero prompt - no onboarding, account or rating screen; the camera prompt only after Scan (A8)"
+    - "Smoke - cards list, theme change, restart, data persists"
+    - "Add type - type a number, ranked formats, wrong check digit refused with a tap-to-use fix, save, card shows it (U3)"
+    - "Add scan fallback - the scan screen opens; Type instead and From photo are one tap away (A5)"
+    - "Add photo - codes read from images (Vision / ML Kit), number confirmation required before Save (U4, D41.2)"
+    - "Card view - 2D codes from the render-once cache, open time, brightness line, copy, full screen, favourite (A7, A9, D42)"
+    - "Categories - add, rename, reorder, delete; a card in a category; the list filters by it"
+    - "Share - QR with the card payload, copy number, Catima link; a scanned payload opens Receive (U6)"
+    - "Export - Catima zip with the JPEG photo converted to PNG, backup and CSV; name, size and report before sharing (U7)"
+    - "Licences screen lists the app and opens a full licence text"
+    - "Settings - language switch to German and back, sort, country; About and the backup-exclusion line (dev)"
+    - "Widget link - the URL every widget tile uses opens that card, cold start only in Release (A10)"
+    - "Shortcuts - long-press on the app icon lists the 4 most-used cards; one opens its card (A11)"
+    - "Widgets (Android) - barcode and grid widgets pinned from Settings show the widget cards; a tap opens the card (A10)"
+    - "Self-test - code-kit decodes 13 formats + a two-code screenshot, brightness, Hermes text, A3 timing"
+    - "Decode set - dev render set rendered on the device, decoded by Vision or ML Kit, no wrong value"

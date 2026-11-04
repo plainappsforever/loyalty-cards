@@ -1,0 +1,29 @@
+appId: ${APP_ID}
+---
+# Loads a dev seed set (src/app/debug/seed.tsx) and waits for the Cards list. env: SEED = query after `?`, e.g.
+# "set=ten" or "set=two-hundred&heavy=1". The route wipes every card first.
+- openLink: ${SCHEME}://debug/seed?${SEED}
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - tapOn:
+          text: Open
+          optional: true
+# Preview builds with cards ask for the typed word before the wipe (review F5, D54); development builds wipe at once.
+- runFlow:
+    when:
+      visible:
+        id: seed-confirm-input
+    commands:
+      - tapOn:
+          id: seed-confirm-input
+      # no hideKeyboard: on iOS Maestro cannot hide this keyboard ("Couldn't hide the keyboard"), and the button sits above it
+      - inputText: WIPE
+      - tapOn:
+          id: seed-confirm-button
+- extendedWaitUntil:
+    visible:
+      id: home-screen
+    timeout: 60000
+- waitForAnimationToEnd

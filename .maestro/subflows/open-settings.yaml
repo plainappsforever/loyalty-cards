@@ -1,0 +1,23 @@
+appId: ${APP_ID}
+---
+# Opens Settings from the Cards header. P7: a tap on the header button right after a launch was sometimes not taken on
+# iOS 26 (by hand it always opened; L14), so the tap is retried once when Settings does not appear within 5 s.
+- waitForAnimationToEnd
+- tapOn:
+    id: open-settings
+- extendedWaitUntil:
+    visible:
+      id: settings-screen
+    timeout: 5000
+    optional: true
+- runFlow:
+    when:
+      notVisible:
+        id: settings-screen
+    commands:
+      - tapOn:
+          id: open-settings
+- extendedWaitUntil:
+    visible:
+      id: settings-screen
+    timeout: 15000

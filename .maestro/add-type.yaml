@@ -1,0 +1,94 @@
+appId: ${APP_ID}
+name: Add type - type a number, ranked formats, wrong check digit refused with a tap-to-use fix, save, card shows it (U3)
+tags:
+  - p6
+---
+- runFlow: subflows/launch.yaml
+- runFlow:
+    file: subflows/seed.yaml
+    env:
+      SEED: set=empty
+- tapOn:
+    id: empty-type
+- assertVisible:
+    id: edit-screen
+# number first: typing the name shows known-shop suggestions under it, which moves the number field down
+- tapOn:
+    id: edit-number
+# EAN-13 with a WRONG check digit (…932; correct is …931): Code 128 fits and is ranked first, EAN-13 is not offered
+- inputText: "4006381333932"
+- tapOn:
+    id: edit-name
+- inputText: Testmarkt
+# hideKeyboard, not a tap on the heading text: since F8 the field itself carries that text as its screen-reader label, so a tap on it refocuses the field
+# iOS: Maestro cannot hide this keyboard ("Couldn't hide the keyboard"); the Return key of the single-line Name field does it
+- runFlow:
+    when:
+      platform: Android
+    commands:
+      - hideKeyboard
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - pressKey: Enter
+- assertVisible:
+    id: format-code128
+    selected: true
+- tapOn:
+    id: edit-more-formats
+- scrollUntilVisible:
+    element:
+      id: format-ean13
+- tapOn:
+    id: format-ean13
+- assertVisible:
+    id: edit-error
+- assertVisible: "The check digit does not match."
+# never corrected silently: the fix is a button the user taps
+- assertVisible: "Use 4006381333931"
+- tapOn:
+    id: edit-suggestion
+- assertNotVisible:
+    id: edit-error
+- scrollUntilVisible:
+    element:
+      id: edit-save
+- tapOn:
+    id: edit-save
+- assertVisible:
+    id: card-screen
+- assertVisible: "4006 3813 3393 1"
+- assertVisible:
+    id: card-format
+- assertVisible: "EAN-13"
+- assertVisible:
+    id: card-code
+# edit it: rename, the list shows the new name
+- tapOn:
+    id: card-edit
+- tapOn:
+    id: edit-name
+- eraseText: 20
+- inputText: Testmarkt Neu
+- runFlow:
+    when:
+      platform: Android
+    commands:
+      - hideKeyboard
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - pressKey: Enter
+- scrollUntilVisible:
+    element:
+      id: edit-save
+- tapOn:
+    id: edit-save
+- assertVisible: "Testmarkt Neu"
+- runFlow: subflows/back.yaml
+- assertVisible:
+    id: home-screen
+- assertVisible: "1 card"
+- assertVisible: "Testmarkt Neu"

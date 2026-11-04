@@ -1,0 +1,153 @@
+appId: ${APP_ID}
+name: Widgets (Android) - barcode and grid widgets pinned from Settings show the widget cards; a tap opens the card (A10)
+tags:
+  - p7
+---
+# Android only (the launcher's pin dialog). iOS: widget gallery + home screen driven step by step (V1_LOG P7), the same
+# `card/<id>` links. Seed "ten": favourites Nordmarkt (EAN-13) and Velo Depot, then the most used (Bauhof Plus, …).
+- runFlow:
+    when:
+      platform: Android
+    commands:
+      - runFlow: subflows/launch.yaml
+      - runFlow:
+          file: subflows/seed.yaml
+          env:
+            SEED: set=ten
+      # the seed pushes the widget data when the list regains focus
+      - runFlow: subflows/open-settings.yaml
+      - scrollUntilVisible:
+          element:
+            id: settings-widget-barcode
+      - tapOn:
+          id: settings-widget-barcode
+      # First run: the launcher asks; later runs: the widget is already there (the app says so)
+      - tapOn:
+          text: Add to home screen
+          optional: true
+      - tapOn:
+          text: Add
+          optional: true
+      - tapOn:
+          text: OK
+          optional: true
+      - pressKey: Home
+      # The barcode widget: name, the code and the grouped number of the first widget card
+      - extendedWaitUntil:
+          visible: 7807 0563 5388 2
+          timeout: 8000
+          optional: true
+      # Widgets from earlier runs may sit on another home page and Home keeps the page shown last: sweep forward, then back
+      - repeat:
+          while:
+            notVisible: 7807 0563 5388 2
+          times: 3
+          commands:
+            - swipe:
+                start: 85%,50%
+                end: 15%,50%
+                duration: 300
+            - waitForAnimationToEnd
+      - repeat:
+          while:
+            notVisible: 7807 0563 5388 2
+          times: 3
+          commands:
+            - swipe:
+                start: 15%,50%
+                end: 85%,50%
+                duration: 300
+            - waitForAnimationToEnd
+      - extendedWaitUntil:
+          visible: 7807 0563 5388 2
+          timeout: 15000
+      - assertVisible: Nordmarkt
+      - takeScreenshot: artifacts/maestro/widgets-android-home
+      - waitForAnimationToEnd
+      - tapOn: 7807 0563 5388 2
+      # A tap while the launcher is still redrawing the just-updated widget was dropped once in a full run (P8a-2): tap again
+      - extendedWaitUntil:
+          visible:
+            id: card-code
+          timeout: 8000
+          optional: true
+      - runFlow:
+          when:
+            notVisible:
+              id: card-code
+          commands:
+            - tapOn: 7807 0563 5388 2
+      - extendedWaitUntil:
+          visible:
+            id: card-code
+          timeout: 30000
+      - assertVisible: 7807 0563 5388 2
+      # Grid widget: four tiles; Velo Depot (2nd favourite) opens its card
+      - launchApp
+      - runFlow:
+          when:
+            notVisible:
+              id: open-settings
+          commands:
+            - runFlow: subflows/back.yaml
+      - runFlow: subflows/open-settings.yaml
+      - scrollUntilVisible:
+          element:
+            id: settings-widget-grid
+      - tapOn:
+          id: settings-widget-grid
+      - tapOn:
+          text: Add to home screen
+          optional: true
+      - tapOn:
+          text: Add
+          optional: true
+      - tapOn:
+          text: OK
+          optional: true
+      - pressKey: Home
+      - extendedWaitUntil:
+          visible: Velo Depot
+          timeout: 8000
+          optional: true
+      - repeat:
+          while:
+            notVisible: Velo Depot
+          times: 3
+          commands:
+            - swipe:
+                start: 85%,50%
+                end: 15%,50%
+                duration: 300
+            - waitForAnimationToEnd
+      - repeat:
+          while:
+            notVisible: Velo Depot
+          times: 3
+          commands:
+            - swipe:
+                start: 15%,50%
+                end: 85%,50%
+                duration: 300
+            - waitForAnimationToEnd
+      - extendedWaitUntil:
+          visible: Velo Depot
+          timeout: 15000
+      - waitForAnimationToEnd
+      - tapOn: Velo Depot
+      - extendedWaitUntil:
+          visible:
+            id: card-code
+          timeout: 8000
+          optional: true
+      - runFlow:
+          when:
+            notVisible:
+              id: card-code
+          commands:
+            - tapOn: Velo Depot
+      - extendedWaitUntil:
+          visible:
+            id: card-code
+          timeout: 30000
+      - assertVisible: A54422864B

@@ -1,0 +1,2624 @@
+{
+ "set": "loyalty-b1",
+ "version": 1,
+ "cases": [
+  {
+   "id": "R-CODE128-001",
+   "format": "code128",
+   "value": "A",
+   "expectDecoded": "A",
+   "expectSymbology": "Code128",
+   "note": "minimum length 1"
+  },
+  {
+   "id": "R-CODE128-002",
+   "format": "code128",
+   "value": "0",
+   "expectDecoded": "0",
+   "expectSymbology": "Code128",
+   "note": "single digit"
+  },
+  {
+   "id": "R-CODE128-003",
+   "format": "code128",
+   "value": "x",
+   "expectDecoded": "x",
+   "expectSymbology": "Code128",
+   "note": "single lower-case"
+  },
+  {
+   "id": "R-CODE128-004",
+   "format": "code128",
+   "value": "00",
+   "expectDecoded": "00",
+   "expectSymbology": "Code128",
+   "note": "two digits (one C pair)"
+  },
+  {
+   "id": "R-CODE128-005",
+   "format": "code128",
+   "value": "A1",
+   "expectDecoded": "A1",
+   "expectSymbology": "Code128",
+   "note": "two chars"
+  },
+  {
+   "id": "R-CODE128-006",
+   "format": "code128",
+   "value": "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnop",
+   "expectDecoded": "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnop",
+   "expectSymbology": "Code128",
+   "note": "maximum length 80: printable ASCII 33..112",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE128-007",
+   "format": "code128",
+   "value": "./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}",
+   "expectDecoded": "./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}",
+   "expectSymbology": "Code128",
+   "note": "maximum length 80: ASCII 46..125 incl. []^_`{|}",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE128-008",
+   "format": "code128",
+   "value": "01234567890123456789012345678901234567890123456789012345678901234567890123456789",
+   "expectDecoded": "01234567890123456789012345678901234567890123456789012345678901234567890123456789",
+   "expectSymbology": "Code128",
+   "note": "maximum length 80, all digits (pure subset C)",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE128-009",
+   "format": "code128",
+   "value": "0123456789012345678901234567890123456789012345678901234567890123456789012345678",
+   "expectDecoded": "0123456789012345678901234567890123456789012345678901234567890123456789012345678",
+   "expectSymbology": "Code128",
+   "note": "79 digits (odd run: C then a switch)",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE128-010",
+   "format": "code128",
+   "value": "AB12345678CD",
+   "expectDecoded": "AB12345678CD",
+   "expectSymbology": "Code128",
+   "note": "B -> C -> B switch",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE128-011",
+   "format": "code128",
+   "value": "12345",
+   "expectDecoded": "12345",
+   "expectSymbology": "Code128",
+   "note": "odd digit run"
+  },
+  {
+   "id": "R-CODE128-012",
+   "format": "code128",
+   "value": "1234567890",
+   "expectDecoded": "1234567890",
+   "expectSymbology": "Code128",
+   "note": "even digit run"
+  },
+  {
+   "id": "R-CODE128-013",
+   "format": "code128",
+   "value": "a1b2c3d4",
+   "expectDecoded": "a1b2c3d4",
+   "expectSymbology": "Code128",
+   "note": "alternating case/digits"
+  },
+  {
+   "id": "R-CODE128-014",
+   "format": "code128",
+   "value": "Ab12345Cd6789eF",
+   "expectDecoded": "Ab12345Cd6789eF",
+   "expectSymbology": "Code128",
+   "note": "mixed case with digit runs"
+  },
+  {
+   "id": "R-CODE128-015",
+   "format": "code128",
+   "value": "!\"#$%&'()*+,-./",
+   "expectDecoded": "!\"#$%&'()*+,-./",
+   "expectSymbology": "Code128",
+   "note": "punctuation 33..47"
+  },
+  {
+   "id": "R-CODE128-016",
+   "format": "code128",
+   "value": ":;<=>?@[\\]^_`{|}~",
+   "expectDecoded": ":;<=>?@[\\]^_`{|}~",
+   "expectSymbology": "Code128",
+   "note": "punctuation 58..126"
+  },
+  {
+   "id": "R-CODE128-017",
+   "format": "code128",
+   "value": "HELLO WORLD",
+   "expectDecoded": "HELLO WORLD",
+   "expectSymbology": "Code128",
+   "note": "upper case with space"
+  },
+  {
+   "id": "R-CODE128-018",
+   "format": "code128",
+   "value": "hello world",
+   "expectDecoded": "hello world",
+   "expectSymbology": "Code128",
+   "note": "lower case with space"
+  },
+  {
+   "id": "R-CODE128-019",
+   "format": "code128",
+   "value": "0000123456",
+   "expectDecoded": "0000123456",
+   "expectSymbology": "Code128",
+   "note": "leading zeros kept"
+  },
+  {
+   "id": "R-CODE128-020",
+   "format": "code128",
+   "value": "AB^123",
+   "expectDecoded": "AB^123",
+   "expectSymbology": "Code128",
+   "note": "caret is data (parse off, D28)",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE128-021",
+   "format": "code128",
+   "value": "^FNC1",
+   "expectDecoded": "^FNC1",
+   "expectSymbology": "Code128",
+   "note": "literal ^FNC1 text, not a function code",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE128-022",
+   "format": "code128",
+   "value": "^065^066",
+   "expectDecoded": "^065^066",
+   "expectSymbology": "Code128",
+   "note": "caret-escape lookalike (would be \"AB\" if parsed)",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE128-023",
+   "format": "code128",
+   "value": "A  B",
+   "expectDecoded": "A  B",
+   "expectSymbology": "Code128",
+   "note": "double inner space"
+  },
+  {
+   "id": "R-CODE128-024",
+   "format": "code128",
+   "value": "~",
+   "expectDecoded": "~",
+   "expectSymbology": "Code128",
+   "note": "highest printable 126"
+  },
+  {
+   "id": "R-CODE128-025",
+   "format": "code128",
+   "value": "CARD-2026/10-16",
+   "expectDecoded": "CARD-2026/10-16",
+   "expectSymbology": "Code128",
+   "note": "dashes and slashes"
+  },
+  {
+   "id": "R-CODE128-026",
+   "format": "code128",
+   "value": "9780306406157",
+   "expectDecoded": "9780306406157",
+   "expectSymbology": "Code128",
+   "note": "13 digits as Code 128 (not EAN)"
+  },
+  {
+   "id": "R-CODE128-027",
+   "format": "code128",
+   "value": "1234567890123456789012345678901234567890",
+   "expectDecoded": "1234567890123456789012345678901234567890",
+   "expectSymbology": "Code128",
+   "note": "40 digits"
+  },
+  {
+   "id": "R-CODE128-028",
+   "format": "code128",
+   "value": "{\"a\":1}",
+   "expectDecoded": "{\"a\":1}",
+   "expectSymbology": "Code128",
+   "note": "JSON-looking text"
+  },
+  {
+   "id": "R-CODE128-029",
+   "format": "code128",
+   "value": "Mixed123abc456DEF7890",
+   "expectDecoded": "Mixed123abc456DEF7890",
+   "expectSymbology": "Code128",
+   "note": "many subset changes",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE128-030",
+   "format": "code128",
+   "value": "DE89370400440532013000",
+   "expectDecoded": "DE89370400440532013000",
+   "expectSymbology": "Code128",
+   "note": "IBAN-like"
+  },
+  {
+   "id": "R-CODE128-031",
+   "format": "code128",
+   "value": "ID#42&Co",
+   "expectDecoded": "ID#42&Co",
+   "expectSymbology": "Code128",
+   "note": "hash and ampersand"
+  },
+  {
+   "id": "R-CODE128-032",
+   "format": "code128",
+   "value": "M-1234-5678-9",
+   "expectDecoded": "M-1234-5678-9",
+   "expectSymbology": "Code128",
+   "note": "grouped number"
+  },
+  {
+   "id": "R-EAN13-001",
+   "format": "ean13",
+   "value": "4006381333931",
+   "expectDecoded": "4006381333931",
+   "expectSymbology": "EAN13",
+   "note": "classic valid"
+  },
+  {
+   "id": "R-EAN13-002",
+   "format": "ean13",
+   "value": "5901234123457",
+   "expectDecoded": "5901234123457",
+   "expectSymbology": "EAN13",
+   "note": "GS1 example"
+  },
+  {
+   "id": "R-EAN13-003",
+   "format": "ean13",
+   "value": "9780306406157",
+   "expectDecoded": "9780306406157",
+   "expectSymbology": "EAN13",
+   "note": "ISBN-13"
+  },
+  {
+   "id": "R-EAN13-004",
+   "format": "ean13",
+   "value": "0000000000000",
+   "expectDecoded": "0000000000000",
+   "expectSymbology": "EAN13",
+   "note": "all zeros"
+  },
+  {
+   "id": "R-EAN13-005",
+   "format": "ean13",
+   "value": "0012345678905",
+   "expectDecoded": "0012345678905",
+   "expectSymbology": "EAN13",
+   "note": "leading zeros (UPC-A in EAN-13)"
+  },
+  {
+   "id": "R-EAN13-006",
+   "format": "ean13",
+   "value": "0244595510500",
+   "expectDecoded": "0244595510500",
+   "expectSymbology": "EAN13",
+   "note": "check digit 0, first digit 0 (parity 0)"
+  },
+  {
+   "id": "R-EAN13-007",
+   "format": "ean13",
+   "value": "1330266193550",
+   "expectDecoded": "1330266193550",
+   "expectSymbology": "EAN13",
+   "note": "check digit 0, first digit 1 (parity 1)"
+  },
+  {
+   "id": "R-EAN13-008",
+   "format": "ean13",
+   "value": "2711887563431",
+   "expectDecoded": "2711887563431",
+   "expectSymbology": "EAN13",
+   "note": "check digit 1, first digit 2 (parity 2)"
+  },
+  {
+   "id": "R-EAN13-009",
+   "format": "ean13",
+   "value": "3778253498451",
+   "expectDecoded": "3778253498451",
+   "expectSymbology": "EAN13",
+   "note": "check digit 1, first digit 3 (parity 3)"
+  },
+  {
+   "id": "R-EAN13-010",
+   "format": "ean13",
+   "value": "4533974202522",
+   "expectDecoded": "4533974202522",
+   "expectSymbology": "EAN13",
+   "note": "check digit 2, first digit 4 (parity 4)"
+  },
+  {
+   "id": "R-EAN13-011",
+   "format": "ean13",
+   "value": "5716212786322",
+   "expectDecoded": "5716212786322",
+   "expectSymbology": "EAN13",
+   "note": "check digit 2, first digit 5 (parity 5)"
+  },
+  {
+   "id": "R-EAN13-012",
+   "format": "ean13",
+   "value": "6235253483933",
+   "expectDecoded": "6235253483933",
+   "expectSymbology": "EAN13",
+   "note": "check digit 3, first digit 6 (parity 6)"
+  },
+  {
+   "id": "R-EAN13-013",
+   "format": "ean13",
+   "value": "7348289815223",
+   "expectDecoded": "7348289815223",
+   "expectSymbology": "EAN13",
+   "note": "check digit 3, first digit 7 (parity 7)"
+  },
+  {
+   "id": "R-EAN13-014",
+   "format": "ean13",
+   "value": "8814879074794",
+   "expectDecoded": "8814879074794",
+   "expectSymbology": "EAN13",
+   "note": "check digit 4, first digit 8 (parity 8)"
+  },
+  {
+   "id": "R-EAN13-015",
+   "format": "ean13",
+   "value": "9412173589144",
+   "expectDecoded": "9412173589144",
+   "expectSymbology": "EAN13",
+   "note": "check digit 4, first digit 9 (parity 9)"
+  },
+  {
+   "id": "R-EAN13-016",
+   "format": "ean13",
+   "value": "0276673949315",
+   "expectDecoded": "0276673949315",
+   "expectSymbology": "EAN13",
+   "note": "check digit 5, first digit 0 (parity 0)"
+  },
+  {
+   "id": "R-EAN13-017",
+   "format": "ean13",
+   "value": "1707128113375",
+   "expectDecoded": "1707128113375",
+   "expectSymbology": "EAN13",
+   "note": "check digit 5, first digit 1 (parity 1)"
+  },
+  {
+   "id": "R-EAN13-018",
+   "format": "ean13",
+   "value": "2106569983896",
+   "expectDecoded": "2106569983896",
+   "expectSymbology": "EAN13",
+   "note": "check digit 6, first digit 2 (parity 2)"
+  },
+  {
+   "id": "R-EAN13-019",
+   "format": "ean13",
+   "value": "3626583976036",
+   "expectDecoded": "3626583976036",
+   "expectSymbology": "EAN13",
+   "note": "check digit 6, first digit 3 (parity 3)"
+  },
+  {
+   "id": "R-EAN13-020",
+   "format": "ean13",
+   "value": "4573851869547",
+   "expectDecoded": "4573851869547",
+   "expectSymbology": "EAN13",
+   "note": "check digit 7, first digit 4 (parity 4)"
+  },
+  {
+   "id": "R-EAN13-021",
+   "format": "ean13",
+   "value": "5103047725327",
+   "expectDecoded": "5103047725327",
+   "expectSymbology": "EAN13",
+   "note": "check digit 7, first digit 5 (parity 5)"
+  },
+  {
+   "id": "R-EAN13-022",
+   "format": "ean13",
+   "value": "6264159555598",
+   "expectDecoded": "6264159555598",
+   "expectSymbology": "EAN13",
+   "note": "check digit 8, first digit 6 (parity 6)"
+  },
+  {
+   "id": "R-EAN13-023",
+   "format": "ean13",
+   "value": "7964472429918",
+   "expectDecoded": "7964472429918",
+   "expectSymbology": "EAN13",
+   "note": "check digit 8, first digit 7 (parity 7)"
+  },
+  {
+   "id": "R-EAN13-024",
+   "format": "ean13",
+   "value": "8608563861469",
+   "expectDecoded": "8608563861469",
+   "expectSymbology": "EAN13",
+   "note": "check digit 9, first digit 8 (parity 8)"
+  },
+  {
+   "id": "R-EAN13-025",
+   "format": "ean13",
+   "value": "9477035445259",
+   "expectDecoded": "9477035445259",
+   "expectSymbology": "EAN13",
+   "note": "check digit 9, first digit 9 (parity 9)"
+  },
+  {
+   "id": "R-EAN8-001",
+   "format": "ean8",
+   "value": "96385074",
+   "expectDecoded": "96385074",
+   "expectSymbology": "EAN8",
+   "note": "classic valid"
+  },
+  {
+   "id": "R-EAN8-002",
+   "format": "ean8",
+   "value": "73513537",
+   "expectDecoded": "73513537",
+   "expectSymbology": "EAN8",
+   "note": "valid"
+  },
+  {
+   "id": "R-EAN8-003",
+   "format": "ean8",
+   "value": "00000000",
+   "expectDecoded": "00000000",
+   "expectSymbology": "EAN8",
+   "note": "all zeros"
+  },
+  {
+   "id": "R-EAN8-004",
+   "format": "ean8",
+   "value": "01234565",
+   "expectDecoded": "01234565",
+   "expectSymbology": "EAN8",
+   "note": "EAN-8/UPC-E twin rendered as EAN-8",
+   "adversarial": true
+  },
+  {
+   "id": "R-EAN8-005",
+   "format": "ean8",
+   "value": "05555598",
+   "expectDecoded": "05555598",
+   "expectSymbology": "EAN8",
+   "note": "twin rendered as EAN-8",
+   "adversarial": true
+  },
+  {
+   "id": "R-EAN8-006",
+   "format": "ean8",
+   "value": "32337990",
+   "expectDecoded": "32337990",
+   "expectSymbology": "EAN8",
+   "note": "check digit 0"
+  },
+  {
+   "id": "R-EAN8-007",
+   "format": "ean8",
+   "value": "22759771",
+   "expectDecoded": "22759771",
+   "expectSymbology": "EAN8",
+   "note": "check digit 1"
+  },
+  {
+   "id": "R-EAN8-008",
+   "format": "ean8",
+   "value": "95211312",
+   "expectDecoded": "95211312",
+   "expectSymbology": "EAN8",
+   "note": "check digit 2"
+  },
+  {
+   "id": "R-EAN8-009",
+   "format": "ean8",
+   "value": "01929393",
+   "expectDecoded": "01929393",
+   "expectSymbology": "EAN8",
+   "note": "check digit 3"
+  },
+  {
+   "id": "R-EAN8-010",
+   "format": "ean8",
+   "value": "71883304",
+   "expectDecoded": "71883304",
+   "expectSymbology": "EAN8",
+   "note": "check digit 4"
+  },
+  {
+   "id": "R-EAN8-011",
+   "format": "ean8",
+   "value": "37323035",
+   "expectDecoded": "37323035",
+   "expectSymbology": "EAN8",
+   "note": "check digit 5"
+  },
+  {
+   "id": "R-EAN8-012",
+   "format": "ean8",
+   "value": "97287476",
+   "expectDecoded": "97287476",
+   "expectSymbology": "EAN8",
+   "note": "check digit 6"
+  },
+  {
+   "id": "R-EAN8-013",
+   "format": "ean8",
+   "value": "18872897",
+   "expectDecoded": "18872897",
+   "expectSymbology": "EAN8",
+   "note": "check digit 7"
+  },
+  {
+   "id": "R-EAN8-014",
+   "format": "ean8",
+   "value": "16644878",
+   "expectDecoded": "16644878",
+   "expectSymbology": "EAN8",
+   "note": "check digit 8"
+  },
+  {
+   "id": "R-EAN8-015",
+   "format": "ean8",
+   "value": "25112139",
+   "expectDecoded": "25112139",
+   "expectSymbology": "EAN8",
+   "note": "check digit 9"
+  },
+  {
+   "id": "R-EAN8-016",
+   "format": "ean8",
+   "value": "53136930",
+   "expectDecoded": "53136930",
+   "expectSymbology": "EAN8",
+   "note": "check digit 0"
+  },
+  {
+   "id": "R-EAN8-017",
+   "format": "ean8",
+   "value": "14658273",
+   "expectDecoded": "14658273",
+   "expectSymbology": "EAN8",
+   "note": "check digit 3"
+  },
+  {
+   "id": "R-EAN8-018",
+   "format": "ean8",
+   "value": "88976495",
+   "expectDecoded": "88976495",
+   "expectSymbology": "EAN8",
+   "note": "check digit 5"
+  },
+  {
+   "id": "R-EAN8-019",
+   "format": "ean8",
+   "value": "29719617",
+   "expectDecoded": "29719617",
+   "expectSymbology": "EAN8",
+   "note": "check digit 7"
+  },
+  {
+   "id": "R-EAN8-020",
+   "format": "ean8",
+   "value": "85218369",
+   "expectDecoded": "85218369",
+   "expectSymbology": "EAN8",
+   "note": "check digit 9"
+  },
+  {
+   "id": "R-UPCA-001",
+   "format": "upca",
+   "value": "036000291452",
+   "expectDecoded": "0036000291452",
+   "expectSymbology": "EAN13",
+   "note": "classic valid"
+  },
+  {
+   "id": "R-UPCA-002",
+   "format": "upca",
+   "value": "012345678905",
+   "expectDecoded": "0012345678905",
+   "expectSymbology": "EAN13",
+   "note": "valid"
+  },
+  {
+   "id": "R-UPCA-003",
+   "format": "upca",
+   "value": "000000000000",
+   "expectDecoded": "0000000000000",
+   "expectSymbology": "EAN13",
+   "note": "all zeros"
+  },
+  {
+   "id": "R-UPCA-004",
+   "format": "upca",
+   "value": "042100005264",
+   "expectDecoded": "0042100005264",
+   "expectSymbology": "EAN13",
+   "note": "expansion of UPC-E 04252614"
+  },
+  {
+   "id": "R-UPCA-005",
+   "format": "upca",
+   "value": "123456789012",
+   "expectDecoded": "0123456789012",
+   "expectSymbology": "EAN13",
+   "note": "number system 1"
+  },
+  {
+   "id": "R-UPCA-006",
+   "format": "upca",
+   "value": "011632166460",
+   "expectDecoded": "0011632166460",
+   "expectSymbology": "EAN13",
+   "note": "check 0, number system 0"
+  },
+  {
+   "id": "R-UPCA-007",
+   "format": "upca",
+   "value": "319221699741",
+   "expectDecoded": "0319221699741",
+   "expectSymbology": "EAN13",
+   "note": "check 1, number system 3"
+  },
+  {
+   "id": "R-UPCA-008",
+   "format": "upca",
+   "value": "615638149122",
+   "expectDecoded": "0615638149122",
+   "expectSymbology": "EAN13",
+   "note": "check 2, number system 6"
+  },
+  {
+   "id": "R-UPCA-009",
+   "format": "upca",
+   "value": "944145458633",
+   "expectDecoded": "0944145458633",
+   "expectSymbology": "EAN13",
+   "note": "check 3, number system 9"
+  },
+  {
+   "id": "R-UPCA-010",
+   "format": "upca",
+   "value": "217518568414",
+   "expectDecoded": "0217518568414",
+   "expectSymbology": "EAN13",
+   "note": "check 4, number system 2"
+  },
+  {
+   "id": "R-UPCA-011",
+   "format": "upca",
+   "value": "578347932235",
+   "expectDecoded": "0578347932235",
+   "expectSymbology": "EAN13",
+   "note": "check 5, number system 5"
+  },
+  {
+   "id": "R-UPCA-012",
+   "format": "upca",
+   "value": "862302817126",
+   "expectDecoded": "0862302817126",
+   "expectSymbology": "EAN13",
+   "note": "check 6, number system 8"
+  },
+  {
+   "id": "R-UPCA-013",
+   "format": "upca",
+   "value": "138126549537",
+   "expectDecoded": "0138126549537",
+   "expectSymbology": "EAN13",
+   "note": "check 7, number system 1"
+  },
+  {
+   "id": "R-UPCA-014",
+   "format": "upca",
+   "value": "411573348718",
+   "expectDecoded": "0411573348718",
+   "expectSymbology": "EAN13",
+   "note": "check 8, number system 4"
+  },
+  {
+   "id": "R-UPCA-015",
+   "format": "upca",
+   "value": "754380096749",
+   "expectDecoded": "0754380096749",
+   "expectSymbology": "EAN13",
+   "note": "check 9, number system 7"
+  },
+  {
+   "id": "R-UPCA-016",
+   "format": "upca",
+   "value": "012045713661",
+   "expectDecoded": "0012045713661",
+   "expectSymbology": "EAN13",
+   "note": "check 1, number system 0"
+  },
+  {
+   "id": "R-UPCA-017",
+   "format": "upca",
+   "value": "315349689992",
+   "expectDecoded": "0315349689992",
+   "expectSymbology": "EAN13",
+   "note": "check 2, number system 3"
+  },
+  {
+   "id": "R-UPCA-018",
+   "format": "upca",
+   "value": "630747200854",
+   "expectDecoded": "0630747200854",
+   "expectSymbology": "EAN13",
+   "note": "check 4, number system 6"
+  },
+  {
+   "id": "R-UPCA-019",
+   "format": "upca",
+   "value": "917904710266",
+   "expectDecoded": "0917904710266",
+   "expectSymbology": "EAN13",
+   "note": "check 6, number system 9"
+  },
+  {
+   "id": "R-UPCA-020",
+   "format": "upca",
+   "value": "243831681158",
+   "expectDecoded": "0243831681158",
+   "expectSymbology": "EAN13",
+   "note": "check 8, number system 2"
+  },
+  {
+   "id": "R-UPCA-021",
+   "format": "upca",
+   "value": "578236117880",
+   "expectDecoded": "0578236117880",
+   "expectSymbology": "EAN13",
+   "note": "check 0, number system 5"
+  },
+  {
+   "id": "R-UPCA-022",
+   "format": "upca",
+   "value": "846373379639",
+   "expectDecoded": "0846373379639",
+   "expectSymbology": "EAN13",
+   "note": "check 9, number system 8"
+  },
+  {
+   "id": "R-UPCE-001",
+   "format": "upce",
+   "value": "04252614",
+   "expectDecoded": "04252614",
+   "expectSymbology": "UPCE",
+   "note": "Wikipedia example (pattern 1)"
+  },
+  {
+   "id": "R-UPCE-002",
+   "format": "upce",
+   "value": "01234565",
+   "expectDecoded": "01234565",
+   "expectSymbology": "UPCE",
+   "note": "twin with EAN-8, rendered as UPC-E",
+   "adversarial": true
+  },
+  {
+   "id": "R-UPCE-003",
+   "format": "upce",
+   "value": "00000000",
+   "expectDecoded": "00000000",
+   "expectSymbology": "UPCE",
+   "note": "all zeros"
+  },
+  {
+   "id": "R-UPCE-004",
+   "format": "upce",
+   "value": "12345670",
+   "expectDecoded": "12345670",
+   "expectSymbology": "UPCE",
+   "note": "number system 1, pattern 7"
+  },
+  {
+   "id": "R-UPCE-005",
+   "format": "upce",
+   "value": "06411600",
+   "expectDecoded": "06411600",
+   "expectSymbology": "UPCE",
+   "note": "number system 0, expansion pattern 0 -> UPC-A 064000001160"
+  },
+  {
+   "id": "R-UPCE-006",
+   "format": "upce",
+   "value": "07611010",
+   "expectDecoded": "07611010",
+   "expectSymbology": "UPCE",
+   "note": "number system 0, expansion pattern 1 -> UPC-A 076100001100"
+  },
+  {
+   "id": "R-UPCE-007",
+   "format": "upce",
+   "value": "06745121",
+   "expectDecoded": "06745121",
+   "expectSymbology": "UPCE",
+   "note": "number system 0, expansion pattern 2 -> UPC-A 067200004511"
+  },
+  {
+   "id": "R-UPCE-008",
+   "format": "upce",
+   "value": "01648039",
+   "expectDecoded": "01648039",
+   "expectSymbology": "UPCE",
+   "note": "number system 0, expansion pattern 3 -> UPC-A 016400000809"
+  },
+  {
+   "id": "R-UPCE-009",
+   "format": "upce",
+   "value": "04632340",
+   "expectDecoded": "04632340",
+   "expectSymbology": "UPCE",
+   "note": "number system 0, expansion pattern 4 -> UPC-A 046320000030"
+  },
+  {
+   "id": "R-UPCE-010",
+   "format": "upce",
+   "value": "09120259",
+   "expectDecoded": "09120259",
+   "expectSymbology": "UPCE",
+   "note": "number system 0, expansion pattern 5 -> UPC-A 091202000059"
+  },
+  {
+   "id": "R-UPCE-011",
+   "format": "upce",
+   "value": "05281169",
+   "expectDecoded": "05281169",
+   "expectSymbology": "UPCE",
+   "note": "number system 0, expansion pattern 6 -> UPC-A 052811000069"
+  },
+  {
+   "id": "R-UPCE-012",
+   "format": "upce",
+   "value": "09070172",
+   "expectDecoded": "09070172",
+   "expectSymbology": "UPCE",
+   "note": "number system 0, expansion pattern 7 -> UPC-A 090701000072"
+  },
+  {
+   "id": "R-UPCE-013",
+   "format": "upce",
+   "value": "06742980",
+   "expectDecoded": "06742980",
+   "expectSymbology": "UPCE",
+   "note": "number system 0, expansion pattern 8 -> UPC-A 067429000080"
+  },
+  {
+   "id": "R-UPCE-014",
+   "format": "upce",
+   "value": "07810992",
+   "expectDecoded": "07810992",
+   "expectSymbology": "UPCE",
+   "note": "number system 0, expansion pattern 9 -> UPC-A 078109000092"
+  },
+  {
+   "id": "R-UPCE-015",
+   "format": "upce",
+   "value": "18062902",
+   "expectDecoded": "18062902",
+   "expectSymbology": "UPCE",
+   "note": "number system 1, expansion pattern 0 -> UPC-A 180000006292"
+  },
+  {
+   "id": "R-UPCE-016",
+   "format": "upce",
+   "value": "10853519",
+   "expectDecoded": "10853519",
+   "expectSymbology": "UPCE",
+   "note": "number system 1, expansion pattern 1 -> UPC-A 108100005359"
+  },
+  {
+   "id": "R-UPCE-017",
+   "format": "upce",
+   "value": "12798425",
+   "expectDecoded": "12798425",
+   "expectSymbology": "UPCE",
+   "note": "number system 1, expansion pattern 2 -> UPC-A 127200009845"
+  },
+  {
+   "id": "R-UPCE-018",
+   "format": "upce",
+   "value": "12904539",
+   "expectDecoded": "12904539",
+   "expectSymbology": "UPCE",
+   "note": "number system 1, expansion pattern 3 -> UPC-A 129000000459"
+  },
+  {
+   "id": "R-UPCE-019",
+   "format": "upce",
+   "value": "11119744",
+   "expectDecoded": "11119744",
+   "expectSymbology": "UPCE",
+   "note": "number system 1, expansion pattern 4 -> UPC-A 111190000074"
+  },
+  {
+   "id": "R-UPCE-020",
+   "format": "upce",
+   "value": "18566451",
+   "expectDecoded": "18566451",
+   "expectSymbology": "UPCE",
+   "note": "number system 1, expansion pattern 5 -> UPC-A 185664000051"
+  },
+  {
+   "id": "R-UPCE-021",
+   "format": "upce",
+   "value": "11683667",
+   "expectDecoded": "11683667",
+   "expectSymbology": "UPCE",
+   "note": "number system 1, expansion pattern 6 -> UPC-A 116836000067"
+  },
+  {
+   "id": "R-UPCE-022",
+   "format": "upce",
+   "value": "10317273",
+   "expectDecoded": "10317273",
+   "expectSymbology": "UPCE",
+   "note": "number system 1, expansion pattern 7 -> UPC-A 103172000073"
+  },
+  {
+   "id": "R-UPCE-023",
+   "format": "upce",
+   "value": "17087988",
+   "expectDecoded": "17087988",
+   "expectSymbology": "UPCE",
+   "note": "number system 1, expansion pattern 8 -> UPC-A 170879000088"
+  },
+  {
+   "id": "R-UPCE-024",
+   "format": "upce",
+   "value": "11425298",
+   "expectDecoded": "11425298",
+   "expectSymbology": "UPCE",
+   "note": "number system 1, expansion pattern 9 -> UPC-A 114252000098"
+  },
+  {
+   "id": "R-ITF-001",
+   "format": "itf",
+   "value": "1234",
+   "expectDecoded": "1234",
+   "expectSymbology": "I2of5",
+   "note": "minimum 4 digits"
+  },
+  {
+   "id": "R-ITF-002",
+   "format": "itf",
+   "value": "0000",
+   "expectDecoded": "0000",
+   "expectSymbology": "I2of5",
+   "note": "all zeros, minimum"
+  },
+  {
+   "id": "R-ITF-003",
+   "format": "itf",
+   "value": "123456",
+   "expectDecoded": "123456",
+   "expectSymbology": "I2of5",
+   "note": "6 digits"
+  },
+  {
+   "id": "R-ITF-004",
+   "format": "itf",
+   "value": "000123",
+   "expectDecoded": "000123",
+   "expectSymbology": "I2of5",
+   "note": "6 digits leading zeros"
+  },
+  {
+   "id": "R-ITF-005",
+   "format": "itf",
+   "value": "12345678",
+   "expectDecoded": "12345678",
+   "expectSymbology": "I2of5",
+   "note": "8"
+  },
+  {
+   "id": "R-ITF-006",
+   "format": "itf",
+   "value": "1234567890",
+   "expectDecoded": "1234567890",
+   "expectSymbology": "I2of5",
+   "note": "10 (scanner may say itf14)"
+  },
+  {
+   "id": "R-ITF-007",
+   "format": "itf",
+   "value": "123456789012",
+   "expectDecoded": "123456789012",
+   "expectSymbology": "I2of5",
+   "note": "12"
+  },
+  {
+   "id": "R-ITF-008",
+   "format": "itf",
+   "value": "12345678901231",
+   "expectDecoded": "12345678901231",
+   "expectSymbology": "I2of5",
+   "note": "14 with valid ITF-14 check"
+  },
+  {
+   "id": "R-ITF-009",
+   "format": "itf",
+   "value": "12345678901234",
+   "expectDecoded": "12345678901234",
+   "expectSymbology": "I2of5",
+   "note": "14 with WRONG GS1 check: still valid ITF (no check rule)",
+   "adversarial": true
+  },
+  {
+   "id": "R-ITF-010",
+   "format": "itf",
+   "value": "00012345678905",
+   "expectDecoded": "00012345678905",
+   "expectSymbology": "I2of5",
+   "note": "14, GTIN-14 of a UPC"
+  },
+  {
+   "id": "R-ITF-011",
+   "format": "itf",
+   "value": "10012345678902",
+   "expectDecoded": "10012345678902",
+   "expectSymbology": "I2of5",
+   "note": "14, GTIN-14 indicator 1"
+  },
+  {
+   "id": "R-ITF-012",
+   "format": "itf",
+   "value": "00000000000000",
+   "expectDecoded": "00000000000000",
+   "expectSymbology": "I2of5",
+   "note": "14 zeros"
+  },
+  {
+   "id": "R-ITF-013",
+   "format": "itf",
+   "value": "1234567890123456",
+   "expectDecoded": "1234567890123456",
+   "expectSymbology": "I2of5",
+   "note": "16"
+  },
+  {
+   "id": "R-ITF-014",
+   "format": "itf",
+   "value": "123456789012345678",
+   "expectDecoded": "123456789012345678",
+   "expectSymbology": "I2of5",
+   "note": "18"
+  },
+  {
+   "id": "R-ITF-015",
+   "format": "itf",
+   "value": "12345678901234567890",
+   "expectDecoded": "12345678901234567890",
+   "expectSymbology": "I2of5",
+   "note": "20"
+  },
+  {
+   "id": "R-ITF-016",
+   "format": "itf",
+   "value": "987654321098765432109876",
+   "expectDecoded": "987654321098765432109876",
+   "expectSymbology": "I2of5",
+   "note": "24"
+  },
+  {
+   "id": "R-ITF-017",
+   "format": "itf",
+   "value": "40063813339310",
+   "expectDecoded": "40063813339310",
+   "expectSymbology": "I2of5",
+   "note": "14 digits = EAN-13 + 0"
+  },
+  {
+   "id": "R-ITF-018",
+   "format": "itf",
+   "value": "9999",
+   "expectDecoded": "9999",
+   "expectSymbology": "I2of5",
+   "note": "all nines"
+  },
+  {
+   "id": "R-ITF-019",
+   "format": "itf",
+   "value": "5050",
+   "expectDecoded": "5050",
+   "expectSymbology": "I2of5",
+   "note": "repeating"
+  },
+  {
+   "id": "R-ITF-020",
+   "format": "itf",
+   "value": "0101010101",
+   "expectDecoded": "0101010101",
+   "expectSymbology": "I2of5",
+   "note": "alternating"
+  },
+  {
+   "id": "R-ITF-021",
+   "format": "itf",
+   "value": "31117013206375",
+   "expectDecoded": "31117013206375",
+   "expectSymbology": "I2of5",
+   "note": "14, library-like"
+  },
+  {
+   "id": "R-ITF-022",
+   "format": "itf",
+   "value": "8800",
+   "expectDecoded": "8800",
+   "expectSymbology": "I2of5",
+   "note": "short"
+  },
+  {
+   "id": "R-CODABAR-001",
+   "format": "codabar",
+   "value": "A40156A",
+   "expectDecoded": "A40156A",
+   "expectSymbology": "Codabar",
+   "note": "start A stop A"
+  },
+  {
+   "id": "R-CODABAR-002",
+   "format": "codabar",
+   "value": "A12B",
+   "expectDecoded": "A12B",
+   "expectSymbology": "Codabar",
+   "note": "start A stop B",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODABAR-003",
+   "format": "codabar",
+   "value": "A1234567890C",
+   "expectDecoded": "A1234567890C",
+   "expectSymbology": "Codabar",
+   "note": "start A stop C"
+  },
+  {
+   "id": "R-CODABAR-004",
+   "format": "codabar",
+   "value": "A-$:/.+D",
+   "expectDecoded": "A-$:/.+D",
+   "expectSymbology": "Codabar",
+   "note": "start A stop D"
+  },
+  {
+   "id": "R-CODABAR-005",
+   "format": "codabar",
+   "value": "B31117013206375A",
+   "expectDecoded": "B31117013206375A",
+   "expectSymbology": "Codabar",
+   "note": "start B stop A"
+  },
+  {
+   "id": "R-CODABAR-006",
+   "format": "codabar",
+   "value": "B01B",
+   "expectDecoded": "B01B",
+   "expectSymbology": "Codabar",
+   "note": "start B stop B"
+  },
+  {
+   "id": "R-CODABAR-007",
+   "format": "codabar",
+   "value": "B12.50C",
+   "expectDecoded": "B12.50C",
+   "expectSymbology": "Codabar",
+   "note": "start B stop C"
+  },
+  {
+   "id": "R-CODABAR-008",
+   "format": "codabar",
+   "value": "B$100D",
+   "expectDecoded": "B$100D",
+   "expectSymbology": "Codabar",
+   "note": "start B stop D"
+  },
+  {
+   "id": "R-CODABAR-009",
+   "format": "codabar",
+   "value": "C1/2A",
+   "expectDecoded": "C1/2A",
+   "expectSymbology": "Codabar",
+   "note": "start C stop A"
+  },
+  {
+   "id": "R-CODABAR-010",
+   "format": "codabar",
+   "value": "C12:30B",
+   "expectDecoded": "C12:30B",
+   "expectSymbology": "Codabar",
+   "note": "start C stop B"
+  },
+  {
+   "id": "R-CODABAR-011",
+   "format": "codabar",
+   "value": "C+49-30C",
+   "expectDecoded": "C+49-30C",
+   "expectSymbology": "Codabar",
+   "note": "start C stop C"
+  },
+  {
+   "id": "R-CODABAR-012",
+   "format": "codabar",
+   "value": "C999D",
+   "expectDecoded": "C999D",
+   "expectSymbology": "Codabar",
+   "note": "start C stop D"
+  },
+  {
+   "id": "R-CODABAR-013",
+   "format": "codabar",
+   "value": "D0000A",
+   "expectDecoded": "D0000A",
+   "expectSymbology": "Codabar",
+   "note": "start D stop A"
+  },
+  {
+   "id": "R-CODABAR-014",
+   "format": "codabar",
+   "value": "D5.5.5B",
+   "expectDecoded": "D5.5.5B",
+   "expectSymbology": "Codabar",
+   "note": "start D stop B"
+  },
+  {
+   "id": "R-CODABAR-015",
+   "format": "codabar",
+   "value": "D7-7C",
+   "expectDecoded": "D7-7C",
+   "expectSymbology": "Codabar",
+   "note": "start D stop C"
+  },
+  {
+   "id": "R-CODABAR-016",
+   "format": "codabar",
+   "value": "D42D",
+   "expectDecoded": "D42D",
+   "expectSymbology": "Codabar",
+   "note": "start D stop D"
+  },
+  {
+   "id": "R-CODABAR-017",
+   "format": "codabar",
+   "value": "A123456789012345678901234567890B",
+   "expectDecoded": "A123456789012345678901234567890B",
+   "expectSymbology": "Codabar",
+   "note": "long body 30"
+  },
+  {
+   "id": "R-CODABAR-018",
+   "format": "codabar",
+   "value": "A12B",
+   "expectDecoded": "A12B",
+   "expectSymbology": "Codabar",
+   "note": "minimum body 2 (D30)",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODABAR-019",
+   "format": "codabar",
+   "value": "D-$:/.+A",
+   "expectDecoded": "D-$:/.+A",
+   "expectSymbology": "Codabar",
+   "note": "all specials, reversed letters"
+  },
+  {
+   "id": "R-CODABAR-020",
+   "format": "codabar",
+   "value": "C40156D",
+   "expectDecoded": "C40156D",
+   "expectSymbology": "Codabar",
+   "note": "C/D classic"
+  },
+  {
+   "id": "R-CODABAR-021",
+   "format": "codabar",
+   "value": "1234567890",
+   "expectDecoded": "1234567890",
+   "expectSymbology": "Codabar",
+   "note": "no start/stop given: engine adds them; Vision returns them",
+   "expectDecodedPattern": "^[A-D]1234567890[A-D]$",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODABAR-022",
+   "format": "codabar",
+   "value": "12-34",
+   "expectDecoded": "12-34",
+   "expectSymbology": "Codabar",
+   "note": "no start/stop, dash",
+   "expectDecodedPattern": "^[A-D]12\\-34[A-D]$",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODABAR-023",
+   "format": "codabar",
+   "value": "31117013206375",
+   "expectDecoded": "31117013206375",
+   "expectSymbology": "Codabar",
+   "note": "no start/stop, 14 digits",
+   "expectDecodedPattern": "^[A-D]31117013206375[A-D]$",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODABAR-024",
+   "format": "codabar",
+   "value": "00",
+   "expectDecoded": "00",
+   "expectSymbology": "Codabar",
+   "note": "no start/stop, minimum body",
+   "expectDecodedPattern": "^[A-D]00[A-D]$",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODABAR-025",
+   "format": "codabar",
+   "value": "B987654321C",
+   "expectDecoded": "B987654321C",
+   "expectSymbology": "Codabar",
+   "note": "B/C"
+  },
+  {
+   "id": "R-CODABAR-026",
+   "format": "codabar",
+   "value": "A0001B",
+   "expectDecoded": "A0001B",
+   "expectSymbology": "Codabar",
+   "note": "leading zeros in body"
+  },
+  {
+   "id": "R-CODE39-001",
+   "format": "code39",
+   "value": "A",
+   "expectDecoded": "A",
+   "expectSymbology": "Code39",
+   "note": "single char"
+  },
+  {
+   "id": "R-CODE39-002",
+   "format": "code39",
+   "value": "1",
+   "expectDecoded": "1",
+   "expectSymbology": "Code39",
+   "note": "single digit"
+  },
+  {
+   "id": "R-CODE39-003",
+   "format": "code39",
+   "value": "CODE39",
+   "expectDecoded": "CODE39",
+   "expectSymbology": "Code39",
+   "note": "word"
+  },
+  {
+   "id": "R-CODE39-004",
+   "format": "code39",
+   "value": "ABC-123",
+   "expectDecoded": "ABC-123",
+   "expectSymbology": "Code39",
+   "note": "dash"
+  },
+  {
+   "id": "R-CODE39-005",
+   "format": "code39",
+   "value": "HELLO WORLD",
+   "expectDecoded": "HELLO WORLD",
+   "expectSymbology": "Code39",
+   "note": "inner space"
+  },
+  {
+   "id": "R-CODE39-006",
+   "format": "code39",
+   "value": "0123456789",
+   "expectDecoded": "0123456789",
+   "expectSymbology": "Code39",
+   "note": "digits"
+  },
+  {
+   "id": "R-CODE39-007",
+   "format": "code39",
+   "value": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+   "expectDecoded": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+   "expectSymbology": "Code39",
+   "note": "alphabet"
+  },
+  {
+   "id": "R-CODE39-008",
+   "format": "code39",
+   "value": "-. $/+%",
+   "expectDecoded": "-. $/+%",
+   "expectSymbology": "Code39",
+   "note": "all specials"
+  },
+  {
+   "id": "R-CODE39-009",
+   "format": "code39",
+   "value": "+A",
+   "expectDecoded": "+A",
+   "expectSymbology": "Code39",
+   "note": "full-ASCII lookalike (+A = a)",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE39-010",
+   "format": "code39",
+   "value": "$M",
+   "expectDecoded": "$M",
+   "expectSymbology": "Code39",
+   "note": "full-ASCII lookalike ($M = CR)",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE39-011",
+   "format": "code39",
+   "value": "%U",
+   "expectDecoded": "%U",
+   "expectSymbology": "Code39",
+   "note": "full-ASCII lookalike (%U = NUL)",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE39-012",
+   "format": "code39",
+   "value": "/A",
+   "expectDecoded": "/A",
+   "expectSymbology": "Code39",
+   "note": "full-ASCII lookalike (/A = !)",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE39-013",
+   "format": "code39",
+   "value": "A B",
+   "expectDecoded": "A B",
+   "expectSymbology": "Code39",
+   "note": "single inner space"
+  },
+  {
+   "id": "R-CODE39-014",
+   "format": "code39",
+   "value": "12.50",
+   "expectDecoded": "12.50",
+   "expectSymbology": "Code39",
+   "note": "decimal"
+  },
+  {
+   "id": "R-CODE39-015",
+   "format": "code39",
+   "value": "$100",
+   "expectDecoded": "$100",
+   "expectSymbology": "Code39",
+   "note": "dollar"
+  },
+  {
+   "id": "R-CODE39-016",
+   "format": "code39",
+   "value": "TEL/123",
+   "expectDecoded": "TEL/123",
+   "expectSymbology": "Code39",
+   "note": "slash"
+  },
+  {
+   "id": "R-CODE39-017",
+   "format": "code39",
+   "value": "%%%",
+   "expectDecoded": "%%%",
+   "expectSymbology": "Code39",
+   "note": "percent run"
+  },
+  {
+   "id": "R-CODE39-018",
+   "format": "code39",
+   "value": "X-Y.Z",
+   "expectDecoded": "X-Y.Z",
+   "expectSymbology": "Code39",
+   "note": "mixed specials"
+  },
+  {
+   "id": "R-CODE39-019",
+   "format": "code39",
+   "value": "W",
+   "expectDecoded": "W",
+   "expectSymbology": "Code39",
+   "note": "single W (mod-43 of CODE39)",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE39-020",
+   "format": "code39",
+   "value": "CODE39W",
+   "expectDecoded": "CODE39W",
+   "expectSymbology": "Code39",
+   "note": "value ending in its own mod-43 check char",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE39-021",
+   "format": "code39",
+   "value": "1234567890ABCDEFGHIJ1234567890",
+   "expectDecoded": "1234567890ABCDEFGHIJ1234567890",
+   "expectSymbology": "Code39",
+   "note": "30 chars"
+  },
+  {
+   "id": "R-CODE39-022",
+   "format": "code39",
+   "value": "LIB 0042 7",
+   "expectDecoded": "LIB 0042 7",
+   "expectSymbology": "Code39",
+   "note": "library-like"
+  },
+  {
+   "id": "R-CODE93-001",
+   "format": "code93",
+   "value": "A",
+   "expectDecoded": "A",
+   "expectSymbology": "Code93",
+   "note": "single char"
+  },
+  {
+   "id": "R-CODE93-002",
+   "format": "code93",
+   "value": "1",
+   "expectDecoded": "1",
+   "expectSymbology": "Code93",
+   "note": "single digit"
+  },
+  {
+   "id": "R-CODE93-003",
+   "format": "code93",
+   "value": "TEST93",
+   "expectDecoded": "TEST93",
+   "expectSymbology": "Code93",
+   "note": "word"
+  },
+  {
+   "id": "R-CODE93-004",
+   "format": "code93",
+   "value": "CODE 93",
+   "expectDecoded": "CODE 93",
+   "expectSymbology": "Code93",
+   "note": "space"
+  },
+  {
+   "id": "R-CODE93-005",
+   "format": "code93",
+   "value": "ABC-123",
+   "expectDecoded": "ABC-123",
+   "expectSymbology": "Code93",
+   "note": "dash"
+  },
+  {
+   "id": "R-CODE93-006",
+   "format": "code93",
+   "value": "0123456789",
+   "expectDecoded": "0123456789",
+   "expectSymbology": "Code93",
+   "note": "digits"
+  },
+  {
+   "id": "R-CODE93-007",
+   "format": "code93",
+   "value": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+   "expectDecoded": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+   "expectSymbology": "Code93",
+   "note": "alphabet"
+  },
+  {
+   "id": "R-CODE93-008",
+   "format": "code93",
+   "value": "-. $/+%",
+   "expectDecoded": "-. $/+%",
+   "expectSymbology": "Code93",
+   "note": "all specials"
+  },
+  {
+   "id": "R-CODE93-009",
+   "format": "code93",
+   "value": "+A",
+   "expectDecoded": "+A",
+   "expectSymbology": "Code93",
+   "note": "shift lookalike (literal)",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE93-010",
+   "format": "code93",
+   "value": "%U",
+   "expectDecoded": "%U",
+   "expectSymbology": "Code93",
+   "note": "shift lookalike (literal)",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE93-011",
+   "format": "code93",
+   "value": "$M",
+   "expectDecoded": "$M",
+   "expectSymbology": "Code93",
+   "note": "lookalike",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE93-012",
+   "format": "code93",
+   "value": "/A",
+   "expectDecoded": "/A",
+   "expectSymbology": "Code93",
+   "note": "lookalike",
+   "adversarial": true
+  },
+  {
+   "id": "R-CODE93-013",
+   "format": "code93",
+   "value": "A B-C.$/+%",
+   "expectDecoded": "A B-C.$/+%",
+   "expectSymbology": "Code93",
+   "note": "mixed specials"
+  },
+  {
+   "id": "R-CODE93-014",
+   "format": "code93",
+   "value": "12.50",
+   "expectDecoded": "12.50",
+   "expectSymbology": "Code93",
+   "note": "decimal"
+  },
+  {
+   "id": "R-CODE93-015",
+   "format": "code93",
+   "value": "00000",
+   "expectDecoded": "00000",
+   "expectSymbology": "Code93",
+   "note": "zeros"
+  },
+  {
+   "id": "R-CODE93-016",
+   "format": "code93",
+   "value": "ZZZZZZZZZZ",
+   "expectDecoded": "ZZZZZZZZZZ",
+   "expectSymbology": "Code93",
+   "note": "repeats"
+  },
+  {
+   "id": "R-CODE93-017",
+   "format": "code93",
+   "value": "1234567890ABCDEFGHIJ1234567890",
+   "expectDecoded": "1234567890ABCDEFGHIJ1234567890",
+   "expectSymbology": "Code93",
+   "note": "30 chars"
+  },
+  {
+   "id": "R-CODE93-018",
+   "format": "code93",
+   "value": "X",
+   "expectDecoded": "X",
+   "expectSymbology": "Code93",
+   "note": "single X"
+  },
+  {
+   "id": "R-CODE93-019",
+   "format": "code93",
+   "value": "99",
+   "expectDecoded": "99",
+   "expectSymbology": "Code93",
+   "note": "two digits"
+  },
+  {
+   "id": "R-CODE93-020",
+   "format": "code93",
+   "value": "Q-1/2",
+   "expectDecoded": "Q-1/2",
+   "expectSymbology": "Code93",
+   "note": "slash"
+  },
+  {
+   "id": "R-CODE93-021",
+   "format": "code93",
+   "value": "CARD 7",
+   "expectDecoded": "CARD 7",
+   "expectSymbology": "Code93",
+   "note": "space digit"
+  },
+  {
+   "id": "R-CODE93-022",
+   "format": "code93",
+   "value": "M.N.O",
+   "expectDecoded": "M.N.O",
+   "expectSymbology": "Code93",
+   "note": "dots"
+  },
+  {
+   "id": "R-QR-001",
+   "format": "qr",
+   "value": "A",
+   "expectDecoded": "A",
+   "expectSymbology": "QR",
+   "note": "single char"
+  },
+  {
+   "id": "R-QR-002",
+   "format": "qr",
+   "value": "1",
+   "expectDecoded": "1",
+   "expectSymbology": "QR",
+   "note": "single digit"
+  },
+  {
+   "id": "R-QR-003",
+   "format": "qr",
+   "value": "Hello, World!",
+   "expectDecoded": "Hello, World!",
+   "expectSymbology": "QR",
+   "note": "ASCII text"
+  },
+  {
+   "id": "R-QR-004",
+   "format": "qr",
+   "value": "https://example.com/card?id=12345&x=y",
+   "expectDecoded": "https://example.com/card?id=12345&x=y",
+   "expectSymbology": "QR",
+   "note": "URL"
+  },
+  {
+   "id": "R-QR-005",
+   "format": "qr",
+   "value": "4006381333931",
+   "expectDecoded": "4006381333931",
+   "expectSymbology": "QR",
+   "note": "digits"
+  },
+  {
+   "id": "R-QR-006",
+   "format": "qr",
+   "value": "Müller",
+   "expectDecoded": "Müller",
+   "expectSymbology": "QR",
+   "note": "umlaut"
+  },
+  {
+   "id": "R-QR-007",
+   "format": "qr",
+   "value": "Bäckerei Größe ÄÖÜ ß",
+   "expectDecoded": "Bäckerei Größe ÄÖÜ ß",
+   "expectSymbology": "QR",
+   "note": "German"
+  },
+  {
+   "id": "R-QR-008",
+   "format": "qr",
+   "value": "こんにちは世界",
+   "expectDecoded": "こんにちは世界",
+   "expectSymbology": "QR",
+   "note": "kana + kanji"
+  },
+  {
+   "id": "R-QR-009",
+   "format": "qr",
+   "value": "🙂🎉",
+   "expectDecoded": "🙂🎉",
+   "expectSymbology": "QR",
+   "note": "emoji (astral)",
+   "adversarial": true
+  },
+  {
+   "id": "R-QR-010",
+   "format": "qr",
+   "value": "Мир 123",
+   "expectDecoded": "Мир 123",
+   "expectSymbology": "QR",
+   "note": "Cyrillic"
+  },
+  {
+   "id": "R-QR-011",
+   "format": "qr",
+   "value": "مرحبا 42",
+   "expectDecoded": "مرحبا 42",
+   "expectSymbology": "QR",
+   "note": "Arabic"
+  },
+  {
+   "id": "R-QR-012",
+   "format": "qr",
+   "value": "中文会员卡 12345",
+   "expectDecoded": "中文会员卡 12345",
+   "expectSymbology": "QR",
+   "note": "Chinese"
+  },
+  {
+   "id": "R-QR-013",
+   "format": "qr",
+   "value": "MÃ¼ller",
+   "expectDecoded": "MÃ¼ller",
+   "expectSymbology": "QR",
+   "note": "mojibake lookalike text (Ã and ¼ are data)",
+   "adversarial": true
+  },
+  {
+   "id": "R-QR-014",
+   "format": "qr",
+   "value": "Price ^ 5 €",
+   "expectDecoded": "Price ^ 5 €",
+   "expectSymbology": "QR",
+   "note": "caret with non-ASCII (D31 doubling)",
+   "adversarial": true
+  },
+  {
+   "id": "R-QR-015",
+   "format": "qr",
+   "value": "ü^065",
+   "expectDecoded": "ü^065",
+   "expectSymbology": "QR",
+   "note": "caret-escape lookalike after non-ASCII",
+   "adversarial": true
+  },
+  {
+   "id": "R-QR-016",
+   "format": "qr",
+   "value": "^ECI000026Müller",
+   "expectDecoded": "^ECI000026Müller",
+   "expectSymbology": "QR",
+   "note": "literal ECI text with non-ASCII",
+   "adversarial": true
+  },
+  {
+   "id": "R-QR-017",
+   "format": "qr",
+   "value": "caret ^ only ASCII",
+   "expectDecoded": "caret ^ only ASCII",
+   "expectSymbology": "QR",
+   "note": "caret, ASCII path",
+   "adversarial": true
+  },
+  {
+   "id": "R-QR-018",
+   "format": "qr",
+   "value": "LC1:{\"n\":\"Bäckerei\",\"i\":\"4006381333931\",\"f\":\"ean13\",\"k\":\"#67bf74\",\"t\":\"Kasse 2\"}",
+   "expectDecoded": "LC1:{\"n\":\"Bäckerei\",\"i\":\"4006381333931\",\"f\":\"ean13\",\"k\":\"#67bf74\",\"t\":\"Kasse 2\"}",
+   "expectSymbology": "QR",
+   "note": "an LC1 share payload"
+  },
+  {
+   "id": "R-QR-019",
+   "format": "qr",
+   "value": "Ωmega ✓ naïve café",
+   "expectDecoded": "Ωmega ✓ naïve café",
+   "expectSymbology": "QR",
+   "note": "mixed BMP symbols"
+  },
+  {
+   "id": "R-QR-020",
+   "format": "qr",
+   "value": "Tab-free–dash",
+   "expectDecoded": "Tab-free–dash",
+   "expectSymbology": "QR",
+   "note": "en dash"
+  },
+  {
+   "id": "R-QR-021",
+   "format": "qr",
+   "value": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L",
+   "expectDecoded": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L",
+   "expectSymbology": "QR",
+   "note": "1000 chars ASCII text (maximum)"
+  },
+  {
+   "id": "R-QR-022",
+   "format": "qr",
+   "value": "X'.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSX",
+   "expectDecoded": "X'.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSX",
+   "expectSymbology": "QR",
+   "note": "1000 chars printable ASCII (maximum)"
+  },
+  {
+   "id": "R-QR-023",
+   "format": "qr",
+   "value": "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789",
+   "expectDecoded": "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789",
+   "expectSymbology": "QR",
+   "note": "1000 digits (numeric mode)"
+  },
+  {
+   "id": "R-QR-024",
+   "format": "qr",
+   "value": "üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü",
+   "expectDecoded": "üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü",
+   "expectSymbology": "QR",
+   "note": "1000 x ü = 2000 UTF-8 bytes (QR only)"
+  },
+  {
+   "id": "R-QR-025",
+   "format": "qr",
+   "value": "HELLO WORLD 123",
+   "expectDecoded": "HELLO WORLD 123",
+   "expectSymbology": "QR",
+   "note": "alphanumeric mode"
+  },
+  {
+   "id": "R-QR-026",
+   "format": "qr",
+   "value": "0",
+   "expectDecoded": "0",
+   "expectSymbology": "QR",
+   "note": "zero"
+  },
+  {
+   "id": "R-QR-027",
+   "format": "qr",
+   "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "expectDecoded": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "expectSymbology": "QR",
+   "note": "500 chars"
+  },
+  {
+   "id": "R-QR-028",
+   "format": "qr",
+   "value": "Ä1",
+   "expectDecoded": "Ä1",
+   "expectSymbology": "QR",
+   "note": "two chars, one non-ASCII"
+  },
+  {
+   "id": "R-QR-029",
+   "format": "qr",
+   "value": "ß",
+   "expectDecoded": "ß",
+   "expectSymbology": "QR",
+   "note": "single sharp s"
+  },
+  {
+   "id": "R-QR-030",
+   "format": "qr",
+   "value": "ñandú",
+   "expectDecoded": "ñandú",
+   "expectSymbology": "QR",
+   "note": "Spanish"
+  },
+  {
+   "id": "R-AZTEC-001",
+   "format": "aztec",
+   "value": "A",
+   "expectDecoded": "A",
+   "expectSymbology": "Aztec",
+   "note": "single char"
+  },
+  {
+   "id": "R-AZTEC-002",
+   "format": "aztec",
+   "value": "1",
+   "expectDecoded": "1",
+   "expectSymbology": "Aztec",
+   "note": "single digit"
+  },
+  {
+   "id": "R-AZTEC-003",
+   "format": "aztec",
+   "value": "Hello, World!",
+   "expectDecoded": "Hello, World!",
+   "expectSymbology": "Aztec",
+   "note": "ASCII text"
+  },
+  {
+   "id": "R-AZTEC-004",
+   "format": "aztec",
+   "value": "https://example.com/card?id=12345&x=y",
+   "expectDecoded": "https://example.com/card?id=12345&x=y",
+   "expectSymbology": "Aztec",
+   "note": "URL"
+  },
+  {
+   "id": "R-AZTEC-005",
+   "format": "aztec",
+   "value": "4006381333931",
+   "expectDecoded": "4006381333931",
+   "expectSymbology": "Aztec",
+   "note": "digits"
+  },
+  {
+   "id": "R-AZTEC-006",
+   "format": "aztec",
+   "value": "Müller",
+   "expectDecoded": "Müller",
+   "expectSymbology": "Aztec",
+   "note": "umlaut"
+  },
+  {
+   "id": "R-AZTEC-007",
+   "format": "aztec",
+   "value": "Bäckerei Größe ÄÖÜ ß",
+   "expectDecoded": "Bäckerei Größe ÄÖÜ ß",
+   "expectSymbology": "Aztec",
+   "note": "German"
+  },
+  {
+   "id": "R-AZTEC-008",
+   "format": "aztec",
+   "value": "こんにちは世界",
+   "expectDecoded": "こんにちは世界",
+   "expectSymbology": "Aztec",
+   "note": "kana + kanji"
+  },
+  {
+   "id": "R-AZTEC-009",
+   "format": "aztec",
+   "value": "🙂🎉",
+   "expectDecoded": "🙂🎉",
+   "expectSymbology": "Aztec",
+   "note": "emoji (astral)",
+   "adversarial": true
+  },
+  {
+   "id": "R-AZTEC-010",
+   "format": "aztec",
+   "value": "Мир 123",
+   "expectDecoded": "Мир 123",
+   "expectSymbology": "Aztec",
+   "note": "Cyrillic"
+  },
+  {
+   "id": "R-AZTEC-011",
+   "format": "aztec",
+   "value": "مرحبا 42",
+   "expectDecoded": "مرحبا 42",
+   "expectSymbology": "Aztec",
+   "note": "Arabic"
+  },
+  {
+   "id": "R-AZTEC-012",
+   "format": "aztec",
+   "value": "中文会员卡 12345",
+   "expectDecoded": "中文会员卡 12345",
+   "expectSymbology": "Aztec",
+   "note": "Chinese"
+  },
+  {
+   "id": "R-AZTEC-013",
+   "format": "aztec",
+   "value": "MÃ¼ller",
+   "expectDecoded": "MÃ¼ller",
+   "expectSymbology": "Aztec",
+   "note": "mojibake lookalike text (Ã and ¼ are data)",
+   "adversarial": true
+  },
+  {
+   "id": "R-AZTEC-014",
+   "format": "aztec",
+   "value": "Price ^ 5 €",
+   "expectDecoded": "Price ^ 5 €",
+   "expectSymbology": "Aztec",
+   "note": "caret with non-ASCII (D31 doubling)",
+   "adversarial": true
+  },
+  {
+   "id": "R-AZTEC-015",
+   "format": "aztec",
+   "value": "ü^065",
+   "expectDecoded": "ü^065",
+   "expectSymbology": "Aztec",
+   "note": "caret-escape lookalike after non-ASCII",
+   "adversarial": true
+  },
+  {
+   "id": "R-AZTEC-016",
+   "format": "aztec",
+   "value": "^ECI000026Müller",
+   "expectDecoded": "^ECI000026Müller",
+   "expectSymbology": "Aztec",
+   "note": "literal ECI text with non-ASCII",
+   "adversarial": true
+  },
+  {
+   "id": "R-AZTEC-017",
+   "format": "aztec",
+   "value": "caret ^ only ASCII",
+   "expectDecoded": "caret ^ only ASCII",
+   "expectSymbology": "Aztec",
+   "note": "caret, ASCII path",
+   "adversarial": true
+  },
+  {
+   "id": "R-AZTEC-018",
+   "format": "aztec",
+   "value": "LC1:{\"n\":\"Bäckerei\",\"i\":\"4006381333931\",\"f\":\"ean13\",\"k\":\"#67bf74\",\"t\":\"Kasse 2\"}",
+   "expectDecoded": "LC1:{\"n\":\"Bäckerei\",\"i\":\"4006381333931\",\"f\":\"ean13\",\"k\":\"#67bf74\",\"t\":\"Kasse 2\"}",
+   "expectSymbology": "Aztec",
+   "note": "an LC1 share payload"
+  },
+  {
+   "id": "R-AZTEC-019",
+   "format": "aztec",
+   "value": "Ωmega ✓ naïve café",
+   "expectDecoded": "Ωmega ✓ naïve café",
+   "expectSymbology": "Aztec",
+   "note": "mixed BMP symbols"
+  },
+  {
+   "id": "R-AZTEC-020",
+   "format": "aztec",
+   "value": "Tab-free–dash",
+   "expectDecoded": "Tab-free–dash",
+   "expectSymbology": "Aztec",
+   "note": "en dash"
+  },
+  {
+   "id": "R-AZTEC-021",
+   "format": "aztec",
+   "value": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L",
+   "expectDecoded": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L",
+   "expectSymbology": "Aztec",
+   "note": "1000 chars ASCII text (maximum)"
+  },
+  {
+   "id": "R-AZTEC-022",
+   "format": "aztec",
+   "value": "X'.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSX",
+   "expectDecoded": "X'.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSX",
+   "expectSymbology": "Aztec",
+   "note": "1000 chars printable ASCII"
+  },
+  {
+   "id": "R-AZTEC-023",
+   "format": "aztec",
+   "value": "🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂",
+   "expectDecoded": "🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂",
+   "expectSymbology": "Aztec",
+   "note": "250 emoji = 1000 UTF-8 bytes",
+   "adversarial": true
+  },
+  {
+   "id": "R-AZTEC-024",
+   "format": "aztec",
+   "value": "MEMBER-0001",
+   "expectDecoded": "MEMBER-0001",
+   "expectSymbology": "Aztec",
+   "note": "ID"
+  },
+  {
+   "id": "R-AZTEC-025",
+   "format": "aztec",
+   "value": "zhxbx",
+   "expectDecoded": "zhxbx",
+   "expectSymbology": "Aztec",
+   "note": "Catima example"
+  },
+  {
+   "id": "R-PDF417-001",
+   "format": "pdf417",
+   "value": "A",
+   "expectDecoded": "A",
+   "expectSymbology": "PDF417",
+   "note": "single char"
+  },
+  {
+   "id": "R-PDF417-002",
+   "format": "pdf417",
+   "value": "1",
+   "expectDecoded": "1",
+   "expectSymbology": "PDF417",
+   "note": "single digit"
+  },
+  {
+   "id": "R-PDF417-003",
+   "format": "pdf417",
+   "value": "Hello, World!",
+   "expectDecoded": "Hello, World!",
+   "expectSymbology": "PDF417",
+   "note": "ASCII text"
+  },
+  {
+   "id": "R-PDF417-004",
+   "format": "pdf417",
+   "value": "https://example.com/card?id=12345&x=y",
+   "expectDecoded": "https://example.com/card?id=12345&x=y",
+   "expectSymbology": "PDF417",
+   "note": "URL"
+  },
+  {
+   "id": "R-PDF417-005",
+   "format": "pdf417",
+   "value": "4006381333931",
+   "expectDecoded": "4006381333931",
+   "expectSymbology": "PDF417",
+   "note": "digits"
+  },
+  {
+   "id": "R-PDF417-006",
+   "format": "pdf417",
+   "value": "Müller",
+   "expectDecoded": "Müller",
+   "expectSymbology": "PDF417",
+   "note": "umlaut"
+  },
+  {
+   "id": "R-PDF417-007",
+   "format": "pdf417",
+   "value": "Bäckerei Größe ÄÖÜ ß",
+   "expectDecoded": "Bäckerei Größe ÄÖÜ ß",
+   "expectSymbology": "PDF417",
+   "note": "German"
+  },
+  {
+   "id": "R-PDF417-008",
+   "format": "pdf417",
+   "value": "こんにちは世界",
+   "expectDecoded": "こんにちは世界",
+   "expectSymbology": "PDF417",
+   "note": "kana + kanji"
+  },
+  {
+   "id": "R-PDF417-009",
+   "format": "pdf417",
+   "value": "🙂🎉",
+   "expectDecoded": "🙂🎉",
+   "expectSymbology": "PDF417",
+   "note": "emoji (astral)",
+   "adversarial": true
+  },
+  {
+   "id": "R-PDF417-010",
+   "format": "pdf417",
+   "value": "Мир 123",
+   "expectDecoded": "Мир 123",
+   "expectSymbology": "PDF417",
+   "note": "Cyrillic"
+  },
+  {
+   "id": "R-PDF417-011",
+   "format": "pdf417",
+   "value": "مرحبا 42",
+   "expectDecoded": "مرحبا 42",
+   "expectSymbology": "PDF417",
+   "note": "Arabic"
+  },
+  {
+   "id": "R-PDF417-012",
+   "format": "pdf417",
+   "value": "中文会员卡 12345",
+   "expectDecoded": "中文会员卡 12345",
+   "expectSymbology": "PDF417",
+   "note": "Chinese"
+  },
+  {
+   "id": "R-PDF417-013",
+   "format": "pdf417",
+   "value": "MÃ¼ller",
+   "expectDecoded": "MÃ¼ller",
+   "expectSymbology": "PDF417",
+   "note": "mojibake lookalike text (Ã and ¼ are data)",
+   "adversarial": true
+  },
+  {
+   "id": "R-PDF417-014",
+   "format": "pdf417",
+   "value": "Price ^ 5 €",
+   "expectDecoded": "Price ^ 5 €",
+   "expectSymbology": "PDF417",
+   "note": "caret with non-ASCII (D31 doubling)",
+   "adversarial": true
+  },
+  {
+   "id": "R-PDF417-015",
+   "format": "pdf417",
+   "value": "ü^065",
+   "expectDecoded": "ü^065",
+   "expectSymbology": "PDF417",
+   "note": "caret-escape lookalike after non-ASCII",
+   "adversarial": true
+  },
+  {
+   "id": "R-PDF417-016",
+   "format": "pdf417",
+   "value": "^ECI000026Müller",
+   "expectDecoded": "^ECI000026Müller",
+   "expectSymbology": "PDF417",
+   "note": "literal ECI text with non-ASCII",
+   "adversarial": true
+  },
+  {
+   "id": "R-PDF417-017",
+   "format": "pdf417",
+   "value": "caret ^ only ASCII",
+   "expectDecoded": "caret ^ only ASCII",
+   "expectSymbology": "PDF417",
+   "note": "caret, ASCII path",
+   "adversarial": true
+  },
+  {
+   "id": "R-PDF417-018",
+   "format": "pdf417",
+   "value": "LC1:{\"n\":\"Bäckerei\",\"i\":\"4006381333931\",\"f\":\"ean13\",\"k\":\"#67bf74\",\"t\":\"Kasse 2\"}",
+   "expectDecoded": "LC1:{\"n\":\"Bäckerei\",\"i\":\"4006381333931\",\"f\":\"ean13\",\"k\":\"#67bf74\",\"t\":\"Kasse 2\"}",
+   "expectSymbology": "PDF417",
+   "note": "an LC1 share payload"
+  },
+  {
+   "id": "R-PDF417-019",
+   "format": "pdf417",
+   "value": "Ωmega ✓ naïve café",
+   "expectDecoded": "Ωmega ✓ naïve café",
+   "expectSymbology": "PDF417",
+   "note": "mixed BMP symbols"
+  },
+  {
+   "id": "R-PDF417-020",
+   "format": "pdf417",
+   "value": "Tab-free–dash",
+   "expectDecoded": "Tab-free–dash",
+   "expectSymbology": "PDF417",
+   "note": "en dash"
+  },
+  {
+   "id": "R-PDF417-021",
+   "format": "pdf417",
+   "value": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L",
+   "expectDecoded": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L",
+   "expectSymbology": "PDF417",
+   "note": "1000 chars ASCII text (maximum)"
+  },
+  {
+   "id": "R-PDF417-022",
+   "format": "pdf417",
+   "value": "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789",
+   "expectDecoded": "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789",
+   "expectSymbology": "PDF417",
+   "note": "1000 digits"
+  },
+  {
+   "id": "R-PDF417-023",
+   "format": "pdf417",
+   "value": "üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü",
+   "expectDecoded": "üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü",
+   "expectSymbology": "PDF417",
+   "note": "400 x ü = 800 UTF-8 bytes"
+  },
+  {
+   "id": "R-PDF417-024",
+   "format": "pdf417",
+   "value": "1234567890",
+   "expectDecoded": "1234567890",
+   "expectSymbology": "PDF417",
+   "note": "Catima-like"
+  },
+  {
+   "id": "R-PDF417-025",
+   "format": "pdf417",
+   "value": "DL:12345678",
+   "expectDecoded": "DL:12345678",
+   "expectSymbology": "PDF417",
+   "note": "licence-like"
+  },
+  {
+   "id": "R-DATAMATRIX-001",
+   "format": "datamatrix",
+   "value": "A",
+   "expectDecoded": "A",
+   "expectSymbology": "DataMatrix",
+   "note": "single char"
+  },
+  {
+   "id": "R-DATAMATRIX-002",
+   "format": "datamatrix",
+   "value": "1",
+   "expectDecoded": "1",
+   "expectSymbology": "DataMatrix",
+   "note": "single digit"
+  },
+  {
+   "id": "R-DATAMATRIX-003",
+   "format": "datamatrix",
+   "value": "Hello, World!",
+   "expectDecoded": "Hello, World!",
+   "expectSymbology": "DataMatrix",
+   "note": "ASCII text"
+  },
+  {
+   "id": "R-DATAMATRIX-004",
+   "format": "datamatrix",
+   "value": "https://example.com/card?id=12345&x=y",
+   "expectDecoded": "https://example.com/card?id=12345&x=y",
+   "expectSymbology": "DataMatrix",
+   "note": "URL"
+  },
+  {
+   "id": "R-DATAMATRIX-005",
+   "format": "datamatrix",
+   "value": "4006381333931",
+   "expectDecoded": "4006381333931",
+   "expectSymbology": "DataMatrix",
+   "note": "digits"
+  },
+  {
+   "id": "R-DATAMATRIX-006",
+   "format": "datamatrix",
+   "value": "Müller",
+   "expectDecoded": "Müller",
+   "expectSymbology": "DataMatrix",
+   "note": "umlaut"
+  },
+  {
+   "id": "R-DATAMATRIX-007",
+   "format": "datamatrix",
+   "value": "Bäckerei Größe ÄÖÜ ß",
+   "expectDecoded": "Bäckerei Größe ÄÖÜ ß",
+   "expectSymbology": "DataMatrix",
+   "note": "German"
+  },
+  {
+   "id": "R-DATAMATRIX-008",
+   "format": "datamatrix",
+   "value": "こんにちは世界",
+   "expectDecoded": "こんにちは世界",
+   "expectSymbology": "DataMatrix",
+   "note": "kana + kanji"
+  },
+  {
+   "id": "R-DATAMATRIX-009",
+   "format": "datamatrix",
+   "value": "🙂🎉",
+   "expectDecoded": "🙂🎉",
+   "expectSymbology": "DataMatrix",
+   "note": "emoji (astral)",
+   "adversarial": true
+  },
+  {
+   "id": "R-DATAMATRIX-010",
+   "format": "datamatrix",
+   "value": "Мир 123",
+   "expectDecoded": "Мир 123",
+   "expectSymbology": "DataMatrix",
+   "note": "Cyrillic"
+  },
+  {
+   "id": "R-DATAMATRIX-011",
+   "format": "datamatrix",
+   "value": "مرحبا 42",
+   "expectDecoded": "مرحبا 42",
+   "expectSymbology": "DataMatrix",
+   "note": "Arabic"
+  },
+  {
+   "id": "R-DATAMATRIX-012",
+   "format": "datamatrix",
+   "value": "中文会员卡 12345",
+   "expectDecoded": "中文会员卡 12345",
+   "expectSymbology": "DataMatrix",
+   "note": "Chinese"
+  },
+  {
+   "id": "R-DATAMATRIX-013",
+   "format": "datamatrix",
+   "value": "MÃ¼ller",
+   "expectDecoded": "MÃ¼ller",
+   "expectSymbology": "DataMatrix",
+   "note": "mojibake lookalike text (Ã and ¼ are data)",
+   "adversarial": true
+  },
+  {
+   "id": "R-DATAMATRIX-014",
+   "format": "datamatrix",
+   "value": "Price ^ 5 €",
+   "expectDecoded": "Price ^ 5 €",
+   "expectSymbology": "DataMatrix",
+   "note": "caret with non-ASCII (D31 doubling)",
+   "adversarial": true
+  },
+  {
+   "id": "R-DATAMATRIX-015",
+   "format": "datamatrix",
+   "value": "ü^065",
+   "expectDecoded": "ü^065",
+   "expectSymbology": "DataMatrix",
+   "note": "caret-escape lookalike after non-ASCII",
+   "adversarial": true
+  },
+  {
+   "id": "R-DATAMATRIX-016",
+   "format": "datamatrix",
+   "value": "^ECI000026Müller",
+   "expectDecoded": "^ECI000026Müller",
+   "expectSymbology": "DataMatrix",
+   "note": "literal ECI text with non-ASCII",
+   "adversarial": true
+  },
+  {
+   "id": "R-DATAMATRIX-017",
+   "format": "datamatrix",
+   "value": "caret ^ only ASCII",
+   "expectDecoded": "caret ^ only ASCII",
+   "expectSymbology": "DataMatrix",
+   "note": "caret, ASCII path",
+   "adversarial": true
+  },
+  {
+   "id": "R-DATAMATRIX-018",
+   "format": "datamatrix",
+   "value": "LC1:{\"n\":\"Bäckerei\",\"i\":\"4006381333931\",\"f\":\"ean13\",\"k\":\"#67bf74\",\"t\":\"Kasse 2\"}",
+   "expectDecoded": "LC1:{\"n\":\"Bäckerei\",\"i\":\"4006381333931\",\"f\":\"ean13\",\"k\":\"#67bf74\",\"t\":\"Kasse 2\"}",
+   "expectSymbology": "DataMatrix",
+   "note": "an LC1 share payload"
+  },
+  {
+   "id": "R-DATAMATRIX-019",
+   "format": "datamatrix",
+   "value": "Ωmega ✓ naïve café",
+   "expectDecoded": "Ωmega ✓ naïve café",
+   "expectSymbology": "DataMatrix",
+   "note": "mixed BMP symbols"
+  },
+  {
+   "id": "R-DATAMATRIX-020",
+   "format": "datamatrix",
+   "value": "Tab-free–dash",
+   "expectDecoded": "Tab-free–dash",
+   "expectSymbology": "DataMatrix",
+   "note": "en dash"
+  },
+  {
+   "id": "R-DATAMATRIX-021",
+   "format": "datamatrix",
+   "value": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L",
+   "expectDecoded": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L",
+   "expectSymbology": "DataMatrix",
+   "note": "1000 chars ASCII text (maximum)"
+  },
+  {
+   "id": "R-DATAMATRIX-022",
+   "format": "datamatrix",
+   "value": "X'.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSX",
+   "expectDecoded": "X'.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSZahov}%,3:AHOV]dkry!(/6=DKRY`gnu|$+29@GNU\\cjqx '.5<CJQX_fmt{#*18?FMT[bipw~&-4;BIPW^elsz\")07>ELSX",
+   "expectSymbology": "DataMatrix",
+   "note": "1000 chars printable ASCII"
+  },
+  {
+   "id": "R-DATAMATRIX-023",
+   "format": "datamatrix",
+   "value": "日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日",
+   "expectDecoded": "日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日",
+   "expectSymbology": "DataMatrix",
+   "note": "300 kanji = 900 UTF-8 bytes"
+  },
+  {
+   "id": "R-DATAMATRIX-024",
+   "format": "datamatrix",
+   "value": "DM-42",
+   "expectDecoded": "DM-42",
+   "expectSymbology": "DataMatrix",
+   "note": "short ID"
+  },
+  {
+   "id": "R-DATAMATRIX-025",
+   "format": "datamatrix",
+   "value": "01234567890123456789012345678901234567890123456789",
+   "expectDecoded": "01234567890123456789012345678901234567890123456789",
+   "expectSymbology": "DataMatrix",
+   "note": "50 digits"
+  }
+ ]
+}

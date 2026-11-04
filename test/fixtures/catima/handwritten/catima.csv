@@ -1,0 +1,27 @@
+2
+
+_id
+Groceries
+Fitness & Health
+Kundenkarten aus dem alten Portemonnaie 2019 bis 2024
+
+_id,store,note,validfrom,expiry,balance,balancetype,cardid,barcodeid,barcodetype,barcodeencoding,headercolor,starstatus,lastused,archive
+1,Nordmarkt,,,1798761600000,0,,4006381333931,,EAN_13,,-9977996,1,1760000000,0
+2,Kaffeehaus Lila,"Stamp card
+
+after 10 stamps: one free, ask for ""Lila""",1767225600000,,12.50,EUR,2468 1357,24681357,CODE_128,ISO-8859-1,-16777216,0,1759000000,0
+3,Stadtbad,Member QR,,,0,,MEMBER-778,https://example.org/m/778?ü=1,QR_CODE,UTF-8,-1,0,0,0
+4,Typo Markt,12 digits typed for EAN-13,,,0,,400638133393,,EAN_13,ISO-8859-1,-14717117,0,0,0
+5,Parcel Locker,,,,0,,MX-99-ABC,,MAXICODE,ISO-8859-1,,0,0,0
+6,Bibliothek,,,,0,,abc123,,CODE_39,ISO-8859-1,-12627531,0,0,1
+7,Müller Getränke,,,,0,,Müller 42,,AZTEC,ISO-8859-1,-3355444,0,1758000000,0
+8,Corner Shop,no barcode on this card,,,5,USD,778899,,,ISO-8859-1,-5317,0,0,0
+9,US Grocer,,,,0,,036000291452,,UPC_A,ISO-8859-1,-16744320,0,0,0
+10,Nordmarkt,second copy of card 1,,,0,,4006381333931,,EAN_13,ISO-8859-1,-9977996,0,0,0
+
+cardId,groupId
+1,Groceries
+2,Groceries
+2,Fitness & Health
+8,Kundenkarten aus dem alten Portemonnaie 2019 bis 2024
+9,Groceries

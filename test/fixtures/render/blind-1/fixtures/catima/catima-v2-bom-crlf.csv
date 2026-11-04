@@ -1,0 +1,10 @@
+﻿2
+
+_id
+
+_id,store,note,validfrom,expiry,balance,balancetype,cardid,barcodeid,barcodetype,barcodeencoding,headercolor,starstatus,lastused,archive
+1,BOM Shop,,,,0,,111222,,CODE_128,UTF-8,-45147,0,1730000000,0
+2,BOM Mart,,,,0,,5901234123457,,EAN_13,UTF-8,-45147,0,1730000000,0
+3,BOM Club,,,,0,,ZZ-9,,QR_CODE,UTF-8,-45147,0,1730000000,0
+
+cardId,groupId

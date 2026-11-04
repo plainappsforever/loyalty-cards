@@ -1,0 +1,64 @@
+appId: ${APP_ID}
+name: Export - Catima zip with the JPEG photo converted to PNG, backup and CSV; name, size and report before sharing (U7)
+tags:
+  - p6
+---
+# seed-1 ("Nordmarkt") gets a front photo through the native PNG → JPEG path; the Catima export converts it back to PNG.
+- runFlow: subflows/launch.yaml
+- runFlow:
+    file: subflows/seed.yaml
+    env:
+      SEED: set=ten&photo=1
+# a tile with a photo is announced as one element "Nordmarkt, Favourite" since F8 (a plain "Nordmarkt" text match no longer hits it)
+- tapOn: "Nordmarkt.*"
+- assertVisible:
+    id: card-photo-front
+- runFlow: subflows/back.yaml
+- runFlow: subflows/open-settings.yaml
+- scrollUntilVisible:
+    element:
+      id: open-data
+- tapOn:
+    id: open-data
+- assertVisible:
+    id: data-screen
+- tapOn:
+    id: export-catima
+- extendedWaitUntil:
+    visible:
+      id: export-result
+    timeout: 30000
+- assertVisible: "tillcard-catima-.*\\.zip · .* · 10 cards"
+- assertVisible: "1 photos in the file"
+- assertNotVisible:
+    id: export-photo-failed
+- tapOn:
+    id: export-backup
+- extendedWaitUntil:
+    visible: "tillcard-backup-.*\\.zip · .* · 10 cards"
+    timeout: 30000
+- assertVisible: "1 photos in the file"
+- tapOn:
+    id: export-csv
+- extendedWaitUntil:
+    visible: "tillcard-cards-.*\\.csv · .* · 10 cards"
+    timeout: 30000
+# the share sheet opens (sending is the user's choice); close it again
+- tapOn:
+    id: export-share
+- takeScreenshot: export-share-sheet
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - tapOn:
+          id: PopoverDismissRegion.*
+          optional: true
+- runFlow:
+    when:
+      platform: Android
+    commands:
+      - back
+- extendedWaitUntil:
+    visible: "Last export: .*"
+    timeout: 10000

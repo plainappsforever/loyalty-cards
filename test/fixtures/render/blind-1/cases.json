@@ -1,0 +1,4936 @@
+{
+ "set": "loyalty-b1",
+ "version": 1,
+ "cases": [
+  {
+   "id": "V-EAN13-01",
+   "kind": "validate",
+   "input": {
+    "format": "ean13",
+    "value": "4006381333931"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "4006381333931"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-EAN13-03",
+   "kind": "validate",
+   "input": {
+    "format": "ean13",
+    "value": "0012345678905"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "0012345678905"
+   },
+   "strength": "firm",
+   "note": "leading zeros kept"
+  },
+  {
+   "id": "V-EAN13-06",
+   "kind": "validate",
+   "input": {
+    "format": "ean13",
+    "value": "4006381333932"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "check",
+    "suggestedCheck": "1"
+   },
+   "strength": "firm",
+   "note": "§9: \"check digit should be 1\"; never auto-corrected"
+  },
+  {
+   "id": "V-EAN13-08",
+   "kind": "validate",
+   "input": {
+    "format": "ean13",
+    "value": "5901234123450"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "check",
+    "suggestedCheck": "7"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-EAN13-09",
+   "kind": "validate",
+   "input": {
+    "format": "ean13",
+    "value": "400638133393"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "length",
+    "suggestedCheck": "1"
+   },
+   "strength": "firm",
+   "note": "12 digits: check digit SHOWN, never appended (§5.1)"
+  },
+  {
+   "id": "V-EAN13-13",
+   "kind": "validate",
+   "input": {
+    "format": "ean13",
+    "value": "400638133393A"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": "§9: letters with EAN -> message + Code 128 suggested"
+  },
+  {
+   "id": "V-EAN13-14",
+   "kind": "validate",
+   "input": {
+    "format": "ean13",
+    "value": "４００６３８１３３３９３１"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": "full-width digits (Unicode \\d trap)",
+   "adversarial": true
+  },
+  {
+   "id": "V-EAN13-15",
+   "kind": "validate",
+   "input": {
+    "format": "ean13",
+    "value": "٤٠٠٦٣٨١٣٣٣٩٣١"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": "Arabic-Indic digits",
+   "adversarial": true
+  },
+  {
+   "id": "V-EAN13-16",
+   "kind": "validate",
+   "input": {
+    "format": "ean13",
+    "value": " 4006381333931 "
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "4006381333931"
+   },
+   "strength": "inferred",
+   "note": "normalise trims"
+  },
+  {
+   "id": "V-EAN13-17",
+   "kind": "validate",
+   "input": {
+    "format": "ean13",
+    "value": "4006381333931\n"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "4006381333931"
+   },
+   "strength": "inferred",
+   "note": "pasted trailing newline",
+   "adversarial": true
+  },
+  {
+   "id": "V-EAN13-18",
+   "kind": "validate",
+   "input": {
+    "format": "ean13",
+    "value": "+4006381333931"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": "",
+   "adversarial": true
+  },
+  {
+   "id": "V-EAN13-20",
+   "kind": "validate",
+   "input": {
+    "format": "ean13",
+    "value": "4006381333931.0"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": "spreadsheet float artefact",
+   "adversarial": true
+  },
+  {
+   "id": "V-EAN13-21",
+   "kind": "validate",
+   "input": {
+    "format": "ean13",
+    "value": "4.006381333931e12"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": "spreadsheet exponent",
+   "adversarial": true
+  },
+  {
+   "id": "V-EAN13-22",
+   "kind": "validate",
+   "input": {
+    "format": "ean13",
+    "value": "4006 3813 3393 1"
+   },
+   "expect": {
+    "note": "strip spaces or reject: both defensible"
+   },
+   "strength": "ambiguous",
+   "note": "grouped digits as printed",
+   "adversarial": true
+  },
+  {
+   "id": "V-EAN8-01",
+   "kind": "validate",
+   "input": {
+    "format": "ean8",
+    "value": "96385074"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "96385074"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-EAN8-04",
+   "kind": "validate",
+   "input": {
+    "format": "ean8",
+    "value": "01234565"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "01234565"
+   },
+   "strength": "firm",
+   "note": "also a valid UPC-E (twin)"
+  },
+  {
+   "id": "V-EAN8-05",
+   "kind": "validate",
+   "input": {
+    "format": "ean8",
+    "value": "96385075"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "check",
+    "suggestedCheck": "4"
+   },
+   "strength": "inferred",
+   "note": ""
+  },
+  {
+   "id": "V-EAN8-06",
+   "kind": "validate",
+   "input": {
+    "format": "ean8",
+    "value": "9638507"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "length",
+    "suggestedCheck": "4"
+   },
+   "strength": "inferred",
+   "note": ""
+  },
+  {
+   "id": "V-EAN8-07",
+   "kind": "validate",
+   "input": {
+    "format": "ean8",
+    "value": "963850741"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "length"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-EAN8-08",
+   "kind": "validate",
+   "input": {
+    "format": "ean8",
+    "value": "9638507A"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-UPCA-01",
+   "kind": "validate",
+   "input": {
+    "format": "upca",
+    "value": "036000291452"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "036000291452"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-UPCA-04",
+   "kind": "validate",
+   "input": {
+    "format": "upca",
+    "value": "036000291453"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "check",
+    "suggestedCheck": "2"
+   },
+   "strength": "inferred",
+   "note": ""
+  },
+  {
+   "id": "V-UPCA-05",
+   "kind": "validate",
+   "input": {
+    "format": "upca",
+    "value": "03600029145"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "length",
+    "suggestedCheck": "2"
+   },
+   "strength": "inferred",
+   "note": ""
+  },
+  {
+   "id": "V-UPCA-06",
+   "kind": "validate",
+   "input": {
+    "format": "upca",
+    "value": "0036000291452"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "length"
+   },
+   "strength": "firm",
+   "note": "13 digits (valid EAN-13) is not UPC-A",
+   "adversarial": true
+  },
+  {
+   "id": "V-UPCA-07",
+   "kind": "validate",
+   "input": {
+    "format": "upca",
+    "value": "12345678901A"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-UPCE-01",
+   "kind": "validate",
+   "input": {
+    "format": "upce",
+    "value": "04252614"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "04252614"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-UPCE-02",
+   "kind": "validate",
+   "input": {
+    "format": "upce",
+    "value": "01234565"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "01234565"
+   },
+   "strength": "firm",
+   "note": "twin with EAN-8"
+  },
+  {
+   "id": "V-UPCE-03",
+   "kind": "validate",
+   "input": {
+    "format": "upce",
+    "value": "12345670"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "12345670"
+   },
+   "strength": "firm",
+   "note": "number system 1"
+  },
+  {
+   "id": "V-UPCE-05",
+   "kind": "validate",
+   "input": {
+    "format": "upce",
+    "value": "04252615"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "check",
+    "suggestedCheck": "4"
+   },
+   "strength": "inferred",
+   "note": ""
+  },
+  {
+   "id": "V-UPCE-06",
+   "kind": "validate",
+   "input": {
+    "format": "upce",
+    "value": "24252614"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "numbersystem"
+   },
+   "strength": "firm",
+   "note": "number system must be 0/1",
+   "adversarial": true
+  },
+  {
+   "id": "V-UPCE-08",
+   "kind": "validate",
+   "input": {
+    "format": "upce",
+    "value": "425261"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "length"
+   },
+   "strength": "firm",
+   "note": "6-digit form: §5.1 says 8 digits; never padded silently",
+   "adversarial": true
+  },
+  {
+   "id": "V-UPCE-09",
+   "kind": "validate",
+   "input": {
+    "format": "upce",
+    "value": "96385074"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "numbersystem"
+   },
+   "strength": "firm",
+   "note": "valid EAN-8 but NS 9 -> not UPC-E",
+   "adversarial": true
+  },
+  {
+   "id": "V-UPCE-10",
+   "kind": "validate",
+   "input": {
+    "format": "upce",
+    "value": "01234566"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "check",
+    "suggestedCheck": "5"
+   },
+   "strength": "inferred",
+   "note": ""
+  },
+  {
+   "id": "V-ITF-01",
+   "kind": "validate",
+   "input": {
+    "format": "itf",
+    "value": "1234"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "1234"
+   },
+   "strength": "firm",
+   "note": "minimum"
+  },
+  {
+   "id": "V-ITF-03",
+   "kind": "validate",
+   "input": {
+    "format": "itf",
+    "value": "00012345678905"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "00012345678905"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-ITF-04",
+   "kind": "validate",
+   "input": {
+    "format": "itf",
+    "value": "12345678901234"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "12345678901234"
+   },
+   "strength": "firm",
+   "note": "14 digits with a wrong GS1 check: ITF has no check rule in §5.1",
+   "adversarial": true
+  },
+  {
+   "id": "V-ITF-05",
+   "kind": "validate",
+   "input": {
+    "format": "itf",
+    "value": "12345678901234567890"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "12345678901234567890"
+   },
+   "strength": "firm",
+   "note": "20 digits; §5.1 gives no maximum"
+  },
+  {
+   "id": "V-ITF-06",
+   "kind": "validate",
+   "input": {
+    "format": "itf",
+    "value": "123"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "length",
+    "leadingZeroSuggestion": "0123"
+   },
+   "strength": "firm",
+   "note": "odd -> \"add a leading 0?\" suggestion, user confirms; never padded silently"
+  },
+  {
+   "id": "V-ITF-08",
+   "kind": "validate",
+   "input": {
+    "format": "itf",
+    "value": "1234567890123"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "length",
+    "leadingZeroSuggestion": "01234567890123"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-ITF-09",
+   "kind": "validate",
+   "input": {
+    "format": "itf",
+    "value": "12"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "length"
+   },
+   "strength": "firm",
+   "note": "even but shorter than 4",
+   "adversarial": true
+  },
+  {
+   "id": "V-ITF-10",
+   "kind": "validate",
+   "input": {
+    "format": "itf",
+    "value": "12a4"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-CODABAR-01",
+   "kind": "validate",
+   "input": {
+    "format": "codabar",
+    "value": "A1234B"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "A1234B"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-CODABAR-02",
+   "kind": "validate",
+   "input": {
+    "format": "codabar",
+    "value": "a1234d"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "A1234D"
+   },
+   "strength": "firm",
+   "note": "upper-cased"
+  },
+  {
+   "id": "V-CODABAR-03",
+   "kind": "validate",
+   "input": {
+    "format": "codabar",
+    "value": "1234"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "1234"
+   },
+   "strength": "firm",
+   "note": "start/stop optional"
+  },
+  {
+   "id": "V-CODABAR-04",
+   "kind": "validate",
+   "input": {
+    "format": "codabar",
+    "value": "A12B"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "A12B"
+   },
+   "strength": "firm",
+   "note": "minimum body 2 (D30)"
+  },
+  {
+   "id": "V-CODABAR-05",
+   "kind": "validate",
+   "input": {
+    "format": "codabar",
+    "value": "12"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "12"
+   },
+   "strength": "firm",
+   "note": "minimum body 2 without letters"
+  },
+  {
+   "id": "V-CODABAR-06",
+   "kind": "validate",
+   "input": {
+    "format": "codabar",
+    "value": "A1B"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "length"
+   },
+   "strength": "firm",
+   "note": "D30: body < 2 is rejected (Vision cannot read it)",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODABAR-07",
+   "kind": "validate",
+   "input": {
+    "format": "codabar",
+    "value": "1"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "length"
+   },
+   "strength": "firm",
+   "note": "",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODABAR-08",
+   "kind": "validate",
+   "input": {
+    "format": "codabar",
+    "value": "AB"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "length"
+   },
+   "strength": "firm",
+   "note": "empty body",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODABAR-10",
+   "kind": "validate",
+   "input": {
+    "format": "codabar",
+    "value": "E1234E"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": "E/T/N/* alternative start/stop not offered",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODABAR-13",
+   "kind": "validate",
+   "input": {
+    "format": "codabar",
+    "value": "A1A2B"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": "letter inside the body",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODABAR-14",
+   "kind": "validate",
+   "input": {
+    "format": "codabar",
+    "value": "A1234"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "startstop"
+   },
+   "strength": "inferred",
+   "note": "start letter without stop letter",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODE39-01",
+   "kind": "validate",
+   "input": {
+    "format": "code39",
+    "value": "ABC-123"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "ABC-123"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-CODE39-02",
+   "kind": "validate",
+   "input": {
+    "format": "code39",
+    "value": "abc-123"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "ABC-123",
+    "uppercased": true
+   },
+   "strength": "firm",
+   "note": "lower case upper-cased with a visible note"
+  },
+  {
+   "id": "V-CODE39-05",
+   "kind": "validate",
+   "input": {
+    "format": "code39",
+    "value": "A*B"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": "* is the start/stop character",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODE39-07",
+   "kind": "validate",
+   "input": {
+    "format": "code39",
+    "value": "Müller"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-CODE39-08",
+   "kind": "validate",
+   "input": {
+    "format": "code39",
+    "value": "straße"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "inferred",
+   "note": "JS 'ß'.toUpperCase() = 'SS' would silently change the value",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODE39-09",
+   "kind": "validate",
+   "input": {
+    "format": "code39",
+    "value": "kılıç"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "inferred",
+   "note": "dotless i upper-cases to plain I in JS; ç stays invalid",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODE39-10",
+   "kind": "validate",
+   "input": {
+    "format": "code39",
+    "value": "ı"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "inferred",
+   "note": "'ı'.toUpperCase() = 'I' (valid Code 39) — must not be accepted silently",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODE39-11",
+   "kind": "validate",
+   "input": {
+    "format": "code39",
+    "value": "ﬁ"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "inferred",
+   "note": "ligature upper-cases to 'FI'",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODE39-12",
+   "kind": "validate",
+   "input": {
+    "format": "code39",
+    "value": "  CODE39 "
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "CODE39"
+   },
+   "strength": "inferred",
+   "note": ""
+  },
+  {
+   "id": "V-CODE39-13",
+   "kind": "validate",
+   "input": {
+    "format": "code39",
+    "value": ""
+   },
+   "expect": {
+    "ok": false,
+    "reason": "empty"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-CODE93-01",
+   "kind": "validate",
+   "input": {
+    "format": "code93",
+    "value": "TEST93"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "TEST93"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-CODE93-02",
+   "kind": "validate",
+   "input": {
+    "format": "code93",
+    "value": "test 93"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "TEST 93",
+    "uppercased": true
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-CODE93-03",
+   "kind": "validate",
+   "input": {
+    "format": "code93",
+    "value": "A*B"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": "",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODE93-05",
+   "kind": "validate",
+   "input": {
+    "format": "code93",
+    "value": "groß"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "inferred",
+   "note": "",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODE93-06",
+   "kind": "validate",
+   "input": {
+    "format": "code93",
+    "value": "+A$M"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "+A$M"
+   },
+   "strength": "firm",
+   "note": "literal; full-ASCII not offered"
+  },
+  {
+   "id": "V-CODE128-01",
+   "kind": "validate",
+   "input": {
+    "format": "code128",
+    "value": "Hello World"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "Hello World"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-CODE128-03",
+   "kind": "validate",
+   "input": {
+    "format": "code128",
+    "value": "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnop"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnop"
+   },
+   "strength": "firm",
+   "note": "80 chars = maximum"
+  },
+  {
+   "id": "V-CODE128-04",
+   "kind": "validate",
+   "input": {
+    "format": "code128",
+    "value": "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopq"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "length"
+   },
+   "strength": "firm",
+   "note": "81 chars"
+  },
+  {
+   "id": "V-CODE128-05",
+   "kind": "validate",
+   "input": {
+    "format": "code128",
+    "value": "Café"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-CODE128-06",
+   "kind": "validate",
+   "input": {
+    "format": "code128",
+    "value": "A\tB"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": "control char rejected",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODE128-07",
+   "kind": "validate",
+   "input": {
+    "format": "code128",
+    "value": "AB"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": "DEL 127",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODE128-10",
+   "kind": "validate",
+   "input": {
+    "format": "code128",
+    "value": "^FNC1"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "^FNC1"
+   },
+   "strength": "firm",
+   "note": "caret text is data (D28 parse off)",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODE128-11",
+   "kind": "validate",
+   "input": {
+    "format": "code128",
+    "value": "A B"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "charset"
+   },
+   "strength": "firm",
+   "note": "inner no-break space U+00A0",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODE128-12",
+   "kind": "validate",
+   "input": {
+    "format": "code128",
+    "value": "﻿ABC"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "ABC"
+   },
+   "strength": "inferred",
+   "note": "leading BOM is whitespace for JS trim()",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODE128-13",
+   "kind": "validate",
+   "input": {
+    "format": "code128",
+    "value": "  !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnop "
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnop"
+   },
+   "strength": "inferred",
+   "note": "80 chars after trim; 83 before",
+   "adversarial": true
+  },
+  {
+   "id": "V-CODE128-15",
+   "kind": "validate",
+   "input": {
+    "format": "code128",
+    "value": "   "
+   },
+   "expect": {
+    "ok": false,
+    "reason": "empty"
+   },
+   "strength": "inferred",
+   "note": ""
+  },
+  {
+   "id": "V-CODE128-18",
+   "kind": "validate",
+   "input": {
+    "format": "code128",
+    "value": "Ab 12 　"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "Ab 12"
+   },
+   "strength": "inferred",
+   "note": "trailing ideographic space trimmed (JS trim)",
+   "adversarial": true
+  },
+  {
+   "id": "V-QR-02",
+   "kind": "validate",
+   "input": {
+    "format": "qr",
+    "value": "Müller ☃ 日本 🙂"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "Müller ☃ 日本 🙂"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-QR-03",
+   "kind": "validate",
+   "input": {
+    "format": "qr",
+    "value": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L"
+   },
+   "strength": "firm",
+   "note": "1000 chars = maximum"
+  },
+  {
+   "id": "V-QR-04",
+   "kind": "validate",
+   "input": {
+    "format": "qr",
+    "value": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Lx"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "length"
+   },
+   "strength": "firm",
+   "note": "1001 chars"
+  },
+  {
+   "id": "V-QR-05",
+   "kind": "validate",
+   "input": {
+    "format": "qr",
+    "value": "üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü"
+   },
+   "strength": "firm",
+   "note": "1000 chars, 2000 UTF-8 bytes: fits QR (2331 bytes at level M)"
+  },
+  {
+   "id": "V-QR-06",
+   "kind": "validate",
+   "input": {
+    "format": "qr",
+    "value": "日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日日"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "capacity"
+   },
+   "strength": "inferred",
+   "note": "1000 chars but 3000 UTF-8 bytes: no QR symbol can hold it (max 2953); §2: never render a code no scanner accepts",
+   "adversarial": true
+  },
+  {
+   "id": "V-QR-07",
+   "kind": "validate",
+   "input": {
+    "format": "qr",
+    "value": ""
+   },
+   "expect": {
+    "ok": false,
+    "reason": "empty"
+   },
+   "strength": "inferred",
+   "note": ""
+  },
+  {
+   "id": "V-QR-09",
+   "kind": "validate",
+   "input": {
+    "format": "qr",
+    "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa🙂"
+   },
+   "expect": {
+    "note": "1000 code points but 1001 UTF-16 units"
+   },
+   "strength": "ambiguous",
+   "note": "JS .length counts UTF-16 units",
+   "adversarial": true
+  },
+  {
+   "id": "V-QR-10",
+   "kind": "validate",
+   "input": {
+    "format": "qr",
+    "value": "Line 1\nLine 2"
+   },
+   "expect": {
+    "note": "inner newline: UTF-8 allows it; spec silent"
+   },
+   "strength": "ambiguous",
+   "note": "",
+   "adversarial": true
+  },
+  {
+   "id": "V-AZTEC-02",
+   "kind": "validate",
+   "input": {
+    "format": "aztec",
+    "value": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-AZTEC-03",
+   "kind": "validate",
+   "input": {
+    "format": "aztec",
+    "value": "üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "capacity"
+   },
+   "strength": "inferred",
+   "note": "2000 UTF-8 bytes > Aztec maximum 1914",
+   "adversarial": true
+  },
+  {
+   "id": "V-PDF417-02",
+   "kind": "validate",
+   "input": {
+    "format": "pdf417",
+    "value": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-PDF417-03",
+   "kind": "validate",
+   "input": {
+    "format": "pdf417",
+    "value": "üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "capacity"
+   },
+   "strength": "inferred",
+   "note": "2000 UTF-8 bytes > PDF417 maximum ~1108",
+   "adversarial": true
+  },
+  {
+   "id": "V-PDF417-04",
+   "kind": "validate",
+   "input": {
+    "format": "pdf417",
+    "value": "Кофейня"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "Кофейня"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-DM-02",
+   "kind": "validate",
+   "input": {
+    "format": "datamatrix",
+    "value": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 L"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-DM-03",
+   "kind": "validate",
+   "input": {
+    "format": "datamatrix",
+    "value": "üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü"
+   },
+   "expect": {
+    "ok": false,
+    "reason": "capacity"
+   },
+   "strength": "inferred",
+   "note": "2000 UTF-8 bytes > Data Matrix maximum 1556",
+   "adversarial": true
+  },
+  {
+   "id": "V-DM-04",
+   "kind": "validate",
+   "input": {
+    "format": "datamatrix",
+    "value": "مكتبة 42"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "مكتبة 42"
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "V-NONE-01",
+   "kind": "validate",
+   "input": {
+    "format": "none",
+    "value": "Any text ü 🙂 *#"
+   },
+   "expect": {
+    "ok": true,
+    "normalised": "Any text ü 🙂 *#"
+   },
+   "strength": "firm",
+   "note": "\"none: number only\""
+  },
+  {
+   "id": "V-NONE-02",
+   "kind": "validate",
+   "input": {
+    "format": "none",
+    "value": ""
+   },
+   "expect": {
+    "ok": true,
+    "normalised": ""
+   },
+   "strength": "inferred",
+   "note": "Save allowed when format = none (§7 Edit)"
+  },
+  {
+   "id": "S-01",
+   "kind": "suggest",
+   "input": {
+    "value": "4006381333931"
+   },
+   "expect": {
+    "first": "ean13",
+    "includes": [
+     "code128",
+     "qr"
+    ],
+    "excludes": [
+     "upca",
+     "ean8",
+     "itf"
+    ]
+   },
+   "strength": "firm",
+   "note": "13 digits + valid check -> ean13; odd -> no itf"
+  },
+  {
+   "id": "S-02",
+   "kind": "suggest",
+   "input": {
+    "value": "036000291452"
+   },
+   "expect": {
+    "first": "upca",
+    "includes": [
+     "code128",
+     "itf"
+    ],
+    "excludes": [
+     "ean8"
+    ],
+    "order": [
+     [
+      "code128",
+      "itf"
+     ]
+    ]
+   },
+   "strength": "firm",
+   "note": "12 digits valid UPC-A (ean13-with-check-shown may follow; not scored)"
+  },
+  {
+   "id": "S-03",
+   "kind": "suggest",
+   "input": {
+    "value": "96385074"
+   },
+   "expect": {
+    "first": "ean8",
+    "includes": [
+     "code128",
+     "itf"
+    ],
+    "excludes": [
+     "upce"
+    ],
+    "order": [
+     [
+      "code128",
+      "itf"
+     ]
+    ]
+   },
+   "strength": "firm",
+   "note": "NS 9 -> not UPC-E"
+  },
+  {
+   "id": "S-04",
+   "kind": "suggest",
+   "input": {
+    "value": "01234565"
+   },
+   "expect": {
+    "first": "ean8",
+    "includes": [
+     "upce",
+     "code128",
+     "itf"
+    ],
+    "order": [
+     [
+      "ean8",
+      "upce"
+     ],
+     [
+      "code128",
+      "itf"
+     ]
+    ]
+   },
+   "strength": "inferred",
+   "note": "twins: both readings offered, ean8 listed first (\"ean8/upce\")",
+   "adversarial": true
+  },
+  {
+   "id": "S-05",
+   "kind": "suggest",
+   "input": {
+    "value": "04252614"
+   },
+   "expect": {
+    "first": "upce",
+    "includes": [
+     "code128",
+     "itf"
+    ],
+    "excludes": [
+     "ean8"
+    ]
+   },
+   "strength": "firm",
+   "note": "valid UPC-E, invalid EAN-8"
+  },
+  {
+   "id": "S-06",
+   "kind": "suggest",
+   "input": {
+    "value": "ABC-123"
+   },
+   "expect": {
+    "first": "code128",
+    "includes": [
+     "code39",
+     "qr"
+    ],
+    "excludes": [
+     "ean13",
+     "itf",
+     "upca"
+    ]
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "S-07",
+   "kind": "suggest",
+   "input": {
+    "value": "Müller 42"
+   },
+   "expect": {
+    "first": "qr",
+    "excludes": [
+     "code128",
+     "code39"
+    ]
+   },
+   "strength": "firm",
+   "note": "non-ASCII: only 2D fits"
+  },
+  {
+   "id": "S-08",
+   "kind": "suggest",
+   "input": {
+    "value": "1234"
+   },
+   "expect": {
+    "first": "code128",
+    "includes": [
+     "itf"
+    ],
+    "excludes": [
+     "ean8",
+     "ean13"
+    ],
+    "order": [
+     [
+      "code128",
+      "itf"
+     ]
+    ]
+   },
+   "strength": "firm",
+   "note": "even digits -> itf after code128"
+  },
+  {
+   "id": "S-09",
+   "kind": "suggest",
+   "input": {
+    "value": "4006381333932"
+   },
+   "expect": {
+    "first": "code128",
+    "excludes": [
+     "ean13",
+     "itf"
+    ]
+   },
+   "strength": "firm",
+   "note": "13 digits with a WRONG check: not ean13",
+   "adversarial": true
+  },
+  {
+   "id": "S-11",
+   "kind": "suggest",
+   "input": {
+    "value": "4006381333931",
+    "hint": "code128"
+   },
+   "expect": {
+    "first": "code128",
+    "includes": [
+     "ean13"
+    ]
+   },
+   "strength": "firm",
+   "note": "scanner's reported type first"
+  },
+  {
+   "id": "S-13",
+   "kind": "suggest",
+   "input": {
+    "value": "000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+   },
+   "expect": {
+    "includes": [
+     "qr"
+    ],
+    "excludes": [
+     "code128",
+     "itf"
+    ]
+   },
+   "strength": "inferred",
+   "note": "81 digits: Code 128 excluded (> 80); ITF excluded (odd); first entry not scored",
+   "adversarial": true
+  },
+  {
+   "id": "S-14",
+   "kind": "suggest",
+   "input": {
+    "value": "A1234B"
+   },
+   "expect": {
+    "first": "code128",
+    "includes": [
+     "codabar",
+     "qr"
+    ],
+    "excludes": [
+     "itf"
+    ]
+   },
+   "strength": "inferred",
+   "note": "Codabar fits too; code128 always for printable ASCII"
+  },
+  {
+   "id": "S-15",
+   "kind": "suggest",
+   "input": {
+    "value": "590123412345"
+   },
+   "expect": {
+    "first": "code128",
+    "includes": [
+     "itf"
+    ],
+    "excludes": [
+     "upca"
+    ]
+   },
+   "strength": "ambiguous",
+   "note": "12 digits, invalid UPC-A: whether \"ean13 with check 7 shown\" ranks first is unspecified",
+   "adversarial": true
+  },
+  {
+   "id": "UPCE-X-01",
+   "kind": "upce-expand",
+   "input": {
+    "upce": "04252614"
+   },
+   "expect": {
+    "upca": "042100005264"
+   },
+   "strength": "firm",
+   "note": "expansion pattern 1, number system 0"
+  },
+  {
+   "id": "UPCE-X-03",
+   "kind": "upce-expand",
+   "input": {
+    "upce": "12345670"
+   },
+   "expect": {
+    "upca": "123456000070"
+   },
+   "strength": "firm",
+   "note": "expansion pattern 7, number system 1",
+   "adversarial": true
+  },
+  {
+   "id": "UPCE-X-04",
+   "kind": "upce-expand",
+   "input": {
+    "upce": "01234505"
+   },
+   "expect": {
+    "upca": "012000003455"
+   },
+   "strength": "firm",
+   "note": "expansion pattern 0, number system 0"
+  },
+  {
+   "id": "UPCE-X-05",
+   "kind": "upce-expand",
+   "input": {
+    "upce": "01234531"
+   },
+   "expect": {
+    "upca": "012300000451"
+   },
+   "strength": "firm",
+   "note": "expansion pattern 3, number system 0"
+  },
+  {
+   "id": "UPCE-X-06",
+   "kind": "upce-expand",
+   "input": {
+    "upce": "01234543"
+   },
+   "expect": {
+    "upca": "012340000053"
+   },
+   "strength": "firm",
+   "note": "expansion pattern 4, number system 0"
+  },
+  {
+   "id": "UPCE-X-07",
+   "kind": "upce-expand",
+   "input": {
+    "upce": "19876520"
+   },
+   "expect": {
+    "upca": "198200007650"
+   },
+   "strength": "firm",
+   "note": "expansion pattern 2, number system 1",
+   "adversarial": true
+  },
+  {
+   "id": "COL-01",
+   "kind": "color-to-hex",
+   "input": {
+    "argb": -9977996
+   },
+   "expect": {
+    "hex": "#67bf74"
+   },
+   "strength": "firm",
+   "note": "signed ARGB int -> #rrggbb (D29)"
+  },
+  {
+   "id": "COL-02",
+   "kind": "color-to-hex",
+   "input": {
+    "argb": -45147
+   },
+   "expect": {
+    "hex": "#ff4fa5"
+   },
+   "strength": "firm",
+   "note": "signed ARGB int -> #rrggbb (D29)"
+  },
+  {
+   "id": "COL-04",
+   "kind": "color-to-hex",
+   "input": {
+    "argb": -1
+   },
+   "expect": {
+    "hex": "#ffffff"
+   },
+   "strength": "firm",
+   "note": "signed ARGB int -> #rrggbb (D29)",
+   "adversarial": true
+  },
+  {
+   "id": "COL-06",
+   "kind": "color-to-hex",
+   "input": {
+    "argb": -16766866
+   },
+   "expect": {
+    "hex": "#00286e"
+   },
+   "strength": "firm",
+   "note": "signed ARGB int -> #rrggbb (D29)"
+  },
+  {
+   "id": "COL-07",
+   "kind": "color-to-hex",
+   "input": {
+    "argb": -6543440
+   },
+   "expect": {
+    "hex": "#9c27b0"
+   },
+   "strength": "firm",
+   "note": "signed ARGB int -> #rrggbb (D29)"
+  },
+  {
+   "id": "COL-08",
+   "kind": "color-to-hex",
+   "input": {
+    "argb": 16711680
+   },
+   "expect": {
+    "hex": "#ff0000"
+   },
+   "strength": "inferred",
+   "note": "positive int (alpha 0) -> alpha dropped",
+   "adversarial": true
+  },
+  {
+   "id": "COL-09",
+   "kind": "color-to-int",
+   "input": {
+    "hex": "#67bf74"
+   },
+   "expect": {
+    "int": -9977996
+   },
+   "strength": "firm",
+   "note": "writer: alpha ff, signed 32-bit"
+  },
+  {
+   "id": "COL-11",
+   "kind": "color-to-int",
+   "input": {
+    "hex": "#ffffff"
+   },
+   "expect": {
+    "int": -1
+   },
+   "strength": "firm",
+   "note": "writer: alpha ff, signed 32-bit"
+  },
+  {
+   "id": "URL-01",
+   "kind": "catima-share-parse",
+   "input": {
+    "url": "https://catima.app/share#store%3DGrocery%2BStore%26note%3DQuite%2Bnecessary%26balance%3D150%26cardid%3Ddhd%26barcodetype%3DAZTEC%26headercolor%3D-9977996"
+   },
+   "expect": {
+    "ok": true,
+    "card": {
+     "name": "Grocery Store",
+     "note": "Quite necessary",
+     "balance": "150",
+     "number": "dhd",
+     "codeValue": "dhd",
+     "format": "aztec",
+     "color": "#67bf74"
+    }
+   },
+   "strength": "firm",
+   "note": "Catima doc example, 2.0 fragment form (double-encoded)"
+  },
+  {
+   "id": "URL-02",
+   "kind": "catima-share-parse",
+   "input": {
+    "url": "https://catima.app/share?store=Grocery%20Store&note=Quite%20necessary&balance=150&cardid=dhd&barcodetype=AZTEC&headercolor=-9977996"
+   },
+   "expect": {
+    "ok": true,
+    "card": {
+     "name": "Grocery Store",
+     "note": "Quite necessary",
+     "balance": "150",
+     "number": "dhd",
+     "codeValue": "dhd",
+     "format": "aztec",
+     "color": "#67bf74"
+    }
+   },
+   "strength": "firm",
+   "note": "Catima doc example, legacy query form"
+  },
+  {
+   "id": "URL-04",
+   "kind": "catima-share-parse",
+   "input": {
+    "url": "https://brarcher.github.io/loyalty-card-locker/share?store=Grocery%20Store&note=Quite%20necessary&balance=150&cardid=dhd&barcodetype=AZTEC&headercolor=-9977996"
+   },
+   "expect": {
+    "ok": true,
+    "card": {
+     "name": "Grocery Store",
+     "note": "Quite necessary",
+     "balance": "150",
+     "number": "dhd",
+     "codeValue": "dhd",
+     "format": "aztec",
+     "color": "#67bf74"
+    }
+   },
+   "strength": "firm",
+   "note": "Loyalty Card Locker host, legacy form"
+  },
+  {
+   "id": "URL-05",
+   "kind": "catima-share-parse",
+   "input": {
+    "url": "https://catima.app.evil.example/share#store%3DGrocery%2BStore%26note%3DQuite%2Bnecessary%26balance%3D150%26cardid%3Ddhd%26barcodetype%3DAZTEC%26headercolor%3D-9977996"
+   },
+   "expect": {
+    "ok": false
+   },
+   "strength": "inferred",
+   "note": "look-alike host must not be accepted",
+   "adversarial": true
+  },
+  {
+   "id": "URL-06",
+   "kind": "catima-share-parse",
+   "input": {
+    "url": "https://catima.app/share#store%3DA%2526B%253DC%252BD%2B100%2525%26note%3Dx%253D1%2526y%253D2%250Azweite%2BZeile%26cardid%3DX%2B1%252F2%252B3%26barcodetype%3DCODE_128"
+   },
+   "expect": {
+    "ok": true,
+    "card": {
+     "name": "A&B=C+D 100%",
+     "note": "x=1&y=2\nzweite Zeile",
+     "number": "X 1/2+3",
+     "codeValue": "X 1/2+3",
+     "format": "code128"
+    }
+   },
+   "strength": "firm",
+   "note": "& = + % and newline survive the double encoding",
+   "adversarial": true
+  },
+  {
+   "id": "URL-07",
+   "kind": "catima-share-parse",
+   "input": {
+    "url": "https://catima.app/share#store%3DB%25C3%25A4ckerei%2BM%25C3%25BCller%2B%25F0%259F%25A5%25A8%26note%3D%26cardid%3D%25E4%25BC%259A%25E5%2593%25A1-42%26barcodetype%3DQR_CODE"
+   },
+   "expect": {
+    "ok": true,
+    "card": {
+     "name": "Bäckerei Müller 🥨",
+     "number": "会員-42",
+     "format": "qr",
+     "note": ""
+    }
+   },
+   "strength": "firm",
+   "note": "non-ASCII and emoji",
+   "adversarial": true
+  },
+  {
+   "id": "URL-08",
+   "kind": "catima-share-parse",
+   "input": {
+    "url": "https://catima.app/share#store%3DClub%26note%3Dn%26cardid%3D12345%26barcodeid%3DCLUB-12345-X%26barcodetype%3DQR_CODE%26balance%3D12.50%26balancetype%3DEUR%26expiry%3D1767225600000%26validfrom%3D1704067200000%26headercolor%3D-16777216"
+   },
+   "expect": {
+    "ok": true,
+    "card": {
+     "name": "Club",
+     "number": "12345",
+     "codeValue": "CLUB-12345-X",
+     "format": "qr",
+     "balance": "12.50",
+     "currency": "EUR",
+     "expiry": 1767225600000,
+     "validFrom": 1704067200000,
+     "color": "#000000"
+    }
+   },
+   "strength": "firm",
+   "note": "barcode differs from number; balance stays \"12.50\" (never a float); timestamps in ms (D29)",
+   "adversarial": true
+  },
+  {
+   "id": "URL-09",
+   "kind": "catima-share-parse",
+   "input": {
+    "url": "https://catima.app/share#store%3DParcel%26note%3D%26cardid%3DM1%26barcodetype%3DMAXICODE"
+   },
+   "expect": {
+    "ok": true,
+    "card": {
+     "name": "Parcel",
+     "number": "M1",
+     "format": "none",
+     "noteContains": "Catima type: MAXICODE"
+    }
+   },
+   "strength": "inferred",
+   "note": "unknown-to-us type -> none + note (reader rule applied to links)",
+   "adversarial": true
+  },
+  {
+   "id": "URL-11",
+   "kind": "catima-share-parse",
+   "input": {
+    "url": "https://catima.app/share#store%3DNo%2Bnumber%26note%3D"
+   },
+   "expect": {
+    "ok": false
+   },
+   "strength": "inferred",
+   "note": "cardid missing (required per CARD_FIELDS)",
+   "adversarial": true
+  },
+  {
+   "id": "URL-M1",
+   "kind": "catima-share-make",
+   "input": {
+    "card": {
+     "name": "Grocery Store",
+     "number": "dhd",
+     "codeValue": "dhd",
+     "format": "aztec",
+     "color": "#67bf74",
+     "note": "Quite necessary",
+     "balance": "150",
+     "currency": ""
+    }
+   },
+   "expect": {
+    "host": "catima.app/share",
+    "form": "fragment",
+    "card": {
+     "name": "Grocery Store",
+     "number": "dhd",
+     "codeValue": "dhd",
+     "format": "aztec",
+     "color": "#67bf74",
+     "note": "Quite necessary",
+     "currency": "",
+     "balance": "150"
+    }
+   },
+   "strength": "firm",
+   "note": "generated link parsed by the oracle: 2.0 fragment form, every shared field equal"
+  },
+  {
+   "id": "URL-M2",
+   "kind": "catima-share-make",
+   "input": {
+    "card": {
+     "name": "A&B=C+D 100% Müller 🥨",
+     "number": "X 1/2+3",
+     "codeValue": "https://e.example/?a=1&b=2",
+     "format": "qr",
+     "color": "#000000",
+     "note": "Zeile 1\nZeile 2 \"q\"",
+     "balance": "0.10",
+     "currency": "USD",
+     "expiry": 1767225600000,
+     "validFrom": 1704067200000
+    }
+   },
+   "expect": {
+    "host": "catima.app/share",
+    "form": "fragment",
+    "card": {
+     "name": "A&B=C+D 100% Müller 🥨",
+     "number": "X 1/2+3",
+     "codeValue": "https://e.example/?a=1&b=2",
+     "format": "qr",
+     "color": "#000000",
+     "note": "Zeile 1\nZeile 2 \"q\"",
+     "currency": "USD",
+     "expiry": 1767225600000,
+     "validFrom": 1704067200000,
+     "balance": "0.10"
+    }
+   },
+   "strength": "firm",
+   "note": "generated link parsed by the oracle: 2.0 fragment form, every shared field equal",
+   "adversarial": true
+  },
+  {
+   "id": "URL-M3",
+   "kind": "catima-share-make",
+   "input": {
+    "card": {
+     "name": "Number only",
+     "number": "7788 9900",
+     "codeValue": "7788 9900",
+     "format": "none",
+     "color": "#757575",
+     "note": "",
+     "balance": "",
+     "currency": ""
+    }
+   },
+   "expect": {
+    "host": "catima.app/share",
+    "form": "fragment",
+    "card": {
+     "name": "Number only",
+     "number": "7788 9900",
+     "codeValue": "7788 9900",
+     "format": "none",
+     "color": "#757575",
+     "note": "",
+     "currency": "",
+     "balance": {
+      "anyOf": [
+       "",
+       "0"
+      ]
+     }
+    }
+   },
+   "strength": "firm",
+   "note": "generated link parsed by the oracle: 2.0 fragment form, every shared field equal"
+  },
+  {
+   "id": "CAT-01",
+   "kind": "catima-import",
+   "input": {
+    "file": "fixtures/catima/catima-v2-full.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 20,
+    "skipped": 0,
+    "duplicates": 0,
+    "categories": [
+     "Bücher & Medien",
+     "Fashion",
+     "Food",
+     "Health"
+    ],
+    "cards": [
+     {
+      "name": "Clothing Store",
+      "number": "qw",
+      "format": "none",
+      "note": "Note about store",
+      "color": "#ff4fa5",
+      "favourite": true,
+      "archived": false,
+      "lastUsedAt": 1730493938000,
+      "categories": [
+       "Fashion"
+      ],
+      "hasFront": true,
+      "hasBack": true,
+      "balance": {
+       "anyOf": [
+        "",
+        "0"
+       ]
+      },
+      "currency": ""
+     },
+     {
+      "name": "Supermarkt Müller",
+      "number": "4006381333931",
+      "format": "ean13",
+      "note": "Kundennummer an der Kasse sagen\nZweite Zeile, mit Komma",
+      "color": "#4caf50",
+      "categories": [
+       "Food",
+       "Health"
+      ],
+      "hasFront": true,
+      "hasBack": false,
+      "lastUsedAt": 1730493369000
+     },
+     {
+      "name": "Pâtisserie Élise",
+      "number": "96385074",
+      "format": "ean8",
+      "note": "Says \"hello\", then leaves",
+      "expiry": 1767225600000,
+      "validFrom": null,
+      "balance": "12.50",
+      "currency": "EUR",
+      "color": "#00286e",
+      "categories": [
+       "Health"
+      ]
+     },
+     {
+      "name": "Panadería Niño",
+      "number": "036000291452",
+      "format": "upca",
+      "validFrom": 1704067200000,
+      "expiry": null,
+      "balance": "150",
+      "currency": "",
+      "archived": true,
+      "color": "#9c27b0",
+      "categories": []
+     },
+     {
+      "name": "Padaria São João",
+      "number": "04252614",
+      "format": "upce",
+      "color": "#67bf74"
+     },
+     {
+      "name": "Ferramenta Italia",
+      "number": "00012345678905",
+      "format": "itf",
+      "color": "#000000"
+     },
+     {
+      "name": "Kütüphane",
+      "number": "A40156B",
+      "format": "codabar",
+      "note": "Library card",
+      "color": "#ffffff"
+     },
+     {
+      "name": "Хозтовары",
+      "number": "ABC-123",
+      "format": "code39",
+      "color": "#e91e63"
+     },
+     {
+      "name": "Toko Buku",
+      "number": "TEST93",
+      "format": "code93"
+     },
+     {
+      "name": "Restaurant",
+      "number": "98765432",
+      "format": "code128",
+      "note": "Note about restaurant here",
+      "lastUsedAt": 1730493357000
+     },
+     {
+      "name": "会員カード 東京",
+      "number": "MEMBER-0001",
+      "format": "qr",
+      "codeValue": "https://example.com/m/0001",
+      "note": "日本語のメモ",
+      "favourite": true,
+      "categories": [
+       "Bücher & Medien"
+      ],
+      "hasFront": false,
+      "hasBack": false
+     },
+     {
+      "name": "Shoe Store",
+      "number": "zhxbx",
+      "format": "aztec",
+      "lastUsedAt": 1684347744000
+     },
+     {
+      "name": "Кофейня",
+      "number": "1234567890",
+      "format": "pdf417",
+      "note": "Скидка 10%",
+      "balance": "7",
+      "currency": ""
+     },
+     {
+      "name": "مكتبة",
+      "number": "DM-42",
+      "format": "datamatrix"
+     },
+     {
+      "name": "MaxiCode Store",
+      "number": "MAXI123",
+      "format": "none",
+      "noteContains": [
+       "Parcel card",
+       "Catima type: MAXICODE"
+      ]
+     },
+     {
+      "name": "도서관",
+      "number": "0101234567890128",
+      "format": "none",
+      "noteContains": [
+       "Catima type: RSS_14"
+      ]
+     },
+     {
+      "name": "पुस्तकालय",
+      "number": "(01)98898765432106",
+      "format": "none",
+      "noteContains": [
+       "Catima type: RSS_EXPANDED"
+      ]
+     },
+     {
+      "name": "Café Olé 🙂",
+      "number": "CAFE-1",
+      "format": "code128",
+      "balance": "0.10",
+      "currency": "USD",
+      "categories": [
+       "Food"
+      ]
+     },
+     {
+      "name": "中文超市",
+      "number": "5901234123457",
+      "format": "ean13"
+     },
+     {
+      "name": "Thư viện",
+      "number": "01234565",
+      "format": "upce",
+      "note": "Line one\nLine two\nLine three",
+      "color": "#e91e63"
+     }
+    ]
+   },
+   "strength": "firm",
+   "note": "A4 hand-written export: all 16 Catima types (MAXICODE/RSS_14/RSS_EXPANDED -> none + note), empty type -> none, negative colours, ms expiry/validfrom, SECONDS lastused, multi-line + quoted notes, groups, images incl. icon and an orphan image, 12 scripts",
+   "adversarial": true
+  },
+  {
+   "id": "CAT-02",
+   "kind": "catima-import",
+   "input": {
+    "file": "fixtures/catima/catima-v2-a13.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 12,
+    "skipped": 2,
+    "duplicates": 1,
+    "cards": [
+     {
+      "name": "Bakery One",
+      "number": "1001",
+      "format": "code128"
+     },
+     {
+      "name": "Book Shop",
+      "number": "9780306406157",
+      "format": "ean13",
+      "categories": [
+       "Shops"
+      ]
+     },
+     {
+      "name": "Cinema",
+      "number": "CIN-77",
+      "format": "qr",
+      "hasFront": true
+     },
+     {
+      "name": "Dry Cleaner",
+      "number": "2002",
+      "format": "none"
+     },
+     {
+      "name": "Fuel Station",
+      "number": "4006381333931",
+      "format": "ean13"
+     },
+     {
+      "name": "Gym",
+      "number": "GYM 555",
+      "format": "code39"
+     },
+     {
+      "name": "Hotel Club",
+      "number": "HC-123456",
+      "format": "code128",
+      "categories": [
+       "Travel"
+      ]
+     },
+     {
+      "name": "Juice Bar",
+      "number": "96385074",
+      "format": "ean8"
+     },
+     {
+      "name": "Kiosk",
+      "number": "036000291452",
+      "format": "upca"
+     },
+     {
+      "name": "Laundry",
+      "number": "12345678",
+      "format": "itf"
+     },
+     {
+      "name": "Market",
+      "number": "A1234B",
+      "format": "codabar"
+     },
+     {
+      "name": "Newsagent",
+      "number": "NEWS-1",
+      "format": "aztec"
+     }
+    ],
+    "absentNames": [
+     "Book Shop (copy)"
+    ],
+    "categories": [
+     "Shops",
+     "Travel"
+    ]
+   },
+   "strength": "firm",
+   "note": "A13: \"12 imported, 2 skipped, 1 duplicate skipped\"; the FIRST of two equal number+format rows is kept"
+  },
+  {
+   "id": "CAT-03",
+   "kind": "catima-import",
+   "input": {
+    "file": "fixtures/catima/catima-v2-a13.zip",
+    "existing": [
+     {
+      "name": "Mine",
+      "number": "1001",
+      "format": "code128"
+     }
+    ],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 11,
+    "skipped": 2,
+    "duplicates": 2,
+    "absentNames": [
+     "Bakery One",
+     "Book Shop (copy)"
+    ]
+   },
+   "strength": "inferred",
+   "note": "duplicate against the existing wallet + one inside the file",
+   "adversarial": true
+  },
+  {
+   "id": "CAT-04",
+   "kind": "catima-import",
+   "input": {
+    "file": "fixtures/catima/catima-v2-a13.zip",
+    "existing": [],
+    "duplicateRule": "keep"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 13,
+    "skipped": 2,
+    "duplicates": 0
+   },
+   "strength": "inferred",
+   "note": "\"keep both\" rule"
+  },
+  {
+   "id": "CAT-05",
+   "kind": "catima-import",
+   "input": {
+    "file": "fixtures/catima/catima-v1.csv",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 5,
+    "skipped": 0,
+    "duplicates": 0,
+    "cards": [
+     {
+      "name": "Old Bakery",
+      "number": "12345",
+      "format": "code128",
+      "color": "#ff4fa5",
+      "favourite": false
+     },
+     {
+      "name": "Old Pharmacy",
+      "number": "4006381333931",
+      "format": "ean13",
+      "note": "Two\nlines",
+      "color": "#4caf50",
+      "favourite": true
+     },
+     {
+      "name": "Old Library",
+      "number": "A40156B",
+      "format": "codabar"
+     },
+     {
+      "name": "Old Club",
+      "number": "CLUB 9",
+      "format": "none"
+     },
+     {
+      "name": "Old Garage",
+      "number": "9780306406157",
+      "format": "ean13",
+      "color": "#000000"
+     }
+    ]
+   },
+   "strength": "firm",
+   "note": "bare pre-2.0 CSV: no version line, no groups, missing columns, unknown headertextcolor column",
+   "adversarial": true
+  },
+  {
+   "id": "CAT-06",
+   "kind": "catima-import",
+   "input": {
+    "file": "fixtures/catima/catima-v2-bom-crlf.csv",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 3,
+    "skipped": 0,
+    "duplicates": 0,
+    "categories": [],
+    "cards": [
+     {
+      "name": "BOM Shop",
+      "number": "111222",
+      "format": "code128",
+      "categories": []
+     },
+     {
+      "name": "BOM Mart",
+      "number": "5901234123457",
+      "format": "ean13"
+     },
+     {
+      "name": "BOM Club",
+      "number": "ZZ-9",
+      "format": "qr"
+     }
+    ]
+   },
+   "strength": "inferred",
+   "note": "UTF-8 BOM before the version line; empty tables have no data lines",
+   "adversarial": true
+  },
+  {
+   "id": "CAT-07",
+   "kind": "catima-import",
+   "input": {
+    "file": "fixtures/catima/catima-no-csv.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": true,
+    "imported": 0
+   },
+   "strength": "firm",
+   "note": "§9: zip without catima.csv -> refused with a reason, nothing imported"
+  },
+  {
+   "id": "CAT-08",
+   "kind": "catima-import",
+   "input": {
+    "file": "fixtures/catima/catima-encrypted.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": true,
+    "imported": 0,
+    "reasonClass": "encrypted"
+   },
+   "strength": "firm",
+   "note": "D29: zip4j AES export -> \"password-protected Catima export\" message, nothing imported",
+   "adversarial": true
+  },
+  {
+   "id": "CAT-09",
+   "kind": "catima-import",
+   "input": {
+    "file": "fixtures/catima/catima-v2-group-case.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 3,
+    "skipped": 0,
+    "duplicates": 0,
+    "categories": [
+     "Drinks",
+     "Food"
+    ],
+    "cards": [
+     {
+      "name": "Alpha",
+      "number": "A-1",
+      "format": "code128",
+      "categories": [
+       "Food"
+      ]
+     },
+     {
+      "name": "Beta",
+      "number": "B-2",
+      "format": "code128",
+      "categories": [
+       "Food"
+      ]
+     },
+     {
+      "name": "Gamma",
+      "number": "C-3",
+      "format": "code128",
+      "categories": [
+       "Drinks"
+      ]
+     }
+    ]
+   },
+   "strength": "inferred",
+   "note": "D26: \"Food\" and \"food\" are one category (first spelling kept); a card in both is in it once",
+   "adversarial": true
+  },
+  {
+   "id": "CAT-10",
+   "kind": "catima-import",
+   "input": {
+    "file": "fixtures/catima/catima-v2-2100.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 2100,
+    "skipped": 0,
+    "duplicates": 0,
+    "cards": [
+     {
+      "name": "Card 0001",
+      "number": "L000001",
+      "format": "code128"
+     },
+     {
+      "name": "Card 2100",
+      "number": "L002100",
+      "format": "code128"
+     }
+    ]
+   },
+   "strength": "firm",
+   "note": "§9: > 2,000 cards still import"
+  },
+  {
+   "id": "CAT-11",
+   "kind": "catima-import",
+   "input": {
+    "file": "fixtures/catima/catima-v2-same-number.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 2,
+    "skipped": 0,
+    "duplicates": 1,
+    "absentNames": [
+     "Same C"
+    ],
+    "cards": [
+     {
+      "name": "Same A",
+      "number": "555",
+      "format": "code128"
+     },
+     {
+      "name": "Same B",
+      "number": "555",
+      "format": "qr"
+     }
+    ]
+   },
+   "strength": "firm",
+   "note": "duplicate = same number AND format; same number with another format is kept",
+   "adversarial": true
+  },
+  {
+   "id": "CAT-12",
+   "kind": "catima-import",
+   "input": {
+    "file": "fixtures/catima/catima-v2-invalid-values.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "note": "EAN-13 with a wrong check, a 100-char store name (our CHECK is 1..80), odd-length ITF: skip with reason, import as none/code128 with a note, or keep the format? Spec silent. Must NOT render an unreadable code silently (§2). Reported, not scored."
+   },
+   "strength": "ambiguous",
+   "note": "",
+   "adversarial": true
+  },
+  {
+   "id": "CEX-01",
+   "kind": "catima-export",
+   "input": {
+    "cards": [
+     {
+      "name": "Bakery",
+      "number": "1001",
+      "codeValue": "1001",
+      "format": "code128",
+      "color": "#e53935",
+      "note": "Fresh bread",
+      "balance": "3.50",
+      "currency": "EUR",
+      "validFrom": null,
+      "expiry": 1798761600000,
+      "favourite": true,
+      "archived": false,
+      "lastUsedAt": 1760000000000,
+      "categories": [
+       "Food"
+      ],
+      "hasFront": true,
+      "hasBack": false,
+      "tile": "photo",
+      "chainId": null,
+      "useCount": 12,
+      "sortIndex": 0
+     },
+     {
+      "name": "Bücherei 📚",
+      "number": "A40156B",
+      "codeValue": "A40156B",
+      "format": "codabar",
+      "color": "#1e88e5",
+      "note": "Zeile 1\nZeile 2, \"zitiert\"",
+      "balance": "",
+      "currency": "",
+      "validFrom": 1704067200000,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Bücher",
+       "Food"
+      ],
+      "hasFront": false,
+      "hasBack": true,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 0,
+      "sortIndex": 1
+     },
+     {
+      "name": "会員 QR",
+      "number": "M-1",
+      "codeValue": "https://example.com/m/1?x=1&y=2",
+      "format": "qr",
+      "color": "#43a047",
+      "note": "",
+      "balance": "120",
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": true,
+      "lastUsedAt": 1750000000000,
+      "categories": [],
+      "hasFront": false,
+      "hasBack": false,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 3,
+      "sortIndex": 2
+     },
+     {
+      "name": "Number only",
+      "number": "7788 9900",
+      "codeValue": "7788 9900",
+      "format": "none",
+      "color": "#757575",
+      "note": "a,b;c\td",
+      "balance": "",
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [],
+      "hasFront": false,
+      "hasBack": false,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 0,
+      "sortIndex": 3
+     },
+     {
+      "name": "EAN card",
+      "number": "4006381333931",
+      "codeValue": "4006381333931",
+      "format": "ean13",
+      "color": "#000000",
+      "note": "",
+      "balance": "0.10",
+      "currency": "USD",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": true,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Food"
+      ],
+      "hasFront": true,
+      "hasBack": true,
+      "tile": "photo",
+      "chainId": null,
+      "useCount": 99,
+      "sortIndex": 4
+     }
+    ]
+   },
+   "expect": {
+    "imported": 5,
+    "cards": [
+     {
+      "name": "Bakery",
+      "number": "1001",
+      "codeValue": "1001",
+      "format": "code128",
+      "color": "#e53935",
+      "note": "Fresh bread",
+      "balance": "3.50",
+      "currency": "EUR",
+      "validFrom": null,
+      "expiry": 1798761600000,
+      "favourite": true,
+      "archived": false,
+      "lastUsedAt": 1760000000000,
+      "categories": [
+       "Food"
+      ]
+     },
+     {
+      "name": "Bücherei 📚",
+      "number": "A40156B",
+      "codeValue": "A40156B",
+      "format": "codabar",
+      "color": "#1e88e5",
+      "note": "Zeile 1\nZeile 2, \"zitiert\"",
+      "balance": {
+       "anyOf": [
+        "",
+        "0"
+       ]
+      },
+      "currency": "",
+      "validFrom": 1704067200000,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Bücher",
+       "Food"
+      ]
+     },
+     {
+      "name": "会員 QR",
+      "number": "M-1",
+      "codeValue": "https://example.com/m/1?x=1&y=2",
+      "format": "qr",
+      "color": "#43a047",
+      "note": "",
+      "balance": "120",
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": true,
+      "lastUsedAt": 1750000000000,
+      "categories": []
+     },
+     {
+      "name": "Number only",
+      "number": "7788 9900",
+      "codeValue": "7788 9900",
+      "format": "none",
+      "color": "#757575",
+      "note": "a,b;c\td",
+      "balance": {
+       "anyOf": [
+        "",
+        "0"
+       ]
+      },
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": []
+     },
+     {
+      "name": "EAN card",
+      "number": "4006381333931",
+      "codeValue": "4006381333931",
+      "format": "ean13",
+      "color": "#000000",
+      "note": "",
+      "balance": "0.10",
+      "currency": "USD",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": true,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Food"
+      ]
+     }
+    ],
+    "firstLine": "2",
+    "imagesFor": {
+     "Bakery": [
+      "front"
+     ],
+     "Bücherei 📚": [
+      "back"
+     ],
+     "EAN card": [
+      "front",
+      "back"
+     ]
+    }
+   },
+   "strength": "firm",
+   "note": "engine writer -> ORACLE reader: version-2 zip, every Catima-known field, groups/links, numeric image ids (D29); lastused written in SECONDS (ms/1000)",
+   "adversarial": true
+  },
+  {
+   "id": "CEX-02",
+   "kind": "catima-export",
+   "input": {
+    "cards": [
+     {
+      "name": "Bücherei 📚",
+      "number": "A40156B",
+      "codeValue": "A40156B",
+      "format": "codabar",
+      "color": "#1e88e5",
+      "note": "Zeile 1\nZeile 2, \"zitiert\"",
+      "balance": "",
+      "currency": "",
+      "validFrom": 1704067200000,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Bücher",
+       "Food"
+      ],
+      "hasFront": false,
+      "hasBack": true,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 0,
+      "sortIndex": 1
+     },
+     {
+      "name": "Number only",
+      "number": "7788 9900",
+      "codeValue": "7788 9900",
+      "format": "none",
+      "color": "#757575",
+      "note": "a,b;c\td",
+      "balance": "",
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [],
+      "hasFront": false,
+      "hasBack": false,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 0,
+      "sortIndex": 3
+     }
+    ]
+   },
+   "expect": {
+    "imported": 2,
+    "cards": [
+     {
+      "name": "Bücherei 📚",
+      "number": "A40156B",
+      "codeValue": "A40156B",
+      "format": "codabar",
+      "color": "#1e88e5",
+      "note": "Zeile 1\nZeile 2, \"zitiert\"",
+      "balance": {
+       "anyOf": [
+        "",
+        "0"
+       ]
+      },
+      "currency": "",
+      "validFrom": 1704067200000,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Bücher",
+       "Food"
+      ]
+     },
+     {
+      "name": "Number only",
+      "number": "7788 9900",
+      "codeValue": "7788 9900",
+      "format": "none",
+      "color": "#757575",
+      "note": "a,b;c\td",
+      "balance": {
+       "anyOf": [
+        "",
+        "0"
+       ]
+      },
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": []
+     }
+    ],
+    "firstLine": "2"
+   },
+   "strength": "firm",
+   "note": "quotes, commas, tab, newline and emoji survive RFC 4180 quoting",
+   "adversarial": true
+  },
+  {
+   "id": "LC1-P01",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "LC1:{\"n\":\"Bakery\",\"i\":\"1001\",\"f\":\"code128\"}"
+   },
+   "expect": {
+    "ok": true,
+    "card": {
+     "name": "Bakery",
+     "number": "1001",
+     "codeValue": "1001",
+     "format": "code128"
+    }
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "LC1-P02",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "LC1:{\"n\":\"Bäckerei Müller\",\"i\":\"4006381333931\",\"f\":\"ean13\",\"k\":\"#67bf74\",\"t\":\"Kasse 2\\nbitte scannen\",\"b\":\"12.50\",\"u\":\"EUR\",\"e\":1767225600000}"
+   },
+   "expect": {
+    "ok": true,
+    "card": {
+     "name": "Bäckerei Müller",
+     "number": "4006381333931",
+     "codeValue": "4006381333931",
+     "format": "ean13",
+     "color": "#67bf74",
+     "note": "Kasse 2\nbitte scannen",
+     "balance": "12.50",
+     "currency": "EUR",
+     "expiry": 1767225600000
+    }
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "LC1-P03",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "LC1:{\"n\":\"Club\",\"i\":\"12345\",\"c\":\"CLUB-12345-X\",\"f\":\"qr\",\"k\":\"#000000\"}"
+   },
+   "expect": {
+    "ok": true,
+    "card": {
+     "name": "Club",
+     "number": "12345",
+     "codeValue": "CLUB-12345-X",
+     "format": "qr",
+     "color": "#000000"
+    }
+   },
+   "strength": "firm",
+   "note": ""
+  },
+  {
+   "id": "LC1-P04",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "LC1:{\"n\":\"会員カード 🙂\",\"i\":\"ü-42\",\"f\":\"datamatrix\",\"t\":\"مرحبا\"}"
+   },
+   "expect": {
+    "ok": true,
+    "card": {
+     "name": "会員カード 🙂",
+     "number": "ü-42",
+     "format": "datamatrix",
+     "note": "مرحبا"
+    }
+   },
+   "strength": "firm",
+   "note": "",
+   "adversarial": true
+  },
+  {
+   "id": "LC1-P05",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "LC1:{\"n\":\"Esc\\u00e4ped \\\"q\\\"\",\"i\":\"1\",\"f\":\"code128\"}"
+   },
+   "expect": {
+    "ok": true,
+    "card": {
+     "name": "Escäped \"q\"",
+     "number": "1",
+     "format": "code128"
+    }
+   },
+   "strength": "firm",
+   "note": "JSON \\u escapes and quotes",
+   "adversarial": true
+  },
+  {
+   "id": "LC1-P06",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "LC2:{\"n\":\"Bakery\",\"i\":\"1001\",\"f\":\"code128\"}"
+   },
+   "expect": {
+    "ok": false
+   },
+   "strength": "firm",
+   "note": "other version prefix"
+  },
+  {
+   "id": "LC1-P07",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "lc1:{\"n\":\"Bakery\",\"i\":\"1001\",\"f\":\"code128\"}"
+   },
+   "expect": {
+    "ok": false
+   },
+   "strength": "inferred",
+   "note": "prefix is case-sensitive",
+   "adversarial": true
+  },
+  {
+   "id": "LC1-P09",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "LC1:[1,2,3]"
+   },
+   "expect": {
+    "ok": false
+   },
+   "strength": "firm",
+   "note": "JSON but not an object",
+   "adversarial": true
+  },
+  {
+   "id": "LC1-P10",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "LC1:{\"i\":\"1001\",\"f\":\"code128\"}"
+   },
+   "expect": {
+    "ok": false
+   },
+   "strength": "firm",
+   "note": "no name (CHECK length 1..80)"
+  },
+  {
+   "id": "LC1-P11",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "LC1:{\"n\":\"Bakery\",\"i\":\"1001\",\"f\":\"ean14\"}"
+   },
+   "expect": {
+    "ok": false
+   },
+   "strength": "inferred",
+   "note": "unknown format id",
+   "adversarial": true
+  },
+  {
+   "id": "LC1-P12",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "LC1:{\"n\":123,\"i\":\"1001\",\"f\":\"code128\"}"
+   },
+   "expect": {
+    "ok": false
+   },
+   "strength": "inferred",
+   "note": "name not a string",
+   "adversarial": true
+  },
+  {
+   "id": "LC1-P14",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "https://catima.app/share#store%3DGrocery%2BStore%26note%3DQuite%2Bnecessary%26balance%3D150%26cardid%3Ddhd%26barcodetype%3DAZTEC%26headercolor%3D-9977996"
+   },
+   "expect": {
+    "ok": false
+   },
+   "strength": "firm",
+   "note": "a Catima link is not an LC1 payload (it is handled by share-url.ts)"
+  },
+  {
+   "id": "LC1-P15",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "LC1:{\"n\":\"NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN\",\"i\":\"1\",\"f\":\"code128\"}"
+   },
+   "expect": {
+    "ok": false
+   },
+   "strength": "inferred",
+   "note": "81-char name",
+   "adversarial": true
+  },
+  {
+   "id": "LC1-P16",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "LC1:{\"n\":\"Bakery\",\"i\":\"1001\",\"f\":\"code128\"}xyz"
+   },
+   "expect": {
+    "ok": false
+   },
+   "strength": "firm",
+   "note": "trailing garbage after the JSON",
+   "adversarial": true
+  },
+  {
+   "id": "LC1-P17",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "LC1:{\"n\":\"Bakery\",\"i\":\"1001\",\"f\":\"code128\",\"k\":\"red\"}"
+   },
+   "expect": {
+    "ok": false
+   },
+   "strength": "inferred",
+   "note": "colour must be #rrggbb",
+   "adversarial": true
+  },
+  {
+   "id": "LC1-P19",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "LC1:{\"n\":\"Bakery\",\"i\":\"1001\",\"f\":\"code128\",\"z\":1}"
+   },
+   "expect": {
+    "note": "unknown extra key: strict reject vs forward-compatible ignore"
+   },
+   "strength": "ambiguous",
+   "note": "",
+   "adversarial": true
+  },
+  {
+   "id": "LC1-P20",
+   "kind": "lc1-parse",
+   "input": {
+    "text": "LC1:{\"n\":\"Bad\",\"i\":\"4006381333932\",\"f\":\"ean13\"}"
+   },
+   "expect": {
+    "note": "well-formed payload whose number fails its format rule: reject, or import as code128/none?"
+   },
+   "strength": "ambiguous",
+   "note": "",
+   "adversarial": true
+  },
+  {
+   "id": "LC1-M01",
+   "kind": "lc1-make",
+   "input": {
+    "card": {
+     "name": "Bakery",
+     "number": "1001",
+     "codeValue": "1001",
+     "format": "code128",
+     "color": "#e53935",
+     "note": "Fresh bread",
+     "balance": "3.50",
+     "currency": "EUR",
+     "expiry": 1798761600000
+    }
+   },
+   "expect": {
+    "maxBytes": 1200,
+    "truncated": false,
+    "card": {
+     "name": "Bakery",
+     "number": "1001",
+     "codeValue": "1001",
+     "format": "code128",
+     "color": "#e53935",
+     "note": "Fresh bread",
+     "balance": "3.50",
+     "currency": "EUR",
+     "expiry": 1798761600000
+    }
+   },
+   "strength": "firm",
+   "note": "parsed back by the oracle; every field equal; no truncation"
+  },
+  {
+   "id": "LC1-M02",
+   "kind": "lc1-make",
+   "input": {
+    "card": {
+     "name": "Club",
+     "number": "12345",
+     "codeValue": "CLUB-12345-X",
+     "format": "qr",
+     "color": "#43a047",
+     "note": "",
+     "balance": "",
+     "currency": "",
+     "expiry": null
+    }
+   },
+   "expect": {
+    "maxBytes": 1200,
+    "truncated": false,
+    "card": {
+     "name": "Club",
+     "number": "12345",
+     "codeValue": "CLUB-12345-X",
+     "format": "qr",
+     "color": "#43a047",
+     "note": "",
+     "balance": "",
+     "currency": "",
+     "expiry": null
+    }
+   },
+   "strength": "firm",
+   "note": "parsed back by the oracle; every field equal; no truncation"
+  },
+  {
+   "id": "LC1-M03",
+   "kind": "lc1-make",
+   "input": {
+    "card": {
+     "name": "Long note",
+     "number": "1",
+     "codeValue": "1",
+     "format": "code128",
+     "color": "#000000",
+     "note": "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ",
+     "balance": "",
+     "currency": "",
+     "expiry": null
+    }
+   },
+   "expect": {
+    "maxBytes": 1200,
+    "truncated": true,
+    "card": {
+     "name": "Long note",
+     "number": "1",
+     "codeValue": "1",
+     "format": "code128",
+     "color": "#000000",
+     "balance": "",
+     "currency": "",
+     "expiry": null
+    }
+   },
+   "strength": "firm",
+   "note": "parsed back by the oracle; ≤ 1,200 bytes incl. \"LC1:\"; a cut note ends with \"…\", is a prefix of the original, valid Unicode (no lone surrogate), and truncated=true is reported"
+  },
+  {
+   "id": "LC1-M04",
+   "kind": "lc1-make",
+   "input": {
+    "card": {
+     "name": "長いメモ",
+     "number": "2",
+     "codeValue": "2",
+     "format": "qr",
+     "color": "#000000",
+     "note": "お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報お得なカード情報",
+     "balance": "",
+     "currency": "",
+     "expiry": null
+    }
+   },
+   "expect": {
+    "maxBytes": 1200,
+    "truncated": true,
+    "card": {
+     "name": "長いメモ",
+     "number": "2",
+     "codeValue": "2",
+     "format": "qr",
+     "color": "#000000",
+     "balance": "",
+     "currency": "",
+     "expiry": null
+    }
+   },
+   "strength": "firm",
+   "note": "parsed back by the oracle; ≤ 1,200 bytes incl. \"LC1:\"; a cut note ends with \"…\", is a prefix of the original, valid Unicode (no lone surrogate), and truncated=true is reported",
+   "adversarial": true
+  },
+  {
+   "id": "LC1-M05",
+   "kind": "lc1-make",
+   "input": {
+    "card": {
+     "name": "Emoji",
+     "number": "3",
+     "codeValue": "3",
+     "format": "qr",
+     "color": "#000000",
+     "note": "🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉🙂🎉",
+     "balance": "",
+     "currency": "",
+     "expiry": null
+    }
+   },
+   "expect": {
+    "maxBytes": 1200,
+    "truncated": true,
+    "card": {
+     "name": "Emoji",
+     "number": "3",
+     "codeValue": "3",
+     "format": "qr",
+     "color": "#000000",
+     "balance": "",
+     "currency": "",
+     "expiry": null
+    }
+   },
+   "strength": "firm",
+   "note": "parsed back by the oracle; ≤ 1,200 bytes incl. \"LC1:\"; a cut note ends with \"…\", is a prefix of the original, valid Unicode (no lone surrogate), and truncated=true is reported",
+   "adversarial": true
+  },
+  {
+   "id": "LC1-M06",
+   "kind": "lc1-make",
+   "input": {
+    "card": {
+     "name": "Fits",
+     "number": "4",
+     "codeValue": "4",
+     "format": "code128",
+     "color": "#000000",
+     "note": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "balance": "",
+     "currency": "",
+     "expiry": null
+    }
+   },
+   "expect": {
+    "maxBytes": 1200,
+    "truncated": false,
+    "card": {
+     "name": "Fits",
+     "number": "4",
+     "codeValue": "4",
+     "format": "code128",
+     "color": "#000000",
+     "note": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "balance": "",
+     "currency": "",
+     "expiry": null
+    }
+   },
+   "strength": "firm",
+   "note": "parsed back by the oracle; every field equal; no truncation"
+  },
+  {
+   "id": "LC1-M07",
+   "kind": "lc1-make",
+   "input": {
+    "card": {
+     "name": "Big QR",
+     "number": "Q",
+     "codeValue": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty c",
+     "format": "qr",
+     "color": "#000000",
+     "note": "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+     "balance": "",
+     "currency": "",
+     "expiry": null
+    }
+   },
+   "expect": {
+    "maxBytes": 1200,
+    "truncated": true,
+    "card": {
+     "name": "Big QR",
+     "number": "Q",
+     "codeValue": "Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty card member 123456 Loyalty c",
+     "format": "qr",
+     "color": "#000000",
+     "balance": "",
+     "currency": "",
+     "expiry": null
+    }
+   },
+   "strength": "inferred",
+   "note": "parsed back by the oracle; ≤ 1,200 bytes incl. \"LC1:\"; a cut note ends with \"…\", is a prefix of the original, valid Unicode (no lone surrogate), and truncated=true is reported",
+   "adversarial": true
+  },
+  {
+   "id": "LC1-M08",
+   "kind": "lc1-make",
+   "input": {
+    "card": {
+     "name": "Huge",
+     "number": "H",
+     "codeValue": "üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü",
+     "format": "qr",
+     "color": "#000000",
+     "note": "",
+     "balance": "",
+     "currency": "",
+     "expiry": null
+    }
+   },
+   "expect": {
+    "note": "code value alone is 2000 UTF-8 bytes > 1200: refuse to share by QR, or send a different payload? Spec silent"
+   },
+   "strength": "ambiguous",
+   "note": "",
+   "adversarial": true
+  },
+  {
+   "id": "BAK-01",
+   "kind": "backup-import",
+   "input": {
+    "file": "fixtures/backup/backup-valid.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 4,
+    "skipped": 0,
+    "duplicates": 0,
+    "categories": [
+     "Bücher",
+     "Food"
+    ],
+    "cards": [
+     {
+      "name": "Bakery",
+      "number": "1001",
+      "format": "code128",
+      "color": "#e53935",
+      "note": "Fresh bread",
+      "balance": "3.50",
+      "currency": "EUR",
+      "expiry": 1798761600000,
+      "favourite": true,
+      "hasFront": true,
+      "hasBack": false,
+      "useCount": 12,
+      "lastUsedAt": 1760000000000,
+      "tile": "photo",
+      "categories": [
+       "Food"
+      ]
+     },
+     {
+      "name": "Bücherei 📚",
+      "number": "A40156B",
+      "format": "codabar",
+      "note": "Zeile 1\nZeile 2",
+      "validFrom": 1704067200000,
+      "categories": [
+       "Bücher"
+      ]
+     },
+     {
+      "name": "Member QR",
+      "number": "M-1",
+      "format": "qr",
+      "codeValue": "https://example.com/m/1",
+      "archived": true,
+      "useCount": 3,
+      "categories": [
+       "Food"
+      ]
+     },
+     {
+      "name": "Number only",
+      "number": "",
+      "format": "none",
+      "color": "#757575",
+      "categories": []
+     }
+    ]
+   },
+   "strength": "inferred",
+   "note": "hand-written backup; keys = SQL column names (ambiguity A9)"
+  },
+  {
+   "id": "BAK-02",
+   "kind": "backup-import",
+   "input": {
+    "file": "fixtures/backup/backup-skip.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 3,
+    "skipped": 6,
+    "duplicates": 0,
+    "absentNames": [
+     "",
+     "Bad colour",
+     "Bad format",
+     "Bad flag",
+     "Bad tile"
+    ]
+   },
+   "strength": "inferred",
+   "note": "reader validates every field by the CHECK rules: empty / 81-char name, #GGGGGG, ean14, favourite 2, tile logo",
+   "adversarial": true
+  },
+  {
+   "id": "BAK-03",
+   "kind": "backup-import",
+   "input": {
+    "file": "fixtures/backup/backup-no-json.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": true,
+    "imported": 0
+   },
+   "strength": "firm",
+   "note": "no backup.json"
+  },
+  {
+   "id": "BAK-04",
+   "kind": "backup-import",
+   "input": {
+    "file": "fixtures/backup/backup-bad-json.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": true,
+    "imported": 0
+   },
+   "strength": "firm",
+   "note": "truncated JSON",
+   "adversarial": true
+  },
+  {
+   "id": "BAK-05",
+   "kind": "backup-import",
+   "input": {
+    "file": "fixtures/backup/backup-version2.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": true,
+    "imported": 0
+   },
+   "strength": "inferred",
+   "note": "unknown future version must not be half-read",
+   "adversarial": true
+  },
+  {
+   "id": "BAK-06",
+   "kind": "backup-import",
+   "input": {
+    "file": "fixtures/backup/backup-not-a-zip.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": true,
+    "imported": 0
+   },
+   "strength": "firm",
+   "note": "CSV bytes with a .zip name",
+   "adversarial": true
+  },
+  {
+   "id": "BAK-07",
+   "kind": "backup-import",
+   "input": {
+    "file": "fixtures/catima/catima-v2-a13.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": true,
+    "imported": 0
+   },
+   "strength": "inferred",
+   "note": "a Catima zip given to the backup reader (no backup.json) is refused, not mis-read",
+   "adversarial": true
+  },
+  {
+   "id": "BAK-08",
+   "kind": "backup-import",
+   "input": {
+    "file": "fixtures/backup/backup-valid.zip",
+    "existing": [
+     {
+      "name": "Mine",
+      "number": "1001",
+      "format": "code128"
+     }
+    ],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 3,
+    "skipped": 0,
+    "duplicates": 1,
+    "absentNames": [
+     "Bakery"
+    ]
+   },
+   "strength": "inferred",
+   "note": "duplicate against the wallet"
+  },
+  {
+   "id": "BAK-09",
+   "kind": "backup-import",
+   "input": {
+    "file": "fixtures/backup/backup-upper-colour.zip",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "note": "#ABCDEF violates the lower-case CHECK: skip, or lower-case it? Spec silent"
+   },
+   "strength": "ambiguous",
+   "note": "",
+   "adversarial": true
+  },
+  {
+   "id": "BAK-RT1",
+   "kind": "backup-roundtrip",
+   "input": {
+    "cards": [
+     {
+      "name": "Bakery",
+      "number": "1001",
+      "codeValue": "1001",
+      "format": "code128",
+      "color": "#e53935",
+      "note": "Fresh bread",
+      "balance": "3.50",
+      "currency": "EUR",
+      "validFrom": null,
+      "expiry": 1798761600000,
+      "favourite": true,
+      "archived": false,
+      "lastUsedAt": 1760000000000,
+      "categories": [
+       "Food"
+      ],
+      "hasFront": true,
+      "hasBack": false,
+      "tile": "photo",
+      "chainId": null,
+      "useCount": 12,
+      "sortIndex": 0
+     },
+     {
+      "name": "Bücherei 📚",
+      "number": "A40156B",
+      "codeValue": "A40156B",
+      "format": "codabar",
+      "color": "#1e88e5",
+      "note": "Zeile 1\nZeile 2, \"zitiert\"",
+      "balance": "",
+      "currency": "",
+      "validFrom": 1704067200000,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Bücher",
+       "Food"
+      ],
+      "hasFront": false,
+      "hasBack": true,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 0,
+      "sortIndex": 1
+     },
+     {
+      "name": "会員 QR",
+      "number": "M-1",
+      "codeValue": "https://example.com/m/1?x=1&y=2",
+      "format": "qr",
+      "color": "#43a047",
+      "note": "",
+      "balance": "120",
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": true,
+      "lastUsedAt": 1750000000000,
+      "categories": [],
+      "hasFront": false,
+      "hasBack": false,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 3,
+      "sortIndex": 2
+     },
+     {
+      "name": "Number only",
+      "number": "7788 9900",
+      "codeValue": "7788 9900",
+      "format": "none",
+      "color": "#757575",
+      "note": "a,b;c\td",
+      "balance": "",
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [],
+      "hasFront": false,
+      "hasBack": false,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 0,
+      "sortIndex": 3
+     },
+     {
+      "name": "EAN card",
+      "number": "4006381333931",
+      "codeValue": "4006381333931",
+      "format": "ean13",
+      "color": "#000000",
+      "note": "",
+      "balance": "0.10",
+      "currency": "USD",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": true,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Food"
+      ],
+      "hasFront": true,
+      "hasBack": true,
+      "tile": "photo",
+      "chainId": null,
+      "useCount": 99,
+      "sortIndex": 4
+     }
+    ]
+   },
+   "expect": {
+    "zipHas": [
+     "backup.json"
+    ],
+    "jsonTop": {
+     "version": 1
+    },
+    "jsonKeys": [
+     "version",
+     "exportedAt",
+     "cards",
+     "categories",
+     "links"
+    ],
+    "photoFiles": {
+     "Bakery": [
+      "front"
+     ],
+     "Bücherei 📚": [
+      "back"
+     ],
+     "EAN card": [
+      "front",
+      "back"
+     ]
+    },
+    "readBack": {
+     "refused": false,
+     "imported": 5,
+     "skipped": 0,
+     "duplicates": 0,
+     "cards": [
+      {
+       "name": "Bakery",
+       "number": "1001",
+       "codeValue": "1001",
+       "format": "code128",
+       "color": "#e53935",
+       "note": "Fresh bread",
+       "balance": "3.50",
+       "currency": "EUR",
+       "validFrom": null,
+       "expiry": 1798761600000,
+       "favourite": true,
+       "archived": false,
+       "lastUsedAt": 1760000000000,
+       "categories": [
+        "Food"
+       ],
+       "hasFront": true,
+       "hasBack": false,
+       "tile": "photo",
+       "chainId": null,
+       "useCount": 12,
+       "sortIndex": 0
+      },
+      {
+       "name": "Bücherei 📚",
+       "number": "A40156B",
+       "codeValue": "A40156B",
+       "format": "codabar",
+       "color": "#1e88e5",
+       "note": "Zeile 1\nZeile 2, \"zitiert\"",
+       "balance": "",
+       "currency": "",
+       "validFrom": 1704067200000,
+       "expiry": null,
+       "favourite": false,
+       "archived": false,
+       "lastUsedAt": null,
+       "categories": [
+        "Bücher",
+        "Food"
+       ],
+       "hasFront": false,
+       "hasBack": true,
+       "tile": "initials",
+       "chainId": null,
+       "useCount": 0,
+       "sortIndex": 1
+      },
+      {
+       "name": "会員 QR",
+       "number": "M-1",
+       "codeValue": "https://example.com/m/1?x=1&y=2",
+       "format": "qr",
+       "color": "#43a047",
+       "note": "",
+       "balance": "120",
+       "currency": "",
+       "validFrom": null,
+       "expiry": null,
+       "favourite": false,
+       "archived": true,
+       "lastUsedAt": 1750000000000,
+       "categories": [],
+       "hasFront": false,
+       "hasBack": false,
+       "tile": "initials",
+       "chainId": null,
+       "useCount": 3,
+       "sortIndex": 2
+      },
+      {
+       "name": "Number only",
+       "number": "7788 9900",
+       "codeValue": "7788 9900",
+       "format": "none",
+       "color": "#757575",
+       "note": "a,b;c\td",
+       "balance": "",
+       "currency": "",
+       "validFrom": null,
+       "expiry": null,
+       "favourite": false,
+       "archived": false,
+       "lastUsedAt": null,
+       "categories": [],
+       "hasFront": false,
+       "hasBack": false,
+       "tile": "initials",
+       "chainId": null,
+       "useCount": 0,
+       "sortIndex": 3
+      },
+      {
+       "name": "EAN card",
+       "number": "4006381333931",
+       "codeValue": "4006381333931",
+       "format": "ean13",
+       "color": "#000000",
+       "note": "",
+       "balance": "0.10",
+       "currency": "USD",
+       "validFrom": null,
+       "expiry": null,
+       "favourite": true,
+       "archived": false,
+       "lastUsedAt": null,
+       "categories": [
+        "Food"
+       ],
+       "hasFront": true,
+       "hasBack": true,
+       "tile": "photo",
+       "chainId": null,
+       "useCount": 99,
+       "sortIndex": 4
+      }
+     ],
+     "categories": [
+      "Bücher",
+      "Food"
+     ]
+    }
+   },
+   "strength": "firm",
+   "note": "backup keeps EVERY field incl. tile, chain, use_count, sort (§5.3/§5.4), balance strings exact",
+   "adversarial": true
+  },
+  {
+   "id": "BAK-T1",
+   "kind": "backup-tamper",
+   "input": {
+    "cards": [
+     {
+      "name": "Bakery",
+      "number": "1001",
+      "codeValue": "1001",
+      "format": "code128",
+      "color": "#e53935",
+      "note": "Fresh bread",
+      "balance": "3.50",
+      "currency": "EUR",
+      "validFrom": null,
+      "expiry": 1798761600000,
+      "favourite": true,
+      "archived": false,
+      "lastUsedAt": 1760000000000,
+      "categories": [
+       "Food"
+      ],
+      "hasFront": true,
+      "hasBack": false,
+      "tile": "photo",
+      "chainId": null,
+      "useCount": 12,
+      "sortIndex": 0
+     },
+     {
+      "name": "Bücherei 📚",
+      "number": "A40156B",
+      "codeValue": "A40156B",
+      "format": "codabar",
+      "color": "#1e88e5",
+      "note": "Zeile 1\nZeile 2, \"zitiert\"",
+      "balance": "",
+      "currency": "",
+      "validFrom": 1704067200000,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Bücher",
+       "Food"
+      ],
+      "hasFront": false,
+      "hasBack": true,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 0,
+      "sortIndex": 1
+     },
+     {
+      "name": "会員 QR",
+      "number": "M-1",
+      "codeValue": "https://example.com/m/1?x=1&y=2",
+      "format": "qr",
+      "color": "#43a047",
+      "note": "",
+      "balance": "120",
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": true,
+      "lastUsedAt": 1750000000000,
+      "categories": [],
+      "hasFront": false,
+      "hasBack": false,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 3,
+      "sortIndex": 2
+     },
+     {
+      "name": "Number only",
+      "number": "7788 9900",
+      "codeValue": "7788 9900",
+      "format": "none",
+      "color": "#757575",
+      "note": "a,b;c\td",
+      "balance": "",
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [],
+      "hasFront": false,
+      "hasBack": false,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 0,
+      "sortIndex": 3
+     },
+     {
+      "name": "EAN card",
+      "number": "4006381333931",
+      "codeValue": "4006381333931",
+      "format": "ean13",
+      "color": "#000000",
+      "note": "",
+      "balance": "0.10",
+      "currency": "USD",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": true,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Food"
+      ],
+      "hasFront": true,
+      "hasBack": true,
+      "tile": "photo",
+      "chainId": null,
+      "useCount": 99,
+      "sortIndex": 4
+     }
+    ],
+    "tamper": [
+     {
+      "op": "set-top",
+      "key": "version",
+      "value": 2
+     }
+    ]
+   },
+   "expect": {
+    "refused": true,
+    "imported": 0
+   },
+   "strength": "inferred",
+   "note": "engine backup with version 2 -> refused",
+   "adversarial": true
+  },
+  {
+   "id": "BAK-T2",
+   "kind": "backup-tamper",
+   "input": {
+    "cards": [
+     {
+      "name": "Bakery",
+      "number": "1001",
+      "codeValue": "1001",
+      "format": "code128",
+      "color": "#e53935",
+      "note": "Fresh bread",
+      "balance": "3.50",
+      "currency": "EUR",
+      "validFrom": null,
+      "expiry": 1798761600000,
+      "favourite": true,
+      "archived": false,
+      "lastUsedAt": 1760000000000,
+      "categories": [
+       "Food"
+      ],
+      "hasFront": true,
+      "hasBack": false,
+      "tile": "photo",
+      "chainId": null,
+      "useCount": 12,
+      "sortIndex": 0
+     },
+     {
+      "name": "Bücherei 📚",
+      "number": "A40156B",
+      "codeValue": "A40156B",
+      "format": "codabar",
+      "color": "#1e88e5",
+      "note": "Zeile 1\nZeile 2, \"zitiert\"",
+      "balance": "",
+      "currency": "",
+      "validFrom": 1704067200000,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Bücher",
+       "Food"
+      ],
+      "hasFront": false,
+      "hasBack": true,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 0,
+      "sortIndex": 1
+     },
+     {
+      "name": "会員 QR",
+      "number": "M-1",
+      "codeValue": "https://example.com/m/1?x=1&y=2",
+      "format": "qr",
+      "color": "#43a047",
+      "note": "",
+      "balance": "120",
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": true,
+      "lastUsedAt": 1750000000000,
+      "categories": [],
+      "hasFront": false,
+      "hasBack": false,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 3,
+      "sortIndex": 2
+     },
+     {
+      "name": "Number only",
+      "number": "7788 9900",
+      "codeValue": "7788 9900",
+      "format": "none",
+      "color": "#757575",
+      "note": "a,b;c\td",
+      "balance": "",
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [],
+      "hasFront": false,
+      "hasBack": false,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 0,
+      "sortIndex": 3
+     },
+     {
+      "name": "EAN card",
+      "number": "4006381333931",
+      "codeValue": "4006381333931",
+      "format": "ean13",
+      "color": "#000000",
+      "note": "",
+      "balance": "0.10",
+      "currency": "USD",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": true,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Food"
+      ],
+      "hasFront": true,
+      "hasBack": true,
+      "tile": "photo",
+      "chainId": null,
+      "useCount": 99,
+      "sortIndex": 4
+     }
+    ],
+    "tamper": [
+     {
+      "op": "set-card",
+      "index": 1,
+      "column": "name",
+      "value": ""
+     }
+    ]
+   },
+   "expect": {
+    "refused": false,
+    "imported": 4,
+    "skipped": 1,
+    "absentNames": [
+     "Bücherei 📚"
+    ]
+   },
+   "strength": "firm",
+   "note": "one row breaks CHECK(name) -> that row skipped with a reason, the rest imported",
+   "adversarial": true
+  },
+  {
+   "id": "BAK-T3",
+   "kind": "backup-tamper",
+   "input": {
+    "cards": [
+     {
+      "name": "Bakery",
+      "number": "1001",
+      "codeValue": "1001",
+      "format": "code128",
+      "color": "#e53935",
+      "note": "Fresh bread",
+      "balance": "3.50",
+      "currency": "EUR",
+      "validFrom": null,
+      "expiry": 1798761600000,
+      "favourite": true,
+      "archived": false,
+      "lastUsedAt": 1760000000000,
+      "categories": [
+       "Food"
+      ],
+      "hasFront": true,
+      "hasBack": false,
+      "tile": "photo",
+      "chainId": null,
+      "useCount": 12,
+      "sortIndex": 0
+     },
+     {
+      "name": "Bücherei 📚",
+      "number": "A40156B",
+      "codeValue": "A40156B",
+      "format": "codabar",
+      "color": "#1e88e5",
+      "note": "Zeile 1\nZeile 2, \"zitiert\"",
+      "balance": "",
+      "currency": "",
+      "validFrom": 1704067200000,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Bücher",
+       "Food"
+      ],
+      "hasFront": false,
+      "hasBack": true,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 0,
+      "sortIndex": 1
+     },
+     {
+      "name": "会員 QR",
+      "number": "M-1",
+      "codeValue": "https://example.com/m/1?x=1&y=2",
+      "format": "qr",
+      "color": "#43a047",
+      "note": "",
+      "balance": "120",
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": true,
+      "lastUsedAt": 1750000000000,
+      "categories": [],
+      "hasFront": false,
+      "hasBack": false,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 3,
+      "sortIndex": 2
+     },
+     {
+      "name": "Number only",
+      "number": "7788 9900",
+      "codeValue": "7788 9900",
+      "format": "none",
+      "color": "#757575",
+      "note": "a,b;c\td",
+      "balance": "",
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [],
+      "hasFront": false,
+      "hasBack": false,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 0,
+      "sortIndex": 3
+     },
+     {
+      "name": "EAN card",
+      "number": "4006381333931",
+      "codeValue": "4006381333931",
+      "format": "ean13",
+      "color": "#000000",
+      "note": "",
+      "balance": "0.10",
+      "currency": "USD",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": true,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Food"
+      ],
+      "hasFront": true,
+      "hasBack": true,
+      "tile": "photo",
+      "chainId": null,
+      "useCount": 99,
+      "sortIndex": 4
+     }
+    ],
+    "tamper": [
+     {
+      "op": "set-card",
+      "index": 0,
+      "column": "format",
+      "value": "EAN13"
+     }
+    ]
+   },
+   "expect": {
+    "refused": false,
+    "imported": 4,
+    "skipped": 1,
+    "absentNames": [
+     "Bakery"
+    ]
+   },
+   "strength": "inferred",
+   "note": "format outside the CHECK list (case matters) -> row skipped",
+   "adversarial": true
+  },
+  {
+   "id": "BAK-T4",
+   "kind": "backup-tamper",
+   "input": {
+    "cards": [
+     {
+      "name": "Bakery",
+      "number": "1001",
+      "codeValue": "1001",
+      "format": "code128",
+      "color": "#e53935",
+      "note": "Fresh bread",
+      "balance": "3.50",
+      "currency": "EUR",
+      "validFrom": null,
+      "expiry": 1798761600000,
+      "favourite": true,
+      "archived": false,
+      "lastUsedAt": 1760000000000,
+      "categories": [
+       "Food"
+      ],
+      "hasFront": true,
+      "hasBack": false,
+      "tile": "photo",
+      "chainId": null,
+      "useCount": 12,
+      "sortIndex": 0
+     },
+     {
+      "name": "Bücherei 📚",
+      "number": "A40156B",
+      "codeValue": "A40156B",
+      "format": "codabar",
+      "color": "#1e88e5",
+      "note": "Zeile 1\nZeile 2, \"zitiert\"",
+      "balance": "",
+      "currency": "",
+      "validFrom": 1704067200000,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Bücher",
+       "Food"
+      ],
+      "hasFront": false,
+      "hasBack": true,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 0,
+      "sortIndex": 1
+     },
+     {
+      "name": "会員 QR",
+      "number": "M-1",
+      "codeValue": "https://example.com/m/1?x=1&y=2",
+      "format": "qr",
+      "color": "#43a047",
+      "note": "",
+      "balance": "120",
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": true,
+      "lastUsedAt": 1750000000000,
+      "categories": [],
+      "hasFront": false,
+      "hasBack": false,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 3,
+      "sortIndex": 2
+     },
+     {
+      "name": "Number only",
+      "number": "7788 9900",
+      "codeValue": "7788 9900",
+      "format": "none",
+      "color": "#757575",
+      "note": "a,b;c\td",
+      "balance": "",
+      "currency": "",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": false,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [],
+      "hasFront": false,
+      "hasBack": false,
+      "tile": "initials",
+      "chainId": null,
+      "useCount": 0,
+      "sortIndex": 3
+     },
+     {
+      "name": "EAN card",
+      "number": "4006381333931",
+      "codeValue": "4006381333931",
+      "format": "ean13",
+      "color": "#000000",
+      "note": "",
+      "balance": "0.10",
+      "currency": "USD",
+      "validFrom": null,
+      "expiry": null,
+      "favourite": true,
+      "archived": false,
+      "lastUsedAt": null,
+      "categories": [
+       "Food"
+      ],
+      "hasFront": true,
+      "hasBack": true,
+      "tile": "photo",
+      "chainId": null,
+      "useCount": 99,
+      "sortIndex": 4
+     }
+    ],
+    "tamper": [
+     {
+      "op": "delete-file",
+      "path": "backup.json"
+     }
+    ]
+   },
+   "expect": {
+    "refused": true,
+    "imported": 0
+   },
+   "strength": "firm",
+   "note": "backup.json removed"
+  },
+  {
+   "id": "CSV-01",
+   "kind": "csv-import",
+   "input": {
+    "file": "fixtures/csv/generic-comma.csv",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 5,
+    "skipped": 0,
+    "duplicates": 0,
+    "cards": [
+     {
+      "name": "Bakery",
+      "number": "1001",
+      "format": "code128"
+     },
+     {
+      "name": "Books",
+      "number": "9780306406157",
+      "format": "ean13",
+      "note": "Paperbacks"
+     },
+     {
+      "name": "Cinema",
+      "number": "CIN-77",
+      "format": "qr"
+     },
+     {
+      "name": "Club",
+      "number": "2002",
+      "format": "none",
+      "note": "Number only"
+     },
+     {
+      "name": "Diner",
+      "number": "96385074",
+      "format": "ean8"
+     }
+    ]
+   },
+   "strength": "firm",
+   "note": "our format ids"
+  },
+  {
+   "id": "CSV-02",
+   "kind": "csv-import",
+   "input": {
+    "file": "fixtures/csv/generic-semicolon.csv",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 3,
+    "skipped": 0,
+    "cards": [
+     {
+      "name": "Apotheke",
+      "number": "4006381333931",
+      "format": "ean13",
+      "note": "Rabatt 3%"
+     },
+     {
+      "name": "Baumarkt",
+      "number": "ABC-123",
+      "format": "code39"
+     },
+     {
+      "name": "Café",
+      "number": "12;34",
+      "format": "code128",
+      "note": "Semicolon inside"
+     }
+    ]
+   },
+   "strength": "firm",
+   "note": "semicolon delimiter, aliased headers, Catima type names, quoted delimiter",
+   "adversarial": true
+  },
+  {
+   "id": "CSV-03",
+   "kind": "csv-import",
+   "input": {
+    "file": "fixtures/csv/generic-tab-bom-crlf.csv",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 4,
+    "skipped": 0,
+    "cards": [
+     {
+      "name": "Grocer",
+      "number": "5901234123457",
+      "format": "ean13"
+     },
+     {
+      "name": "Hardware",
+      "number": "HW-0099",
+      "format": "code128"
+     },
+     {
+      "name": "Museum",
+      "number": "MUSEUM-PASS-1",
+      "format": "qr"
+     },
+     {
+      "name": "Pool",
+      "number": "04252614",
+      "format": "upce"
+     }
+    ]
+   },
+   "strength": "firm",
+   "note": "tab, BOM, CRLF, aliases \"EAN13\", \"Code 128\", \"QR\", \"UPC-E\"; BOM must not stick to the first header",
+   "adversarial": true
+  },
+  {
+   "id": "CSV-04",
+   "kind": "csv-import",
+   "input": {
+    "file": "fixtures/csv/generic-unknown-format.csv",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 5,
+    "skipped": 0,
+    "cards": [
+     {
+      "name": "Alpha",
+      "number": "4006381333931",
+      "format": "ean13"
+     },
+     {
+      "name": "Beta",
+      "number": "ABC-123",
+      "format": "code128"
+     },
+     {
+      "name": "Gamma",
+      "number": "96385074",
+      "format": "ean8"
+     },
+     {
+      "name": "Delta",
+      "number": "Ü-1234",
+      "format": "qr"
+     },
+     {
+      "name": "Epsilon",
+      "number": "036000291452",
+      "format": "upca"
+     }
+    ]
+   },
+   "strength": "firm",
+   "note": "unknown/empty format -> suggestFormats, first match (§5.4)"
+  },
+  {
+   "id": "CSV-05",
+   "kind": "csv-import",
+   "input": {
+    "file": "fixtures/csv/generic-skips.csv",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 2,
+    "skipped": 2,
+    "duplicates": 0,
+    "absentNames": [
+     "",
+     "No Number"
+    ],
+    "cards": [
+     {
+      "name": "Valid One",
+      "number": "111",
+      "format": "code128"
+     },
+     {
+      "name": "Valid Two",
+      "number": "333",
+      "format": "code128"
+     }
+    ]
+   },
+   "strength": "firm",
+   "note": "empty name / no number -> skipped with reason; no format column -> suggestFormats"
+  },
+  {
+   "id": "CSV-06",
+   "kind": "csv-import",
+   "input": {
+    "file": "fixtures/csv/generic-quoted.csv",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 1,
+    "cards": [
+     {
+      "name": "Smith, John",
+      "number": "SJ-1",
+      "format": "code128",
+      "note": "He said \"hi\"\nsecond line"
+     }
+    ]
+   },
+   "strength": "inferred",
+   "note": "RFC 4180 quoting: comma, doubled quote, newline inside a field",
+   "adversarial": true
+  },
+  {
+   "id": "CSV-07",
+   "kind": "csv-import",
+   "input": {
+    "file": "fixtures/csv/generic-reordered.csv",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 1,
+    "cards": [
+     {
+      "name": "Reordered",
+      "number": "4006381333931",
+      "format": "ean13",
+      "note": "memo"
+     }
+    ]
+   },
+   "strength": "firm",
+   "note": "columns in another order; unknown column ignored"
+  },
+  {
+   "id": "CSV-08",
+   "kind": "csv-import",
+   "input": {
+    "file": "fixtures/csv/generic-duplicates.csv",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "refused": false,
+    "imported": 2,
+    "skipped": 0,
+    "duplicates": 1,
+    "absentNames": [
+     "Second"
+    ],
+    "cards": [
+     {
+      "name": "First",
+      "number": "777",
+      "format": "code128"
+     },
+     {
+      "name": "Third",
+      "number": "777",
+      "format": "qr"
+     }
+    ]
+   },
+   "strength": "inferred",
+   "note": "duplicate rule inside one CSV",
+   "adversarial": true
+  },
+  {
+   "id": "CSV-09",
+   "kind": "csv-import",
+   "input": {
+    "file": "fixtures/csv/generic-no-header.csv",
+    "existing": [],
+    "duplicateRule": "skip"
+   },
+   "expect": {
+    "note": "no header row: refuse, or guess columns? \"header detection\" is specified, a header-less file is not"
+   },
+   "strength": "ambiguous",
+   "note": "",
+   "adversarial": true
+  }
+ ]
+}

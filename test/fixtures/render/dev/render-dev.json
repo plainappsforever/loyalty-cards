@@ -1,0 +1,674 @@
+[
+ {
+  "format": "ean13",
+  "value": "4006381333931"
+ },
+ {
+  "format": "ean13",
+  "value": "9780201379624"
+ },
+ {
+  "format": "ean13",
+  "value": "0000000000000"
+ },
+ {
+  "format": "ean13",
+  "value": "9999999999994"
+ },
+ {
+  "format": "ean13",
+  "value": "5901234123457"
+ },
+ {
+  "format": "ean13",
+  "value": "1234567890128"
+ },
+ {
+  "format": "ean13",
+  "value": "8800000000015"
+ },
+ {
+  "format": "ean13",
+  "value": "0200000000011"
+ },
+ {
+  "format": "ean13",
+  "value": "4712345678900"
+ },
+ {
+  "format": "ean13",
+  "value": "5000000000005"
+ },
+ {
+  "format": "ean13",
+  "value": "3012345678902"
+ },
+ {
+  "format": "ean13",
+  "value": "4000000000006"
+ },
+ {
+  "format": "ean8",
+  "value": "96385074"
+ },
+ {
+  "format": "ean8",
+  "value": "00000000"
+ },
+ {
+  "format": "ean8",
+  "value": "99999995"
+ },
+ {
+  "format": "ean8",
+  "value": "12345670"
+ },
+ {
+  "format": "ean8",
+  "value": "55123457"
+ },
+ {
+  "format": "ean8",
+  "value": "40000008"
+ },
+ {
+  "format": "ean8",
+  "value": "20111113"
+ },
+ {
+  "format": "ean8",
+  "value": "77777775"
+ },
+ {
+  "format": "ean8",
+  "value": "10000007"
+ },
+ {
+  "format": "ean8",
+  "value": "31415927"
+ },
+ {
+  "format": "ean8",
+  "value": "88888880"
+ },
+ {
+  "format": "upca",
+  "value": "036000291452"
+ },
+ {
+  "format": "upca",
+  "value": "000000000000"
+ },
+ {
+  "format": "upca",
+  "value": "999999999993"
+ },
+ {
+  "format": "upca",
+  "value": "012345678905"
+ },
+ {
+  "format": "upca",
+  "value": "725272730706"
+ },
+ {
+  "format": "upca",
+  "value": "042100005264"
+ },
+ {
+  "format": "upca",
+  "value": "614141000364"
+ },
+ {
+  "format": "upca",
+  "value": "888888888886"
+ },
+ {
+  "format": "upca",
+  "value": "123456789012"
+ },
+ {
+  "format": "upca",
+  "value": "300000000001"
+ },
+ {
+  "format": "upca",
+  "value": "555555555555"
+ },
+ {
+  "format": "upce",
+  "value": "01234565"
+ },
+ {
+  "format": "upce",
+  "value": "00000000"
+ },
+ {
+  "format": "upce",
+  "value": "19999999"
+ },
+ {
+  "format": "upce",
+  "value": "00000030"
+ },
+ {
+  "format": "upce",
+  "value": "01234543"
+ },
+ {
+  "format": "upce",
+  "value": "09999954"
+ },
+ {
+  "format": "upce",
+  "value": "10000007"
+ },
+ {
+  "format": "upce",
+  "value": "05555567"
+ },
+ {
+  "format": "upce",
+  "value": "01234572"
+ },
+ {
+  "format": "upce",
+  "value": "07654381"
+ },
+ {
+  "format": "upce",
+  "value": "11234593"
+ },
+ {
+  "format": "itf",
+  "value": "1234"
+ },
+ {
+  "format": "itf",
+  "value": "0000"
+ },
+ {
+  "format": "itf",
+  "value": "9999"
+ },
+ {
+  "format": "itf",
+  "value": "1234567890"
+ },
+ {
+  "format": "itf",
+  "value": "12345678901234"
+ },
+ {
+  "format": "itf",
+  "value": "00000000000000"
+ },
+ {
+  "format": "itf",
+  "value": "12121212121212"
+ },
+ {
+  "format": "itf",
+  "value": "1111111111111111111111111111111111111111"
+ },
+ {
+  "format": "itf",
+  "value": "00000000000000000000"
+ },
+ {
+  "format": "itf",
+  "value": "999999999999999999999999999999"
+ },
+ {
+  "format": "itf",
+  "value": "4711"
+ },
+ {
+  "format": "itf",
+  "value": "98765432"
+ },
+ {
+  "format": "codabar",
+  "value": "A12345B"
+ },
+ {
+  "format": "codabar",
+  "value": "B9876C"
+ },
+ {
+  "format": "codabar",
+  "value": "C00D"
+ },
+ {
+  "format": "codabar",
+  "value": "D123-45A"
+ },
+ {
+  "format": "codabar",
+  "value": "A$100.00B"
+ },
+ {
+  "format": "codabar",
+  "value": "A1:2/3+4B"
+ },
+ {
+  "format": "codabar",
+  "value": "12345"
+ },
+ {
+  "format": "codabar",
+  "value": "1-2-3"
+ },
+ {
+  "format": "codabar",
+  "value": "A77777777777777777777777777777777777777B"
+ },
+ {
+  "format": "codabar",
+  "value": "C$$B"
+ },
+ {
+  "format": "codabar",
+  "value": "D/:A"
+ },
+ {
+  "format": "codabar",
+  "value": "A..B"
+ },
+ {
+  "format": "codabar",
+  "value": "A00B"
+ },
+ {
+  "format": "codabar",
+  "value": "B42C"
+ },
+ {
+  "format": "code39",
+  "value": "ABC-123"
+ },
+ {
+  "format": "code39",
+  "value": "A"
+ },
+ {
+  "format": "code39",
+  "value": "0"
+ },
+ {
+  "format": "code39",
+  "value": "HELLO WORLD"
+ },
+ {
+  "format": "code39",
+  "value": "A.B/C+D%E"
+ },
+ {
+  "format": "code39",
+  "value": "$100"
+ },
+ {
+  "format": "code39",
+  "value": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+ },
+ {
+  "format": "code39",
+  "value": "1234567890"
+ },
+ {
+  "format": "code39",
+  "value": "LC-2026"
+ },
+ {
+  "format": "code39",
+  "value": "Z Z"
+ },
+ {
+  "format": "code39",
+  "value": "-.-"
+ },
+ {
+  "format": "code39",
+  "value": "% %"
+ },
+ {
+  "format": "code93",
+  "value": "ABC-123"
+ },
+ {
+  "format": "code93",
+  "value": "A"
+ },
+ {
+  "format": "code93",
+  "value": "0"
+ },
+ {
+  "format": "code93",
+  "value": "HELLO WORLD"
+ },
+ {
+  "format": "code93",
+  "value": "A.B/C+D%E"
+ },
+ {
+  "format": "code93",
+  "value": "$100"
+ },
+ {
+  "format": "code93",
+  "value": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+ },
+ {
+  "format": "code93",
+  "value": "1234567890"
+ },
+ {
+  "format": "code93",
+  "value": "LC-2026"
+ },
+ {
+  "format": "code93",
+  "value": "Z Z"
+ },
+ {
+  "format": "code93",
+  "value": "-.-"
+ },
+ {
+  "format": "code93",
+  "value": "% %"
+ },
+ {
+  "format": "code128",
+  "value": "HELLO 123"
+ },
+ {
+  "format": "code128",
+  "value": "a"
+ },
+ {
+  "format": "code128",
+  "value": "0"
+ },
+ {
+  "format": "code128",
+  "value": "1234567890"
+ },
+ {
+  "format": "code128",
+  "value": "ABCDEFGHIJ"
+ },
+ {
+  "format": "code128",
+  "value": "abcdefghij"
+ },
+ {
+  "format": "code128",
+  "value": "Mixed Case 42"
+ },
+ {
+  "format": "code128",
+  "value": "!\"#$%&'()*+,-./"
+ },
+ {
+  "format": "code128",
+  "value": ":;<=>?@[\\]^_`{|}~"
+ },
+ {
+  "format": "code128",
+  "value": "12345678901234567890123456789012345678901234567890"
+ },
+ {
+  "format": "code128",
+  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+ },
+ {
+  "format": "code128",
+  "value": "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
+ },
+ {
+  "format": "code128",
+  "value": "a1b2c3d4e5f6g7h8i9j0"
+ },
+ {
+  "format": "code128",
+  "value": "inner  spaces  kept"
+ },
+ {
+  "format": "code128",
+  "value": "FNC-not-a-fnc"
+ },
+ {
+  "format": "code128",
+  "value": "99991111"
+ },
+ {
+  "format": "qr",
+  "value": "hello"
+ },
+ {
+  "format": "qr",
+  "value": "x"
+ },
+ {
+  "format": "qr",
+  "value": "Müller ☃ 日本 🙂"
+ },
+ {
+  "format": "qr",
+  "value": "https://example.com/path?q=1&b=2"
+ },
+ {
+  "format": "qr",
+  "value": "0123456789"
+ },
+ {
+  "format": "qr",
+  "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+ },
+ {
+  "format": "qr",
+  "value": "üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü"
+ },
+ {
+  "format": "qr",
+  "value": "日本語テキスト日本語テキスト日本語テキスト日本語テキスト日本語テキスト日本語テキスト日本語テキスト日本語テキスト日本語テキスト日本語テキスト"
+ },
+ {
+  "format": "qr",
+  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+ },
+ {
+  "format": "qr",
+  "value": "LC1:{\"n\":\"Nordmarkt\",\"i\":\"4006381333931\",\"f\":\"ean13\",\"k\":\"#1f6f43\"}"
+ },
+ {
+  "format": "qr",
+  "value": "line1\nline2"
+ },
+ {
+  "format": "qr",
+  "value": "tab\there"
+ },
+ {
+  "format": "aztec",
+  "value": "hello"
+ },
+ {
+  "format": "aztec",
+  "value": "x"
+ },
+ {
+  "format": "aztec",
+  "value": "Müller ☃ 日本"
+ },
+ {
+  "format": "aztec",
+  "value": "0123456789"
+ },
+ {
+  "format": "aztec",
+  "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+ },
+ {
+  "format": "aztec",
+  "value": "üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü"
+ },
+ {
+  "format": "aztec",
+  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+ },
+ {
+  "format": "aztec",
+  "value": "LC1:{\"n\":\"Nordmarkt\",\"i\":\"4006381333931\",\"f\":\"ean13\",\"k\":\"#1f6f43\"}"
+ },
+ {
+  "format": "aztec",
+  "value": "line1\nline2"
+ },
+ {
+  "format": "aztec",
+  "value": "symbols !@#%^&*()"
+ },
+ {
+  "format": "aztec",
+  "value": "ÄÖÜäöüß"
+ },
+ {
+  "format": "aztec",
+  "value": "🙂🙂🙂"
+ },
+ {
+  "format": "aztec",
+  "value": "a^b ü"
+ },
+ {
+  "format": "aztec",
+  "value": "^^"
+ },
+ {
+  "format": "aztec",
+  "value": "x^y"
+ },
+ {
+  "format": "pdf417",
+  "value": "hello"
+ },
+ {
+  "format": "pdf417",
+  "value": "x"
+ },
+ {
+  "format": "pdf417",
+  "value": "Müller ☃ 日本"
+ },
+ {
+  "format": "pdf417",
+  "value": "0123456789"
+ },
+ {
+  "format": "pdf417",
+  "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+ },
+ {
+  "format": "pdf417",
+  "value": "üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü"
+ },
+ {
+  "format": "pdf417",
+  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+ },
+ {
+  "format": "pdf417",
+  "value": "LC1:{\"n\":\"Nordmarkt\",\"i\":\"4006381333931\",\"f\":\"ean13\",\"k\":\"#1f6f43\"}"
+ },
+ {
+  "format": "pdf417",
+  "value": "line1\nline2"
+ },
+ {
+  "format": "pdf417",
+  "value": "symbols !@#%^&*()"
+ },
+ {
+  "format": "pdf417",
+  "value": "ÄÖÜäöüß"
+ },
+ {
+  "format": "pdf417",
+  "value": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+ },
+ {
+  "format": "pdf417",
+  "value": "a^b ü"
+ },
+ {
+  "format": "pdf417",
+  "value": "^ECI000026 literal"
+ },
+ {
+  "format": "pdf417",
+  "value": "x^y"
+ },
+ {
+  "format": "datamatrix",
+  "value": "hello"
+ },
+ {
+  "format": "datamatrix",
+  "value": "x"
+ },
+ {
+  "format": "datamatrix",
+  "value": "Müller ☃ 日本"
+ },
+ {
+  "format": "datamatrix",
+  "value": "0123456789"
+ },
+ {
+  "format": "datamatrix",
+  "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+ },
+ {
+  "format": "datamatrix",
+  "value": "üüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüüü"
+ },
+ {
+  "format": "datamatrix",
+  "value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+ },
+ {
+  "format": "datamatrix",
+  "value": "LC1:{\"n\":\"Nordmarkt\",\"i\":\"4006381333931\",\"f\":\"ean13\",\"k\":\"#1f6f43\"}"
+ },
+ {
+  "format": "datamatrix",
+  "value": "line1\nline2"
+ },
+ {
+  "format": "datamatrix",
+  "value": "symbols !@#%^&*()"
+ },
+ {
+  "format": "datamatrix",
+  "value": "ÄÖÜäöüß"
+ },
+ {
+  "format": "datamatrix",
+  "value": "🙂🙂🙂"
+ },
+ {
+  "format": "datamatrix",
+  "value": "a^b ü"
+ },
+ {
+  "format": "datamatrix",
+  "value": "^^"
+ },
+ {
+  "format": "datamatrix",
+  "value": "é^ECI000026"
+ }
+]

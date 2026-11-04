@@ -1,0 +1,25 @@
+appId: ${APP_ID}
+name: Self-test - code-kit decodes 13 formats + a two-code screenshot, brightness, Hermes text, A3 timing
+tags:
+  - p5
+---
+- runFlow: subflows/launch.yaml
+- openLink: ${SCHEME}://debug/self-test
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - tapOn:
+          text: Open
+          optional: true
+- extendedWaitUntil:
+    visible:
+      id: selftest-result
+    timeout: 240000
+- assertVisible: "SELFTEST PASS.*"
+# A3 timing lines (Metro log `SELFTEST … A3`) are recorded in docs/V1_LOG.md P5; the flow only waits for them.
+- extendedWaitUntil:
+    visible:
+      id: a3-result
+    timeout: 600000
+- takeScreenshot: selftest

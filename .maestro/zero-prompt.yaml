@@ -1,0 +1,62 @@
+appId: ${APP_ID}
+name: Zero prompt - no onboarding, account or rating screen; the camera prompt only after Scan (A8)
+tags:
+  - p6
+---
+# Camera permission reset to "not decided" so the first Scan really asks (never clearState: the dev client keeps its
+# Metro URL in the app's data).
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - tapOn:
+          text: Open
+          optional: true
+- launchApp:
+    stopApp: true
+    permissions:
+      camera: unset
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - tapOn:
+          text: Open
+          optional: true
+- extendedWaitUntil:
+    visible:
+      id: home-screen
+    timeout: 120000
+- runFlow:
+    file: subflows/seed.yaml
+    env:
+      SEED: set=empty
+# empty wallet: three big buttons, nothing else asks for anything
+- assertVisible:
+    id: cards-empty
+- assertVisible:
+    id: empty-scan
+- assertVisible:
+    id: empty-type
+- assertVisible:
+    id: empty-import
+- assertNotVisible: ".*(Welcome|Sign in|Log in|Create account|Rate |Subscribe|Allow).*"
+# + → the add chooser: still no prompt
+- tapOn:
+    id: add-card
+- assertVisible:
+    id: add-screen
+- assertNotVisible: ".*(Allow|Access the Camera|take pictures).*"
+# Scan → now (and only now) the system asks for the camera
+- tapOn:
+    id: add-scan
+- extendedWaitUntil:
+    visible: ".*(Access the Camera|take pictures|record video).*"
+    timeout: 15000
+- takeScreenshot: zero-prompt-camera
+- tapOn:
+    text: "(Allow|OK|While using the app)"
+- assertVisible:
+    id: scan-screen
+- assertVisible:
+    id: scan-type

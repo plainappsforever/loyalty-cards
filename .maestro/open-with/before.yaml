@@ -1,0 +1,10 @@
+appId: ${APP_ID}
+---
+# scripts/e2e-open-with.sh step 1: app running from Metro, wallet empty.
+- runFlow: ../subflows/launch.yaml
+- runFlow:
+    file: ../subflows/seed.yaml
+    env:
+      SEED: set=empty
+- assertVisible:
+    id: cards-empty

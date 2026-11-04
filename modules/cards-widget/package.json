@@ -1,0 +1,7 @@
+{
+  "name": "cards-widget",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Android home-screen widgets (RemoteViews): favourites grid and barcode widget — SPEC §6.4, mood-journal mood-widget pattern",
+  "main": "index.ts"
+}

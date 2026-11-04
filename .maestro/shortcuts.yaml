@@ -1,0 +1,54 @@
+appId: ${APP_ID}
+name: Shortcuts - long-press on the app icon lists the 4 most-used cards; one opens its card (A11)
+tags:
+  - p7
+---
+# Android only: Maestro's long press lasts ~3 s, which on iOS turns the home screen into edit mode instead of
+# opening the quick-action menu; iOS was driven step by step on the simulator (V1_LOG P7, screenshots).
+# Seed "ten": most used Nordmarkt 38, Bauhof Plus 30, Drogerie Sonne 11, Bücherecke 11 (src/dev/seed.ts). The items are
+# set by expo-quick-actions when the app starts / goes to the background (src/lib/widgets.ts).
+- runFlow:
+    when:
+      platform: Android
+    commands:
+      - runFlow: subflows/launch.yaml
+      - runFlow:
+          file: subflows/seed.yaml
+          env:
+            SEED: set=ten
+      - pressKey: Home
+      - runFlow:
+          when:
+            platform: Android
+          commands:
+            # the app drawer (the dev build is not on the home screen)
+            - swipe:
+                start: 50%,85%
+                end: 50%,20%
+                duration: 400
+            - extendedWaitUntil:
+                visible: ${APP_LABEL}
+                timeout: 10000
+      - runFlow:
+          when:
+            platform: Android
+          commands:
+            - longPressOn: ${APP_LABEL}
+      - extendedWaitUntil:
+          visible: Bauhof Plus
+          timeout: 10000
+      - assertVisible: Nordmarkt
+      - assertVisible: Drogerie Sonne
+      - tapOn: Bauhof Plus
+      - runFlow:
+          when:
+            platform: iOS
+          commands:
+            - tapOn:
+                text: Open
+                optional: true
+      - extendedWaitUntil:
+          visible:
+            id: card-code
+          timeout: 30000
+      - assertVisible: 6423 8258 47

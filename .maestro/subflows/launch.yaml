@@ -1,0 +1,23 @@
+appId: ${APP_ID}
+---
+# `expo run:ios` / a dev-client link leaves an "Open in ...?" prompt that blocks launchApp (card-scanner / Offscan L14).
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - tapOn:
+          text: Open
+          optional: true
+- launchApp:
+    stopApp: true
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - tapOn:
+          text: Open
+          optional: true
+- extendedWaitUntil:
+    visible:
+      id: home-screen
+    timeout: 120000

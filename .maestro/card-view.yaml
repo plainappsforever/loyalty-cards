@@ -1,0 +1,90 @@
+appId: ${APP_ID}
+name: Card view - 2D codes from the render-once cache, open time, brightness line, copy, full screen, favourite (A7, A9, D42)
+tags:
+  - p6
+---
+# 200 seeded cards + the two slowest S4 codes (Aztec 日×500, QR 'aB3$%&()'×125). The tile tap → first frame with the
+# code is printed on the card screen (`open-ms`, development builds only) and to the Metro log as `CARDOPEN …`.
+- runFlow: subflows/launch.yaml
+- runFlow:
+    file: subflows/seed.yaml
+    env:
+      SEED: set=two-hundred&heavy=1
+- assertVisible: "194 cards"
+# heavy Aztec from the cache
+- tapOn:
+    id: search-input
+- inputText: Heavy Aztec
+- tapOn:
+    id: tile-0
+- assertVisible:
+    id: card-code
+- extendedWaitUntil:
+    visible:
+      id: open-ms
+    timeout: 10000
+- assertVisible: "Code shown .* ms after the tap \\(cache\\)"
+- assertVisible:
+    id: brightness-line
+- copyTextFrom:
+    id: open-ms
+- evalScript: ${output.aztec = maestro.copiedText}
+- runFlow: subflows/back.yaml
+# heavy QR from the cache
+- tapOn:
+    id: search-input
+- eraseText: 20
+- inputText: Heavy QR
+- tapOn:
+    id: tile-0
+- extendedWaitUntil:
+    visible:
+      id: open-ms
+    timeout: 10000
+- assertVisible: "Code shown .* ms after the tap \\(cache\\)"
+- runFlow: subflows/back.yaml
+# a 1D card (engine, live; seed Pixelpark cards are never favourites), copy the number, full screen, favourite
+- tapOn:
+    id: search-input
+- eraseText: 20
+- inputText: Pixelpark
+- tapOn:
+    id: tile-0
+- extendedWaitUntil:
+    visible:
+      id: open-ms
+    timeout: 10000
+- assertVisible: "Code shown .* ms after the tap \\(live\\)"
+- assertVisible: "Code 93"
+- tapOn:
+    id: card-copy
+- assertVisible: "Copied"
+- tapOn:
+    id: card-code
+- assertVisible:
+    id: code-fullscreen
+- tapOn:
+    id: code-fullscreen
+- assertVisible:
+    id: card-screen
+- tapOn:
+    id: card-favourite
+- assertVisible: "Favourite ★"
+- tapOn:
+    id: card-favourite
+- assertVisible: "Favourite ☆"
+# leaving the card: the brightness line belongs to the card screen only
+- runFlow: subflows/back.yaml
+- assertNotVisible:
+    id: brightness-line
+# sort modes switch and persist (the ranking itself is unit-tested in src/engine/sort)
+- tapOn:
+    id: search-input
+- eraseText: 20
+- tapOn:
+    id: sort-most_used
+- assertVisible:
+    id: sort-most_used
+    selected: true
+- tapOn:
+    id: sort-manual

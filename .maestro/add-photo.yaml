@@ -1,0 +1,58 @@
+appId: ${APP_ID}
+name: Add photo - codes read from images (Vision / ML Kit), number confirmation required before Save (U4, D41.2)
+tags:
+  - p6
+---
+# Development builds feed three bundled test images instead of the system picker (simulators have no screenshots to
+# pick): EAN-13 4006381333931, a two-code screenshot (QR + Code 128) and an ITF.
+- runFlow: subflows/launch.yaml
+- runFlow:
+    file: subflows/seed.yaml
+    env:
+      SEED: set=empty
+- openLink: ${SCHEME}://add/photo?fixtures=1
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - tapOn:
+          text: Open
+          optional: true
+- extendedWaitUntil:
+    visible:
+      id: photo-summary
+    timeout: 30000
+- assertVisible: "4 codes found in 3 images"
+- assertVisible: "4006381333931"
+- tapOn:
+    id: photo-use-0
+- assertVisible:
+    id: edit-confirm-box
+- assertVisible: "Check the number"
+- tapOn:
+    id: edit-name
+- inputText: Photo card
+- hideKeyboard
+# Save stays disabled until the number is confirmed against the card
+- scrollUntilVisible:
+    element:
+      id: edit-save
+- tapOn:
+    id: edit-save
+- assertVisible:
+    id: edit-screen
+- scrollUntilVisible:
+    element:
+      id: edit-confirm-number
+    direction: UP
+- tapOn:
+    id: edit-confirm-number
+- scrollUntilVisible:
+    element:
+      id: edit-save
+- tapOn:
+    id: edit-save
+- assertVisible:
+    id: card-screen
+- assertVisible: "4006 3813 3393 1"
+- assertVisible: "EAN-13"

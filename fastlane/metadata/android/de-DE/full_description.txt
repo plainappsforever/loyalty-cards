@@ -1,0 +1,29 @@
+Tillcard bewahrt deine Kunden-, Mitglieds-, Bibliotheks- und Bonuskarten in einer Wallet auf deinem Handy auf. Öffne sie, tippe eine Karte an, und der Code steht auf dem Bildschirm. Kein Konto, keine Werbung, keine Analyse, kein Netzwerkcode: deine Karten bleiben auf dem Telefon.
+
+KARTE HINZUFÜGEN
+• Scanne den Barcode mit der Kamera, tippe die Nummer ein oder lies sie aus einem Foto oder Screenshot der Karte. Screenshots helfen, wenn du deine Karten aus einer anderen App mitbringst.
+• Eine aus einem Foto gelesene Nummer wird neben der Karte angezeigt, damit du sie vor dem Speichern vergleichst, denn ein Leser kann einen kleinen oder beschädigten Code verwechseln.
+• Die Nummer wird gegen den Barcode-Typ geprüft (zum Beispiel die Prüfziffer eines EAN-13). Tillcard sagt dir, was nicht passt, und ändert eine Nummer nie stillschweigend.
+• 13 Barcode-Typen: Code 128, EAN-13, EAN-8, UPC-A, UPC-E, ITF, Codabar, Code 39, Code 93, QR, Aztec, PDF417 und Data Matrix. Oder behalte eine Karte nur als Nummer.
+• Wähle einen bekannten Ladennamen für Farbe und den üblichen Barcode-Typ oder tippe einen eigenen. Keine Logos.
+
+AN DER KASSE
+• Die Kartenseite zeigt den Code, die Nummer in großer Schrift mit Kopieren-Taste und den Barcode-Typ.
+• Der Bildschirm wird heller gestellt, solange eine Karte offen ist, danach zurückgesetzt, und er bleibt an. Beides lässt sich in den Einstellungen abschalten.
+• Tippe auf den Code für Vollbild. Ein breiter Code dreht sich seitwärts, um größer zu werden.
+• Manche Scanner, meist ältere Laserscanner, können ein Handydisplay nicht lesen. Tillcard kann das nicht ändern, deshalb steht die Nummer immer dabei: Die Kassenkraft kann sie eintippen.
+
+ORDNUNG
+• Kategorien, Favoriten, Suche und Sortierung nach Name, am häufigsten genutzt oder zuletzt genutzt. Archiviere eine Karte statt sie zu löschen; eine gelöschte Karte lässt sich ein paar Sekunden lang zurückholen.
+• Fotos von Vorder- und Rückseite, eine Notiz, ein Guthaben, das du selbst führst (Punkte oder Geld), Gültig-ab- und Ablaufdatum.
+
+KARTEN MITNEHMEN
+• Importiere Catima-Dateien (Zip oder CSV), Tillcard-Sicherungen oder jede Tabelle mit Spalten für Name und Nummer. Eine Übersicht sagt, wie viele Karten hinzugefügt, übersprungen oder schon vorhanden waren.
+• Exportiere eine Catima-Datei, eine Sicherung mit Fotos oder eine CSV und nutze sie, wann du willst. Ohne Verbindung zu Catima.
+• Teile eine Karte mit der Familie: ein QR-Code, den das andere Handy scannt, eine Datei oder ein Catima-Link.
+
+WIDGETS UND KURZBEFEHLE
+• Widgets auf dem Startbildschirm für deine Lieblingskarten und ein langer Druck auf das App-Symbol für die, die du am meisten nutzt.
+
+PRIVAT
+Es gibt kein Konto und keinen Server. Karten, Fotos und Notizen bleiben auf diesem Telefon, außer du exportierst oder teilst sie. Keine Werbung, keine Analyse, kein Tracking. Die Kamera wird nur benutzt, wenn du eine Karte scannst; nichts wird aufgenommen oder gesendet. Die App hat keine Internetberechtigung. Quelloffen unter GPL-3.0.

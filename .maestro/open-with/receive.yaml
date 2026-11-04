@@ -1,0 +1,58 @@
+appId: ${APP_ID}
+---
+# Run by scripts/e2e-open-with.sh AFTER it handed the Catima sample (test/fixtures/catima/dev/sample-v2.zip: 45 cards, one
+# duplicate inside the file, 5 PNG photos, groups Food/Travel) to the app. env LINK: on iOS the Receive route with the
+# file:// URI (simctl openurl on a file hangs CoreSimulator, P5 L14); on Android empty — the script already fired the
+# real VIEW intent (`am start -a android.intent.action.VIEW -t application/zip -d <uri>`).
+- runFlow:
+    when:
+      true: ${LINK != ''}
+    commands:
+      - openLink: ${LINK}
+      - runFlow:
+          when:
+            platform: iOS
+          commands:
+            - tapOn:
+                text: Open
+                optional: true
+- extendedWaitUntil:
+    visible:
+      id: receive-kind
+    timeout: 60000
+- assertVisible: "Catima export"
+- assertVisible: "45 cards in this file"
+- tapOn:
+    id: receive-add
+- extendedWaitUntil:
+    visible:
+      id: receive-summary
+    timeout: 60000
+- assertVisible: "44 cards imported, 1 duplicate skipped"
+- tapOn:
+    id: receive-done
+- assertVisible:
+    id: home-screen
+# 44 imported: 40 in the list, 4 archived in the Catima file (its `archive` column) behind the Archived chip
+- assertVisible: "40 cards"
+- tapOn:
+    id: show-archived
+- assertVisible: "4 cards"
+- tapOn:
+    id: show-archived
+- assertVisible: "40 cards"
+# a Catima PNG photo became our JPEG (native) and shows on the card
+- tapOn:
+    id: search-input
+- inputText: Nordmarkt 16
+- tapOn:
+    id: tile-0
+- assertVisible:
+    id: card-photo-front
+- assertVisible: "Food"
+- runFlow: ../subflows/back.yaml
+# groups became categories
+- tapOn:
+    id: search-input
+- eraseText: 20
+- assertVisible: "Travel"

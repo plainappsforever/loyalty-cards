@@ -1,0 +1,87 @@
+appId: ${APP_ID}
+name: Categories - add, rename, reorder, delete; a card in a category; the list filters by it
+tags:
+  - p6
+---
+- runFlow: subflows/launch.yaml
+- runFlow:
+    file: subflows/seed.yaml
+    env:
+      SEED: set=ten
+- runFlow: subflows/open-settings.yaml
+- scrollUntilVisible:
+    element:
+      id: open-categories
+- tapOn:
+    id: open-categories
+- assertVisible:
+    id: categories-screen
+- tapOn:
+    id: category-new-input
+- inputText: Food
+- tapOn:
+    id: category-add
+- tapOn:
+    id: category-new-input
+- inputText: Travel
+- tapOn:
+    id: category-add
+# a name that exists (any case) is refused with a reason
+- tapOn:
+    id: category-new-input
+- inputText: food
+- tapOn:
+    id: category-add
+- assertVisible:
+    id: category-error
+- tapOn:
+    id: category-new-input
+- eraseText: 10
+# rename row 0, move it down, then delete row 0 (Travel); "Groceries" stays
+- tapOn:
+    id: category-name-0
+- tapOn:
+    id: category-rename-input-0
+- eraseText: 10
+- inputText: Groceries
+- tapOn:
+    id: category-rename-save-0
+- assertVisible: "Groceries.*"
+- tapOn:
+    id: category-down-0
+- assertVisible:
+    id: category-name-0
+- assertVisible: "Travel.*"
+- tapOn:
+    id: category-delete-0
+- assertNotVisible: "Travel.*"
+- assertVisible: "Groceries.*"
+# put a card into it through Edit, then filter the list
+- runFlow: subflows/back.yaml
+- runFlow: subflows/back.yaml
+- assertVisible:
+    id: home-screen
+- tapOn: "Kaffeehaus Lila"
+- tapOn:
+    id: card-edit
+- scrollUntilVisible:
+    element:
+      id: edit-category-0
+- tapOn:
+    id: edit-category-0
+- scrollUntilVisible:
+    element:
+      id: edit-save
+- tapOn:
+    id: edit-save
+- assertVisible:
+    id: card-categories
+- assertVisible: "Groceries.*"
+- runFlow: subflows/back.yaml
+- tapOn:
+    id: category-chip-0
+- assertVisible: "1 card"
+- assertVisible: "Kaffeehaus Lila"
+- tapOn:
+    id: category-all
+- assertVisible: "10 cards"

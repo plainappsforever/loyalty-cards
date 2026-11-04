@@ -1,0 +1,29 @@
+Tillcard keeps your loyalty, membership, library and customer cards in one wallet on your phone. Open it, tap a card, and the code is on the screen. No account, no ads, no analytics, no network code: your cards stay on the phone.
+
+ADD A CARD
+• Scan the barcode with the camera, type the number, or read it from a photo or screenshot of the card. Screenshots help when you move your cards over from another app.
+• A number read from a photo is shown next to the card to compare before you save, because a reader can mistake a small or damaged code.
+• The number is checked against the barcode type (for example the check digit of an EAN-13). Tillcard tells you what does not fit and never changes a number silently.
+• 13 barcode types: Code 128, EAN-13, EAN-8, UPC-A, UPC-E, ITF, Codabar, Code 39, Code 93, QR, Aztec, PDF417 and Data Matrix. Or keep a card as a number only.
+• Pick a well-known shop name for a colour and the usual barcode type, or type your own. No logos.
+
+AT THE TILL
+• The card screen shows the code, the number in large type with a Copy button, and the barcode type.
+• The screen is brightened while a card is open and set back when you leave, and it stays on. Both can be switched off in Settings.
+• Tap the code for full screen. A wide code turns sideways to get bigger.
+• Some scanners, mostly older laser ones, cannot read a phone screen. Tillcard cannot change that, which is why the number is always shown: a cashier can type it.
+
+ORGANISE
+• Categories, favourites, search, and sort by name, most used or recent. Archive a card instead of deleting it; a deleted card can be brought back for a few seconds.
+• Photos of the front and back, a note, a balance you keep yourself (points or money), valid-from and expiry dates.
+
+TAKE YOUR CARDS WITH YOU
+• Import Catima files (zip or CSV), Tillcard backups, or any spreadsheet with name and number columns. A summary says how many cards were added, skipped or already there.
+• Export a Catima file, a backup with photos, or a CSV, and use them whenever you like. Not affiliated with Catima.
+• Share a card with family: a QR code the other phone scans, a file, or a Catima link.
+
+WIDGETS AND SHORTCUTS
+• Home-screen widgets for your favourite cards, and a long press on the app icon for the ones you use most.
+
+PRIVATE
+There is no account and no server. Cards, photos and notes stay on this phone unless you export or share them. No ads, no analytics, no tracking. The camera is used only when you scan a card; nothing is recorded or sent. The app has no internet permission. Open source under GPL-3.0.

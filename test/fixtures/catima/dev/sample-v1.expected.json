@@ -1,0 +1,12 @@
+{
+ "version": 1,
+ "imported": 5,
+ "skipped": [{ "row": 5, "reason": "emptyName" }, { "row": 6, "reason": "emptyNumber" }],
+ "cards": [
+  { "name": "Old Shop", "number": "1234567890", "format": "code128", "color": "#67bf74", "favourite": true, "lastUsedAt": 1700000000000, "expiry": 1800000000000, "balance": "12.5", "balanceCurrency": "EUR", "note": "multi\nline note, with comma" },
+  { "name": "No Type Shop", "number": "777", "format": "none", "balance": "" },
+  { "name": "Maxi", "number": "42", "format": "none", "note": "has \"quotes\"\nCatima type: MAXICODE", "color": "#000000", "archived": true },
+  { "name": "Twin", "number": "96385074", "format": "ean8", "color": "#ff0000" },
+  { "name": "Barcode Differs", "number": "ACCOUNT-9", "codeValue": "9900001", "format": "code39" }
+ ]
+}

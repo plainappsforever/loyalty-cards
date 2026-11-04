@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cards_widget_grid_label">Karten</string>
+    <string name="cards_widget_grid_description">Vier deiner Karten. Tippe auf eine, um ihren Code zu zeigen.</string>
+    <string name="cards_widget_barcode_label">Barcode</string>
+    <string name="cards_widget_barcode_description">Der Barcode deiner ersten Karte, bereit an der Kasse. Tippen öffnet die Karte.</string>
+</resources>

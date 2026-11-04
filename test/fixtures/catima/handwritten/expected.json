@@ -1,0 +1,22 @@
+{
+ "about": "Hand-written expectation for catima.csv in this folder (P4c, review S11). Typed from Catima's docs/EXPORT_FORMAT.md + CARD_FIELDS.md and CatimaExporter conventions (version line 2, CRLF, RFC 4180, expiry/validfrom ms, lastused seconds, signed ARGB colours). Not produced by our writer. The test zips catima.csv with card_1_front.png and card_2_icon.png using fflate directly.",
+ "read": 10,
+ "skipped": [],
+ "invalidCodes": 1,
+ "groups": ["Groceries", "Fitness & Health", "Kundenkarten aus dem alten Portemonnaie"],
+ "summary": { "imported": 9, "skipped": 0, "duplicates": 1 },
+ "imagesFront": [0],
+ "imagesIcon": [1],
+ "cards": [
+  { "name": "Nordmarkt", "number": "4006381333931", "codeValue": "", "format": "ean13", "color": "#67bf74", "note": "", "balance": "", "balanceCurrency": "", "validFrom": null, "expiry": 1798761600000, "favourite": true, "archived": false, "lastUsedAt": 1760000000000, "categories": ["Groceries"] },
+  { "name": "Kaffeehaus Lila", "number": "2468 1357", "codeValue": "24681357", "format": "code128", "color": "#000000", "note": "Stamp card\n\nafter 10 stamps: one free, ask for \"Lila\"", "balance": "12.50", "balanceCurrency": "EUR", "validFrom": 1767225600000, "expiry": null, "favourite": false, "archived": false, "lastUsedAt": 1759000000000, "categories": ["Groceries", "Fitness & Health"] },
+  { "name": "Stadtbad", "number": "MEMBER-778", "codeValue": "https://example.org/m/778?ü=1", "format": "qr", "color": "#ffffff", "note": "Member QR", "balance": "", "lastUsedAt": null, "categories": [] },
+  { "name": "Typo Markt", "number": "400638133393", "codeValue": "", "format": "none", "color": "#1f6f43", "note": "12 digits typed for EAN-13\nEAN-13 barcode not drawn: wrong number of characters (suggested: 4006381333931). Edit the card to choose a barcode type." },
+  { "name": "Parcel Locker", "number": "MX-99-ABC", "format": "none", "note": "Catima type: MAXICODE" },
+  { "name": "Bibliothek", "number": "abc123", "format": "code39", "color": "#3f51b5", "archived": true, "note": "Code 39 has no lower case: the barcode shows ABC123" },
+  { "name": "Müller Getränke", "number": "Müller 42", "format": "aztec", "color": "#cccccc", "lastUsedAt": 1758000000000 },
+  { "name": "Corner Shop", "number": "778899", "format": "none", "color": "#ffeb3b", "note": "no barcode on this card", "balance": "5", "balanceCurrency": "USD", "categories": ["Kundenkarten aus dem alten Portemonnaie"] },
+  { "name": "US Grocer", "number": "036000291452", "format": "upca", "color": "#008080", "categories": ["Groceries"] },
+  { "name": "Nordmarkt", "number": "4006381333931", "format": "ean13", "note": "second copy of card 1", "favourite": false }
+ ]
+}

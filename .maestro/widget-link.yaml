@@ -1,0 +1,51 @@
+appId: ${APP_ID}
+name: Widget link - the URL every widget tile uses opens that card, cold start only in Release (A10)
+tags:
+  - p7
+---
+# Every widget tap (iOS widgetURL/Link, Android PendingIntent) is `<scheme>://card/<id>` (src/lib/widget-data.ts). This
+# flow opens exactly that URL warm and after a stop (the cold path SPEC A10 asks for via `simctl openurl`).
+- runFlow: subflows/launch.yaml
+- runFlow:
+    file: subflows/seed.yaml
+    env:
+      SEED: set=ten
+- openLink: ${SCHEME}://card/seed-7
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - tapOn:
+          text: Open
+          optional: true
+- extendedWaitUntil:
+    visible:
+      id: card-code
+    timeout: 30000
+- assertVisible: A54422864B
+# Cold path: a dev build opened cold by an app link lands in the dev-client launcher (dev-client behaviour, mood-journal
+# P9, L14), so it runs only against a Release build (scripts/e2e.sh <ios|android> preview .maestro/widget-link.yaml, P8).
+- runFlow:
+    when:
+      true: ${!APP_ID.endsWith('.dev')}
+    commands:
+      - stopApp
+      - openLink: ${SCHEME}://card/seed-1
+      - extendedWaitUntil:
+          visible:
+            id: card-code
+          timeout: 60000
+      - assertVisible: 7807 0563 5388 2
+# Warm again from another card screen: the link replaces what is shown
+- openLink: ${SCHEME}://card/seed-1
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - tapOn:
+          text: Open
+          optional: true
+- extendedWaitUntil:
+    visible:
+      text: 7807 0563 5388 2
+    timeout: 30000

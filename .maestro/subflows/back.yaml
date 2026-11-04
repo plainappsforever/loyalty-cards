@@ -1,0 +1,16 @@
+appId: ${APP_ID}
+---
+# One step back in the stack. Maestro's `back` is Android's system Back; iOS has none, so tap the header's back button
+# (UIKit's accessibility id "BackButton"; written as a pattern because it is not one of our testIDs).
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - tapOn:
+          id: BackButton.*
+- runFlow:
+    when:
+      platform: Android
+    commands:
+      - back
+- waitForAnimationToEnd

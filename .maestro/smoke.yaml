@@ -1,0 +1,42 @@
+appId: ${APP_ID}
+name: Smoke - cards list, theme change, restart, data persists
+tags:
+  - smoke
+---
+# P6: the template's item form is gone (screens repurposed); the smoke flow now checks the Cards list survives a restart.
+- runFlow: subflows/launch.yaml
+- runFlow:
+    file: subflows/seed.yaml
+    env:
+      SEED: set=ten
+- assertVisible: "10 cards"
+- assertVisible: "Nordmarkt"
+
+# Settings: switch to dark mode
+- runFlow: subflows/open-settings.yaml
+- assertVisible:
+    id: settings-screen
+- scrollUntilVisible:
+    element:
+      id: theme-dark
+- tapOn:
+    id: theme-dark
+- assertVisible:
+    id: theme-dark
+    selected: true
+
+# Restart the app: the cards and the theme must still be there
+- stopApp
+- runFlow: subflows/launch.yaml
+- assertVisible: "10 cards"
+- runFlow: subflows/open-settings.yaml
+- scrollUntilVisible:
+    element:
+      id: theme-dark
+- assertVisible:
+    id: theme-dark
+    selected: true
+
+# Restore the default theme for the next run
+- tapOn:
+    id: theme-system

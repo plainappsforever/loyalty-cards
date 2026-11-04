@@ -1,0 +1,4 @@
+Store;CardID;Type;Note
+Apotheke;4006381333931;EAN_13;Rabatt 3%
+Baumarkt;ABC-123;CODE_39;
+Café;"12;34";CODE_128;Semicolon inside

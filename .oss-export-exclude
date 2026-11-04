@@ -1,0 +1,3 @@
+# .oss-export-exclude - paths left out of the public export (one per line)
+scripts/oss   # release tooling copy from the template, with other apps' F-Droid submission notes
+research   # competitor store-listing snapshots (internal)

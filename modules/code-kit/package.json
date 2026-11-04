@@ -1,0 +1,7 @@
+{
+  "name": "code-kit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Still-image barcode decoding: iOS Vision, Android ML Kit (bundled) — SPEC §6.2, D13",
+  "main": "index.ts"
+}

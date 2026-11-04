@@ -1,0 +1,9 @@
+_id,store,note,cardid,barcodeid,barcodetype,headercolor,starstatus,lastused,archive,expiry,balance,balancetype
+1,Old Shop,"multi
+line note, with comma",1234567890,,CODE_128,-9977996,1,1700000000,0,1800000000000,12.5,EUR
+2,No Type Shop,,777,,,,0,0,0,,0,
+3,Maxi,"has ""quotes""",42,,MAXICODE,-16777216,0,0,1,,0,
+4,,missing name,555,,QR_CODE,,0,0,0,,0,
+5,Missing Number,,,,QR_CODE,,0,0,0,,0,
+6,Twin,,96385074,,EAN_8,-65536,0,0,0,,0,
+7,Barcode Differs,,ACCOUNT-9,9900001,CODE_39,,0,0,0,,0,

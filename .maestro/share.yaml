@@ -1,0 +1,53 @@
+appId: ${APP_ID}
+name: Share - QR with the card payload, copy number, Catima link; a scanned payload opens Receive (U6)
+tags:
+  - p6
+---
+- runFlow: subflows/launch.yaml
+- runFlow:
+    file: subflows/seed.yaml
+    env:
+      SEED: set=ten
+- tapOn: "Kaffeehaus Lila"
+- tapOn:
+    id: card-share
+- assertVisible:
+    id: share-screen
+- assertVisible:
+    id: share-qr
+- assertVisible:
+    id: share-hint
+- tapOn:
+    id: share-copy-number
+- assertVisible: "Copied"
+- tapOn:
+    id: share-catima-link
+- assertVisible: "Copied"
+- takeScreenshot: share-qr
+# the receiving side: what Scan hands over for an LC1: payload (the camera itself is owner QA) → Receive → Add.
+# No colour key `k` here: a `#` inside a deep link is cut as the URL fragment by the link handler (in the app, Scan
+# passes the text as a route param, which is encoded properly); `k` is optional (D33 Q1).
+- openLink: "${SCHEME}://receive?text=LC1%3A%7B%22n%22%3A%22Anna%20Bakery%22%2C%22i%22%3A%22CARD-77%22%2C%22f%22%3A%22qr%22%7D"
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - tapOn:
+          text: Open
+          optional: true
+- extendedWaitUntil:
+    visible:
+      id: receive-kind
+    timeout: 15000
+- assertVisible: "Card from another phone"
+- assertVisible: "Anna Bakery · QR Code"
+- tapOn:
+    id: receive-add
+- assertVisible: "1 card imported"
+- tapOn:
+    id: receive-done
+- assertVisible: "11 cards"
+- tapOn:
+    id: search-input
+- inputText: Anna
+- assertVisible: "Anna Bakery"

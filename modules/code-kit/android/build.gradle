@@ -1,0 +1,27 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'expo.modules.codekit'
+version = '1.0.0'
+
+android {
+  namespace "expo.modules.codekit"
+  defaultConfig {
+    versionCode 1
+    versionName "1.0.0"
+  }
+  lintOptions {
+    abortOnError false
+  }
+}
+
+dependencies {
+  // Still-image barcodes (SPEC §6.2, D13, D40): the BUNDLED model (in the APK, offline, no Play-services download).
+  // 17.3.0 = latest on Google's ML Kit release notes (updated 2024-08-07 for 16 KB pages; unchanged in the 2026-07-21
+  // release), checked 2026-10-26 — and the version expo-camera 57.0.6's CameraView scanner already pulls in.
+  implementation "com.google.mlkit:barcode-scanning:17.3.0"
+  // EXIF orientation of imported photos.
+  implementation "androidx.exifinterface:exifinterface:1.4.1"
+}

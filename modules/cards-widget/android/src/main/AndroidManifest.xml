@@ -1,0 +1,28 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <application>
+    <!-- P7 "Cards" 2x2 widget: four tiles, each opens its card. The app pushes a snapshot (no updatePeriodMillis). -->
+    <receiver
+      android:name="expo.modules.cardswidget.CardsGridProvider"
+      android:exported="false"
+      android:label="@string/cards_widget_grid_label">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+      </intent-filter>
+      <meta-data
+        android:name="android.appwidget.provider"
+        android:resource="@xml/cards_widget_grid_info" />
+    </receiver>
+    <!-- P7 "Barcode" 4x2 widget: the first widget card's code, name and number; tap opens the card. -->
+    <receiver
+      android:name="expo.modules.cardswidget.CardBarcodeProvider"
+      android:exported="false"
+      android:label="@string/cards_widget_barcode_label">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+      </intent-filter>
+      <meta-data
+        android:name="android.appwidget.provider"
+        android:resource="@xml/cards_widget_barcode_info" />
+    </receiver>
+  </application>
+</manifest>

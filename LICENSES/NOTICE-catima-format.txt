@@ -1,0 +1,6 @@
+Catima file and link formats (credit)
+
+Tillcard reads and writes the import/export format and the share-link format of Catima, the free and open-source
+loyalty card wallet for Android by Sylvia van Os and contributors (https://github.com/CatimaLoyalty/Android, GPL-3.0).
+Tillcard implements the documented formats itself, contains no Catima code, and is not affiliated with or endorsed by
+the Catima project. Thank you to the Catima team for keeping the cards of their users portable.

@@ -1,0 +1,25 @@
+appId: ${APP_ID}
+name: Licences screen lists the app and opens a full licence text
+tags:
+  - licenses
+---
+- runFlow: subflows/launch.yaml
+- runFlow: subflows/open-settings.yaml
+- assertVisible:
+    id: settings-screen
+- scrollUntilVisible:
+    element:
+      id: open-licenses
+- tapOn:
+    id: open-licenses
+- assertVisible:
+    id: licenses-list
+- assertVisible:
+    id: licenses-item-0
+- assertVisible: ".*GPL-3.0-only.*"
+# The app's own GPL text is taller than the screen, which Maestro does not count as "visible": open the second entry
+# (a short MIT text) to check that an entry expands to its full licence text.
+- tapOn:
+    id: licenses-item-1
+- assertVisible:
+    id: licenses-text-1

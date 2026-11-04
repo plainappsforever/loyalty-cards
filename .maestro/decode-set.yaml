@@ -1,0 +1,27 @@
+appId: ${APP_ID}
+name: Decode set - dev render set rendered on the device, decoded by Vision or ML Kit, no wrong value
+tags:
+  - p5
+---
+- runFlow: subflows/launch.yaml
+- openLink: ${SCHEME}://debug/decode-set
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - tapOn:
+          text: Open
+          optional: true
+- extendedWaitUntil:
+    visible:
+      id: r2-result
+    timeout: 900000
+# iOS (Vision, the A2 referee's decoder): "decoded as a different value" must be 0 (SPEC §13). Android (ML Kit) is the
+# REPORTED second decoder figure (R2): its misreads of our correct symbols (ITF partial reads, DataMatrix ECI prefix,
+# Codabar cross-reads) are recorded in docs/V1_LOG.md P5 / D41, not asserted. Per-scale figures: Metro log `R2 …`.
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - assertVisible: "R2 ok .* wrong 0"
+- assertVisible: "R2 ok .*"

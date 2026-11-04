@@ -1,0 +1,6 @@
+name,number,format,note
+Bakery,1001,code128,
+Books,9780306406157,ean13,Paperbacks
+Cinema,CIN-77,qr,
+Club,2002,none,Number only
+Diner,96385074,ean8,

@@ -1,0 +1,114 @@
+appId: ${APP_ID}
+name: Settings - language switch to German and back, sort, country; About and the backup-exclusion line (dev)
+tags:
+  - p7
+---
+# The language switch and the screen change are SEPARATE steps (pregnancy-tracker: react-native-screens crashed on
+# Android when both happened in one go): switch, wait for the re-render, then go back.
+- runFlow: subflows/launch.yaml
+- runFlow:
+    file: subflows/seed.yaml
+    env:
+      SEED: set=ten
+- runFlow: subflows/open-settings.yaml
+- assertVisible:
+    id: settings-screen
+- scrollUntilVisible:
+    element:
+      id: language-de
+- tapOn:
+    id: language-de
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible: Sprache
+    timeout: 10000
+- assertVisible:
+    id: language-de
+    selected: true
+- waitForAnimationToEnd
+- runFlow: subflows/back.yaml
+- extendedWaitUntil:
+    visible: Einstellungen
+    timeout: 10000
+- assertVisible: 10 Karten
+# back to English (from Settings again, again in its own step)
+- runFlow: subflows/open-settings.yaml
+- scrollUntilVisible:
+    element:
+      id: language-en
+- tapOn:
+    id: language-en
+- waitForAnimationToEnd
+- extendedWaitUntil:
+    visible: Language
+    timeout: 10000
+# two machine-draft languages (P7): Japanese and Arabic headings appear, then English again
+- tapOn:
+    id: language-ja
+- extendedWaitUntil:
+    visible: 言語
+    timeout: 10000
+- tapOn:
+    id: language-ar
+- extendedWaitUntil:
+    visible: اللغة
+    timeout: 10000
+- tapOn:
+    id: language-en
+- extendedWaitUntil:
+    visible: Language
+    timeout: 10000
+# list order and country for store suggestions are saved
+- scrollUntilVisible:
+    element:
+      id: settings-sort-name
+    direction: UP
+- tapOn:
+    id: settings-sort-name
+- assertVisible:
+    id: settings-sort-name
+    selected: true
+- scrollUntilVisible:
+    element:
+      id: country-DE
+- tapOn:
+    id: country-DE
+- assertVisible:
+    id: country-DE
+    selected: true
+# About: SPEC §2 text, licences link; development builds show the backup-exclusion flag read back
+- scrollUntilVisible:
+    element:
+      id: settings-about
+- assertVisible: "Tillcard keeps your cards on this phone.*"
+- scrollUntilVisible:
+    element:
+      id: settings-backup-debug
+- runFlow:
+    when:
+      platform: iOS
+    commands:
+      - assertVisible: ".*SQLite isExcluded=true.*"
+- runFlow:
+    when:
+      platform: Android
+    commands:
+      - assertVisible: ".*n/a \\(Android: rule files\\).*"
+# restore the defaults for the next flows
+- scrollUntilVisible:
+    element:
+      id: country-device
+    direction: UP
+- tapOn:
+    id: country-device
+- scrollUntilVisible:
+    element:
+      id: settings-sort-manual
+    direction: UP
+- tapOn:
+    id: settings-sort-manual
+- scrollUntilVisible:
+    element:
+      id: language-system
+- tapOn:
+    id: language-system

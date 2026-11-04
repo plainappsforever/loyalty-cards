@@ -1,0 +1,50 @@
+appId: ${APP_ID}
+name: Add scan fallback - the scan screen opens; Type instead and From photo are one tap away (A5)
+tags:
+  - p6
+---
+# Simulators/emulators show no real card to the camera: a live hit is owner QA (A5). This flow proves the screen opens
+# (camera permission granted by zero-prompt.yaml, or answered here) and both fallbacks work.
+- runFlow: subflows/launch.yaml
+- runFlow:
+    file: subflows/seed.yaml
+    env:
+      SEED: set=empty
+- tapOn:
+    id: add-card
+- tapOn:
+    id: add-scan
+- tapOn:
+    text: "(Allow|OK|While using the app)"
+    optional: true
+- assertVisible:
+    id: scan-screen
+- assertVisible:
+    id: scan-photo
+- tapOn:
+    id: scan-type
+- assertVisible:
+    id: edit-screen
+- runFlow: subflows/back.yaml
+- assertVisible:
+    id: home-screen
+- tapOn:
+    id: empty-scan
+- tapOn:
+    text: "(Allow|OK|While using the app)"
+    optional: true
+- tapOn:
+    id: scan-photo
+# From photo opens the system picker straight away (Android: full-screen Photo Picker over our screen); cancel it
+- runFlow:
+    when:
+      platform: Android
+    commands:
+      - extendedWaitUntil:
+          visible: "(Photos|Albums)"
+          timeout: 15000
+      - back
+- extendedWaitUntil:
+    visible:
+      id: photo-screen
+    timeout: 15000

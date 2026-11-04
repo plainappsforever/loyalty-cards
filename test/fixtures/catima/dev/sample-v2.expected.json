@@ -1,0 +1,26 @@
+{
+ "cards": 45,
+ "groups": [
+  "Food",
+  "Travel"
+ ],
+ "imagesFront": 5,
+ "duplicatesInFile": 1,
+ "skipped": 0,
+ "formats": {
+  "none": 4,
+  "code128": 4,
+  "ean13": 3,
+  "ean8": 4,
+  "upca": 3,
+  "upce": 3,
+  "itf": 3,
+  "codabar": 3,
+  "code39": 3,
+  "code93": 3,
+  "qr": 3,
+  "aztec": 3,
+  "pdf417": 3,
+  "datamatrix": 3
+ }
+}

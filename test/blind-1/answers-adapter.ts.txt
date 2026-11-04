@@ -1,0 +1,320 @@
+// Blind set B1 answers adapter (L27; written from the set's README §2 only, committed BEFORE the one run).
+// Calls the ENGINE (src/engine, snapshot bcc75af) for every case of cases.json and writes answers.json in the README's
+// shape. It never re-implements a rule: where an engine API cannot give what a case asks, the engine's actual output is
+// emitted and the case is left to fail (notes in `adapterNotes`). Mappings that are the adapter's job (README A19/A20):
+// engine reason codes → the set's 7 classes; "Card" = the README's field names (codeValue = effective barcode value,
+// currency = balanceCurrency); SQL column names in tamper ops → the engine's camelCase keys.
+// Usage (from the repo root):
+//   node --import ./scripts/node/ts-hooks.mjs test/blind-1/answers-adapter.ts <set dir> <answers.json> <engine commit>
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+
+import { expandUpcE } from '@/engine/barcode/check-digit';
+import { isFormatId, type FormatId } from '@/engine/barcode/formats';
+import { normalise, suggestFormats, validate, type ValidationError } from '@/engine/barcode/validate';
+import { readBackup, BackupFormatError } from '@/engine/backup/reader';
+import { writeBackupZip, type BackupCard } from '@/engine/backup/writer';
+import type { CardData, CardImages, ImportedCard, Skipped } from '@/engine/card-data';
+import { catimaColorToHex, hexToCatimaColor } from '@/engine/catima/color';
+import { CatimaFormatError, readCatima } from '@/engine/catima/reader';
+import { buildCatimaShareUrl, parseCatimaShareUrl } from '@/engine/catima/share-url';
+import { writeCatimaZip, type ExportCard } from '@/engine/catima/writer';
+import { parseGenericCsv } from '@/engine/csv';
+import { planImport, type DuplicateRule, type ExistingKey } from '@/engine/import-plan';
+import { buildSharePayload, parseSharePayload } from '@/engine/share-payload';
+import { readZip, utf8, writeZip } from '@/engine/zip';
+
+type Json = Record<string, unknown>;
+type InCard = Json & { name?: string; number?: string; codeValue?: string; format?: string; currency?: string };
+type Case = { id: string; kind: string; input: Json };
+
+const [setDir, answersPath, engine] = process.argv.slice(2);
+if (!setDir || !answersPath || !engine) {
+  console.error('usage: answers-adapter.ts <set dir> <answers.json> <engine commit>');
+  process.exit(2);
+}
+const base = dirname(answersPath);
+const outDir = join(base, 'out');
+mkdirSync(outDir, { recursive: true });
+const cases = (JSON.parse(readFileSync(join(setDir, 'cases.json'), 'utf8')) as { cases: Case[] }).cases;
+const imageBytes = new Uint8Array(readFileSync(join(setDir, 'fixtures/images/tiny.jpg'))); // README: "any image bytes"
+const adapterNotes: Record<string, string> = {};
+
+// ---------------------------------------------------------------- mappings (README §2 answer shapes)
+const TWO_D: readonly FormatId[] = ['qr', 'aztec', 'pdf417', 'datamatrix'];
+/** README A20: engine reason → charset | length | check | numbersystem | startstop | capacity | empty. */
+function reasonClass(error: ValidationError, format: FormatId): string {
+  switch (error) {
+    case 'chars':
+      return 'charset';
+    case 'length':
+      return 'length';
+    case 'checkDigit':
+      return 'check';
+    case 'numberSystem':
+      return 'numbersystem';
+    case 'startStop':
+      return 'startstop';
+    case 'empty':
+      return 'empty';
+    case 'tooLong':
+      return TWO_D.includes(format) ? 'capacity' : 'length'; // engine: "beyond what fits / the symbology allows"
+  }
+}
+
+type EngineCard = CardData & { images?: CardImages; tile?: string; chainId?: string | null; useCount?: number; sortIndex?: number };
+/** Engine card → README "Card" (every field the engine has). */
+function outCard(c: EngineCard): Json {
+  const o: Json = {
+    name: c.name,
+    number: c.number,
+    codeValue: c.codeValue !== '' ? c.codeValue : c.number,
+    format: c.format,
+    color: c.color,
+    note: c.note,
+    balance: c.balance,
+    currency: c.balanceCurrency,
+    validFrom: c.validFrom,
+    expiry: c.expiry,
+    favourite: c.favourite,
+    archived: c.archived,
+    lastUsedAt: c.lastUsedAt,
+    categories: c.categories,
+    hasFront: Boolean(c.images?.front),
+    hasBack: Boolean(c.images?.back),
+  };
+  if (c.tile !== undefined) o.tile = c.tile;
+  if (c.chainId !== undefined) o.chainId = c.chainId;
+  if (c.useCount !== undefined) o.useCount = c.useCount;
+  if (c.sortIndex !== undefined) o.sortIndex = c.sortIndex;
+  return o;
+}
+
+const fmt = (f: unknown): FormatId => (isFormatId(f) ? f : 'none');
+const s = (v: unknown): string => (typeof v === 'string' ? v : '');
+const ms = (v: unknown): number | null => (typeof v === 'number' ? v : null);
+
+/** README "Card" input → engine CardData (codeValue '' when it equals the number: the engine's "same" convention). */
+function inCard(c: InCard): CardData {
+  const number = s(c.number);
+  const code = s(c.codeValue);
+  return {
+    name: s(c.name),
+    number,
+    codeValue: code === number ? '' : code,
+    format: fmt(c.format),
+    color: s(c.color),
+    note: s(c.note),
+    balance: s(c.balance),
+    balanceCurrency: s(c.currency),
+    validFrom: ms(c.validFrom),
+    expiry: ms(c.expiry),
+    favourite: c.favourite === true,
+    archived: c.archived === true,
+    lastUsedAt: ms(c.lastUsedAt),
+    categories: Array.isArray(c.categories) ? c.categories.filter((g): g is string => typeof g === 'string') : [],
+  };
+}
+
+function images(c: InCard): CardImages {
+  return { front: c.hasFront === true ? imageBytes : undefined, back: c.hasBack === true ? imageBytes : undefined };
+}
+
+function backupCards(cards: InCard[]): (BackupCard & { images?: CardImages })[] {
+  return cards.map((c, i) => ({
+    ...inCard(c),
+    id: `b1-card-${i + 1}`,
+    tile: c.tile === 'photo' ? 'photo' : 'initials',
+    chainId: typeof c.chainId === 'string' ? c.chainId : null,
+    useCount: typeof c.useCount === 'number' ? c.useCount : 0,
+    sortIndex: typeof c.sortIndex === 'number' ? c.sortIndex : i,
+    createdAt: 1760000000000,
+    updatedAt: 1760000000000,
+    images: images(c),
+  }));
+}
+
+const unionCategories = (cards: readonly { categories: string[] }[]): string[] => [...new Set(cards.flatMap((c) => c.categories))];
+const EXPORTED_AT = 1760000000000;
+
+function existingKeys(input: Json): ExistingKey[] {
+  const list = Array.isArray(input.existing) ? (input.existing as InCard[]) : [];
+  return list.map((c) => ({ number: s(c.number), format: fmt(c.format) }));
+}
+const rule = (input: Json): DuplicateRule => (input.duplicateRule === 'keep' ? 'keepBoth' : 'skip');
+
+function importAnswer(cards: readonly EngineCard[], skipped: readonly Skipped[], categories: string[], input: Json, extra: Json = {}): Json {
+  const plan = planImport(cards as (ImportedCard & EngineCard)[], existingKeys(input), skipped, rule(input));
+  return {
+    refused: false,
+    imported: plan.summary.imported,
+    skipped: plan.summary.skipped,
+    duplicates: plan.summary.duplicates,
+    cards: plan.toCreate.map(outCard),
+    categories,
+    skippedRows: plan.skipped,
+    ...extra,
+  };
+}
+
+function refusal(e: unknown): Json {
+  const code = e instanceof CatimaFormatError || e instanceof BackupFormatError ? e.code : 'error';
+  return { refused: true, reasonClass: code, reason: e instanceof Error ? e.message : String(e), imported: 0, skipped: 0, duplicates: 0, cards: [], categories: [] };
+}
+
+function catimaImport(bytes: Uint8Array, input: Json): Json {
+  try {
+    const r = readCatima(bytes);
+    return importAnswer(r.cards, r.skipped, r.groups, input, { version: r.version, unusedImages: r.unusedImages, truncatedNames: r.truncatedNames });
+  } catch (e) {
+    return refusal(e);
+  }
+}
+
+function backupImport(bytes: Uint8Array, input: Json): Json {
+  try {
+    const r = readBackup(bytes);
+    return importAnswer(r.cards, r.skipped, r.categories, input, { exportedAt: r.exportedAt });
+  } catch (e) {
+    return refusal(e);
+  }
+}
+
+function csvImport(bytes: Uint8Array, input: Json): Json {
+  try {
+    const r = parseGenericCsv(utf8.decode(bytes));
+    return importAnswer(r.cards, r.skipped, unionCategories(r.cards), input, { delimiter: r.delimiter });
+  } catch (e) {
+    return refusal(e);
+  }
+}
+
+const readFixture = (input: Json): Uint8Array => new Uint8Array(readFileSync(join(setDir, s(input.file))));
+const snakeToCamel = (k: string): string => k.replace(/_([a-z])/g, (_m, ch: string) => ch.toUpperCase());
+
+// ---------------------------------------------------------------- per kind
+function answer(c: Case): unknown {
+  const i = c.input;
+  switch (c.kind) {
+    case 'validate': {
+      const format = fmt(i.format);
+      if (!isFormatId(i.format)) adapterNotes[c.id] = `format ${String(i.format)} is not an engine id; validated as none`;
+      const v = validate(s(i.value), format);
+      const n = normalise(s(i.value), format);
+      const out: Json = { ok: v.ok, normalised: v.ok ? v.value : n.value, uppercased: (v.ok ? v.notes : n.notes).includes('upperCased') };
+      if (!v.ok) {
+        out.reason = reasonClass(v.error, format);
+        out.engineError = v.error;
+        if (v.suggestion) {
+          out.engineSuggestion = v.suggestion;
+          if (v.suggestion.reason === 'addCheckDigit' || v.suggestion.reason === 'fixCheckDigit') out.suggestedCheck = v.suggestion.detail;
+          if (v.suggestion.reason === 'addLeadingZero') out.leadingZeroSuggestion = v.suggestion.value;
+        }
+      }
+      return out;
+    }
+    case 'suggest': {
+      const list = suggestFormats(s(i.value), typeof i.hint === 'string' ? i.hint : undefined);
+      // README: the formats the value SATISFIES; 'digitsCheckShown' entries need a different value (check appended)
+      return { formats: list.filter((x) => x.reason !== 'digitsCheckShown').map((x) => x.format), engineList: list };
+    }
+    case 'upce-expand':
+      return { upca: expandUpcE(s(i.upce)) };
+    case 'color-to-hex':
+      return { hex: catimaColorToHex(i.argb as number) };
+    case 'color-to-int':
+      try {
+        return { int: hexToCatimaColor(s(i.hex)) };
+      } catch (e) {
+        return { int: null, error: e instanceof Error ? e.message : String(e) };
+      }
+    case 'catima-share-parse': {
+      const r = parseCatimaShareUrl(s(i.url));
+      if (!r) return { ok: false };
+      const card: Json = {
+        name: r.name,
+        number: r.number,
+        codeValue: r.codeValue !== '' ? r.codeValue : r.number,
+        format: r.format,
+        color: r.color,
+        note: r.note,
+        balance: r.balance,
+        currency: r.balanceCurrency,
+        validFrom: r.validFrom,
+        expiry: r.expiry,
+        unknownType: r.unknownType,
+      };
+      return { ok: true, card };
+    }
+    case 'catima-share-make': {
+      const d = inCard(i.card as InCard);
+      return { url: buildCatimaShareUrl({ name: d.name, number: d.number, codeValue: d.codeValue, format: d.format, color: d.color, note: d.note, balance: d.balance, balanceCurrency: d.balanceCurrency, validFrom: d.validFrom, expiry: d.expiry }) };
+    }
+    case 'lc1-parse': {
+      const r = parseSharePayload(s(i.text));
+      return r ? { ok: true, card: outCard(r) } : { ok: false };
+    }
+    case 'lc1-make': {
+      const p = buildSharePayload(inCard(i.card as InCard));
+      return { text: p.text, truncated: p.noteTruncated, bytes: p.bytes };
+    }
+    case 'catima-import':
+      return catimaImport(readFixture(i), i);
+    case 'backup-import':
+      return backupImport(readFixture(i), i);
+    case 'csv-import':
+      return csvImport(readFixture(i), i);
+    case 'catima-export': {
+      const cards = (i.cards as InCard[]).map((x): ExportCard => ({ ...inCard(x), images: images(x) }));
+      const zip = writeCatimaZip(cards);
+      const rel = `out/${c.id}.zip`;
+      writeFileSync(join(base, rel), zip);
+      return { zip: rel };
+    }
+    case 'backup-roundtrip': {
+      const cards = backupCards(i.cards as InCard[]);
+      const zip = writeBackupZip(cards, unionCategories(cards), EXPORTED_AT);
+      const rel = `out/${c.id}.zip`;
+      writeFileSync(join(base, rel), zip);
+      return { zip: rel, readBack: backupImport(zip, { existing: [], duplicateRule: 'skip' }) };
+    }
+    case 'backup-tamper': {
+      const cards = backupCards(i.cards as InCard[]);
+      const entries = readZip(writeBackupZip(cards, unionCategories(cards), EXPORTED_AT));
+      for (const op of (i.tamper as Json[]) ?? []) {
+        if (op.op === 'delete-file') {
+          delete entries[s(op.path)];
+          continue;
+        }
+        const doc = JSON.parse(utf8.decode(entries['backup.json'])) as Json & { cards: Json[] };
+        if (op.op === 'set-top') doc[s(op.key)] = op.value;
+        else if (op.op === 'set-card') doc.cards[op.index as number][snakeToCamel(s(op.column))] = op.value;
+        else adapterNotes[c.id] = `unknown tamper op ${String(op.op)}`;
+        entries['backup.json'] = utf8.encode(JSON.stringify(doc, null, 1));
+      }
+      const zip = writeZip(entries);
+      writeFileSync(join(base, `out/${c.id}.zip`), zip);
+      return backupImport(zip, { existing: [], duplicateRule: 'skip' });
+    }
+    default:
+      adapterNotes[c.id] = `kind ${c.kind} not known to the adapter`;
+      return null;
+  }
+}
+
+const answers: Record<string, unknown> = {};
+const kinds: Record<string, number> = {};
+for (const c of cases) {
+  try {
+    answers[c.id] = answer(c);
+  } catch (e) {
+    // an engine call that throws where the README expects an answer: recorded, the case fails
+    adapterNotes[c.id] = `engine threw: ${e instanceof Error ? e.message.slice(0, 200) : String(e)}`;
+    answers[c.id] = { threw: adapterNotes[c.id] };
+  }
+  kinds[c.kind] = (kinds[c.kind] ?? 0) + 1;
+}
+writeFileSync(answersPath, JSON.stringify({ engine, answers, adapterNotes }, null, 1));
+console.log(`answers adapter: ${cases.length} cases (${Object.entries(kinds).map(([k, n]) => `${k} ${n}`).join(', ')}) → ${answersPath}`);
+console.log(`adapter notes: ${Object.keys(adapterNotes).length}`);
+for (const [id, n] of Object.entries(adapterNotes)) console.log(`  ${id}: ${n}`);
