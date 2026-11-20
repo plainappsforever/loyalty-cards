@@ -1,0 +1,30 @@
+appId: ${APP_ID}
+---
+# Like ../subflows/seed.yaml, but taps the iOS "Open in ...?" prompt twice (the Release build asked a second time after the first
+# tap on a fresh install, and the one-tap subflow then waited 60 s on the dimmed list). env: SEED.
+- openLink: ${SCHEME}://debug/seed?${SEED}
+- tapOn:
+    text: Open
+    optional: true
+- waitForAnimationToEnd
+- tapOn:
+    text: Open
+    optional: true
+- runFlow:
+    when:
+      visible:
+        id: seed-confirm-input
+    commands:
+      - tapOn:
+          id: seed-confirm-input
+      - inputText: WIPE
+      - tapOn:
+          id: seed-confirm-button
+- tapOn:
+    text: Open
+    optional: true
+- extendedWaitUntil:
+    visible:
+      id: cards-count
+    timeout: 60000
+- waitForAnimationToEnd

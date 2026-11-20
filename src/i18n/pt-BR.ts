@@ -1,4 +1,4 @@
-// Brazilian Portuguese UI texts — MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
+// Brazilian Portuguese UI texts: MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
 // native speaker. Same keys and {placeholders} as en.ts (scripts/check-i18n.mjs). Counts are written "Label: {n}"
 // (no singular|plural pair outside en/de). Source: docs/i18n-draft/pt-BR.tsv via scripts/i18n-from-tsv.py.
 import type { MessageKey } from './en';
@@ -18,6 +18,9 @@ export const ptBR: Record<MessageKey, string> = {
   'cards.emptyImport': 'Importar de outro app',
   'cards.deleted': '“{name}” excluído',
   'cards.settings': 'Ajustes',
+  'cards.sortFilter': 'Ordenar e filtrar',
+  'cards.expiresSoon': 'Vence em breve',
+  'cards.expired': 'Vencido',
   'sort.manual': 'Manual',
   'sort.name': 'Nome',
   'sort.most_used': 'Mais usados',
@@ -188,6 +191,7 @@ export const ptBR: Record<MessageKey, string> = {
   'widget.empty': 'Adicione um cartão no Tillcard e ele aparece aqui.',
   'widget.noCode': 'Abra o cartão para mostrar o código',
   'settings.till': 'No caixa',
+  'settings.till.on': 'Brilho e tela ativos',
   'settings.sort': 'Ordem da lista de cartões',
   'settings.country': 'País para sugestões de lojas',
   'settings.country.device': 'Região do telefone',

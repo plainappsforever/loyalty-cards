@@ -1,4 +1,4 @@
-// Russian UI texts — MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
+// Russian UI texts: MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
 // native speaker. Same keys and {placeholders} as en.ts (scripts/check-i18n.mjs). Counts are written "Label: {n}"
 // (no singular|plural pair outside en/de). Source: docs/i18n-draft/ru.tsv via scripts/i18n-from-tsv.py.
 import type { MessageKey } from './en';
@@ -18,6 +18,9 @@ export const ru: Record<MessageKey, string> = {
   'cards.emptyImport': 'Импорт из другого приложения',
   'cards.deleted': '«{name}» удалена',
   'cards.settings': 'Настройки',
+  'cards.sortFilter': 'Сортировка и фильтр',
+  'cards.expiresSoon': 'Скоро истекает',
+  'cards.expired': 'Срок истёк',
   'sort.manual': 'Вручную',
   'sort.name': 'По названию',
   'sort.most_used': 'Частые',
@@ -31,7 +34,7 @@ export const ru: Record<MessageKey, string> = {
   'card.number': 'Номер',
   'card.copy': 'Копировать',
   'card.copied': 'Скопировано',
-  'card.noCode': 'Нет штрихкода — покажите номер на кассе',
+  'card.noCode': 'Нет штрихкода: покажите номер на кассе',
   'card.brightness': 'Экран на полной яркости',
   'card.brightnessFailed': 'Не удалось повысить яркость',
   'card.dense': 'Этот код может быть слишком плотным для некоторых сканеров. Нажмите на него для полного экрана.',
@@ -188,6 +191,7 @@ export const ru: Record<MessageKey, string> = {
   'widget.empty': 'Добавьте карту в Tillcard, и она появится здесь.',
   'widget.noCode': 'Откройте карту, чтобы показать код',
   'settings.till': 'На кассе',
+  'settings.till.on': 'Яркость и экран включены',
   'settings.sort': 'Порядок списка карт',
   'settings.country': 'Страна для подсказок магазинов',
   'settings.country.device': 'Регион телефона',

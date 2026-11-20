@@ -1,4 +1,4 @@
-// Korean UI texts — MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
+// Korean UI texts: MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
 // native speaker. Same keys and {placeholders} as en.ts (scripts/check-i18n.mjs). Counts are written "Label: {n}"
 // (no singular|plural pair outside en/de). Source: docs/i18n-draft/ko.tsv via scripts/i18n-from-tsv.py.
 import type { MessageKey } from './en';
@@ -18,6 +18,9 @@ export const ko: Record<MessageKey, string> = {
   'cards.emptyImport': '다른 앱에서 가져오기',
   'cards.deleted': '“{name}” 삭제됨',
   'cards.settings': '설정',
+  'cards.sortFilter': '정렬 및 필터',
+  'cards.expiresSoon': '곧 만료',
+  'cards.expired': '만료됨',
   'sort.manual': '수동',
   'sort.name': '이름',
   'sort.most_used': '자주 사용',
@@ -31,7 +34,7 @@ export const ko: Record<MessageKey, string> = {
   'card.number': '번호',
   'card.copy': '복사',
   'card.copied': '복사됨',
-  'card.noCode': '바코드 없음 — 계산대에서 번호를 보여 주세요',
+  'card.noCode': '바코드 없음: 계산대에서 번호를 보여 주세요',
   'card.brightness': '화면 최대 밝기',
   'card.brightnessFailed': '밝기를 높일 수 없습니다',
   'card.dense': '이 코드는 일부 스캐너에는 너무 촘촘할 수 있습니다. 탭하면 전체 화면으로 표시됩니다.',
@@ -188,6 +191,7 @@ export const ko: Record<MessageKey, string> = {
   'widget.empty': 'Tillcard에 카드를 추가하면 여기에 표시됩니다.',
   'widget.noCode': '카드를 열어 코드를 표시하세요',
   'settings.till': '계산대에서',
+  'settings.till.on': '밝기와 화면 켜짐',
   'settings.sort': '카드 목록 순서',
   'settings.country': '매장 추천 국가',
   'settings.country.device': '휴대폰 지역',

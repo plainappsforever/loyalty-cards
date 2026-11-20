@@ -2,7 +2,7 @@
 // format name, "Screen at full brightness" only while raised (§2), balance/expiry/note/categories, favourite, Share,
 // Edit, photos, Archive/Delete. Opening counts a use. Tap the code → full screen (rotated when the layout says so).
 // Never encodes a 2D code here (D41.1, D42): a missing/stale cache is the only fallback that renders, and it is logged.
-import { testToolsEnabled } from '@/lib/variant';
+import { currentVariant, debugReadoutsVisible, STORE_SHOTS_KEY, testToolsEnabled } from '@/lib/variant';
 import * as Brightness from 'expo-brightness';
 import * as Clipboard from 'expo-clipboard';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
@@ -14,12 +14,12 @@ import { Modal, Platform, Pressable, ScrollView, StyleSheet, View, useWindowDime
 import { Button } from '@/components/button';
 import { CodeView } from '@/components/code-view';
 import { ThemedText } from '@/components/themed-text';
-import { Fonts, Spacing } from '@/constants/theme';
+import { Fonts, Radius, Spacing } from '@/constants/theme';
 import { codeOf, deleteCards, getCard, recordUse, setArchived, setFavourite, type Card } from '@/db/cards';
 import { codeKey, getCodeCache, putCodeCache, type CodeCacheEntry } from '@/db/code-cache';
 import { listCategories } from '@/db/categories';
 import { useSQLiteContext } from '@/db/provider';
-import { getSettings } from '@/db/settings';
+import { getSetting, getSettings } from '@/db/settings';
 import { FORMATS } from '@/engine/barcode/formats';
 import { validate } from '@/engine/barcode/validate';
 import { expiryState, formatBalance, groupNumber } from '@/engine/format';
@@ -30,7 +30,7 @@ import { formatDay } from '@/lib/dates';
 import { photoUri, tapAge, takeTap } from '@/lib/services';
 import { requestWidgetSync } from '@/lib/widgets';
 
-const dev = testToolsEnabled();
+const testBuild = testToolsEnabled();
 
 type Loaded = { card: Card; cache: CodeCacheEntry | null; source: 'cache' | 'rendered' | 'live'; categories: string[]; now: number };
 
@@ -49,6 +49,11 @@ export default function CardScreen() {
   const [full, setFull] = useState(false);
   const [dense, setDense] = useState(false);
   const [openMs, setOpenMs] = useState<number | null>(null);
+  // dev read-outs: test builds only, and not while the store-screenshot switch is set
+  const [dev, setDev] = useState(false);
+  useEffect(() => {
+    if (testBuild) void getSetting(db, STORE_SHOTS_KEY).then((v) => setDev(debugReadoutsVisible(currentVariant(), v)));
+  }, [db]);
   // dev timing stages (ms since the tile tap): screen mounted → card + cache read → code drawn
   const stages = useRef<{ start?: number | null; loaded?: number | null }>({});
 
@@ -286,8 +291,8 @@ export default function CardScreen() {
 const styles = StyleSheet.create({
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: Spacing.four },
   content: { padding: Spacing.three, gap: Spacing.two, paddingBottom: Spacing.six },
-  codeBox: { alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffffff', borderRadius: 12, paddingVertical: Spacing.three },
-  noCode: { borderRadius: 12, padding: Spacing.four, alignItems: 'center' },
+  codeBox: { alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffffff', borderRadius: Radius.card, paddingVertical: Spacing.three },
+  noCode: { borderRadius: Radius.card, padding: Spacing.four, alignItems: 'center' },
   numberRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three, marginTop: Spacing.two },
   number: { flex: 1, fontFamily: Fonts.mono, fontSize: 28, lineHeight: 34, fontWeight: 700 },
   copy: { borderRadius: 10, paddingHorizontal: Spacing.three, paddingVertical: Spacing.two },

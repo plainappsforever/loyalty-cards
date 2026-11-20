@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
-import { Spacing } from '@/constants/theme';
+import { Radius, Spacing } from '@/constants/theme';
 import entries from '@/content/licenses.generated.json';
 import { useT } from '@/hooks/use-t';
 import { useTheme } from '@/hooks/use-theme';
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.two,
   },
   row: {
-    borderRadius: 12,
+    borderRadius: Radius.card,
     overflow: 'hidden',
   },
   header: {

@@ -1,0 +1,31 @@
+{
+  "_doc": "Tillcard identity (sheet 11 in tasks-and-reports/DESIGN_IDENTITIES.md, 1.1.0). Field guide: docs/DESIGN_TOKENS.md. Read by src/constants/theme.ts and app.config.ts.",
+  "light": {
+    "accent": "#6E3FA3",
+    "onAccent": "#FFFFFF",
+    "accentText": "#6E3FA3",
+    "background": "#EFF0F5",
+    "surface": "#FFFFFF",
+    "border": "#D7D8DC"
+  },
+  "dark": {
+    "accent": "#C29BF0",
+    "onAccent": "#16181A",
+    "accentText": "#C29BF0",
+    "background": "#1D1E26",
+    "surface": "#2D2E35",
+    "border": "#3F4047"
+  },
+  "fonts": {
+    "title": "sans",
+    "body": "sans",
+    "numerals": "sans"
+  },
+  "radius": {
+    "control": 14,
+    "card": 14
+  },
+  "card": "outlined",
+  "density": "regular",
+  "settingsLayout": "C"
+}

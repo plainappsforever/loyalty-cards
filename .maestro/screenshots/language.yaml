@@ -1,0 +1,18 @@
+appId: ${APP_ID}
+name: Listing screenshots - switch the app language (run by scripts/screenshots.sh between the EN and the DE capture)
+tags:
+  - screenshots
+---
+# env: LANG_ID = "de" or "system". Its own step: the switch is made on Settings and the screen is left only afterwards
+# (pregnancy-tracker: a language switch and a screen change in one go crashed react-native-screens on Android).
+- runFlow: ../subflows/launch.yaml
+- runFlow: ../subflows/open-settings.yaml
+- scrollUntilVisible:
+    element:
+      id: language-${LANG_ID}
+- tapOn:
+    id: language-${LANG_ID}
+- waitForAnimationToEnd
+- assertVisible:
+    id: language-${LANG_ID}
+    selected: true

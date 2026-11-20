@@ -20,7 +20,7 @@ case "${1:?Usage: boot.sh <ios|android>}" in
     serial=$(find_serial)
     if [[ -z $serial ]]; then
       mkdir -p artifacts
-      nohup emulator -avd "$ANDROID_AVD" -port "$ANDROID_EMULATOR_PORT" -no-boot-anim >artifacts/emulator.log 2>&1 &
+      nohup emulator -avd "$ANDROID_AVD" -port "$ANDROID_EMULATOR_PORT" -no-boot-anim -no-audio >artifacts/emulator.log 2>&1 &
       for _ in $(seq 1 90); do
         serial=$(find_serial)
         [[ -n $serial ]] && break

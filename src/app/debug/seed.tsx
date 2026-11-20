@@ -14,9 +14,10 @@ import { Button } from '@/components/button';
 import { ThemedText } from '@/components/themed-text';
 import { codeOf, createCards, hasWipeableData, updateCard, wipeAllCards, type NewCard } from '@/db/cards';
 import { useSQLiteContext } from '@/db/provider';
+import { deleteSetting, setSetting } from '@/db/settings';
 import { SEED_SETS, seedCards, type SeedSet } from '@/dev/seed';
 import { useT } from '@/hooks/use-t';
-import { currentVariant, seedNeedsConfirmation, testToolsEnabled, wipeConfirmed, WIPE_WORD } from '@/lib/variant';
+import { currentVariant, seedNeedsConfirmation, STORE_SHOTS_KEY, testToolsEnabled, wipeConfirmed, WIPE_WORD } from '@/lib/variant';
 import { buildCodeCache } from '@/lib/code-cache';
 import { replacePhoto } from '@/lib/files';
 import { expoFs } from '@/lib/fs-expo';
@@ -28,7 +29,7 @@ const HEAVY: NewCard[] = [
 ];
 
 export default function SeedScreen() {
-  const params = useLocalSearchParams<{ set?: string; heavy?: string; photo?: string }>();
+  const params = useLocalSearchParams<{ set?: string; heavy?: string; photo?: string; lang?: string }>();
   const db = useSQLiteContext();
   const router = useRouter();
   const t = useT();
@@ -44,13 +45,16 @@ export default function SeedScreen() {
     const set = (SEED_SETS as readonly string[]).includes(params.set ?? '') ? (params.set as SeedSet) : 'ten';
     setStatus(t('debug.seeding', { set }));
     await wipeAllCards(db); // the photo folders of wiped cards are removed by the start-up sweep (P6 wires FileOps)
-    const cards = [...(params.heavy === '1' ? HEAVY : []), ...seedCards(set)];
+    const cards = [...(params.heavy === '1' ? HEAVY : []), ...seedCards(set, undefined, params.lang === 'de' ? 'de' : 'en')];
     const { ids } = await createCards(db, cards.map((c) => ({ ...c, codeCache: buildCodeCache(codeOf({ number: c.number ?? '', codeValue: c.codeValue ?? '' }), c.format) })));
     if (params.photo === '1' && ids.includes('seed-1')) {
       // a front photo through the real capture path: PNG → EXIF-free JPEG (code-kit), staged, moved, row updated
       const temp = await photoToTempJpeg(await fixtureFileUri(require('../../../test/fixtures/images/ean13.png')));
       await replacePhoto(expoFs, 'seed-1', 'front', temp, () => updateCard(db, 'seed-1', { hasFront: true }));
     }
+    // store screenshots: this set hides the debug read-outs (variant.ts); every other set brings them back
+    if (set === 'store-demo') await setSetting(db, STORE_SHOTS_KEY, '1');
+    else await deleteSetting(db, STORE_SHOTS_KEY);
     setStatus(t('debug.seedDone', { n: ids.length }));
     setDone(true);
     router.dismissTo('/'); // back to the Cards list underneath (replace left a second list with a Back button)

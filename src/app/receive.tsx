@@ -9,7 +9,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button } from '@/components/button';
 import { Chip } from '@/components/chip';
 import { ThemedText } from '@/components/themed-text';
-import { Spacing } from '@/constants/theme';
+import { Radius, Spacing } from '@/constants/theme';
 import { useSQLiteContext } from '@/db/provider';
 import { FORMATS } from '@/engine/barcode/formats';
 import type { DuplicateRule } from '@/engine/import-plan';
@@ -135,6 +135,6 @@ export default function ReceiveScreen() {
 
 const styles = StyleSheet.create({
   content: { padding: Spacing.three, gap: Spacing.three },
-  list: { borderRadius: 12, padding: Spacing.three, gap: Spacing.one },
+  list: { borderRadius: Radius.card, padding: Spacing.three, gap: Spacing.one },
   row: { flexDirection: 'row', gap: Spacing.two },
 });

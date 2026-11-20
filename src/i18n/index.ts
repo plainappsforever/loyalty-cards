@@ -94,7 +94,7 @@ export function deviceLanguageTags(): string[] {
   }
 }
 
-/** The device's region (ISO 3166 alpha-2, upper case) — the default country for the chain list (SPEC §4.2 `default_country`). */
+/** The device's region (ISO 3166 alpha-2, upper case): the default country for the chain list (SPEC §4.2 `default_country`). */
 export function deviceRegion(): string | undefined {
   try {
     const code = getLocales().find((l) => typeof l.regionCode === 'string' && l.regionCode)?.regionCode;

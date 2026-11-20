@@ -26,3 +26,14 @@ export function seedNeedsConfirmation(variant: unknown, hasData: boolean): boole
 export function wipeConfirmed(typed: string): boolean {
   return typed.trim() === WIPE_WORD;
 }
+
+/**
+ * Store-screenshot switch (preview and development only): the seed set `store-demo` stores `store_shots=1` in the settings table, and
+ * while it is set every debug read-out (card open time, backup line, variant tag in the version line) stays hidden so a store
+ * screenshot shows what a customer sees. Any other seed set removes it. Production never has the read-outs, so it is unaffected.
+ */
+export const STORE_SHOTS_KEY = 'store_shots';
+
+export function debugReadoutsVisible(variant: unknown, storeShots: string | null): boolean {
+  return isTestVariant(variant) && storeShots !== '1';
+}

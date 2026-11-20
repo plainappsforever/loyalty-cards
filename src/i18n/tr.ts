@@ -1,4 +1,4 @@
-// Turkish UI texts — MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
+// Turkish UI texts: MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
 // native speaker. Same keys and {placeholders} as en.ts (scripts/check-i18n.mjs). Counts are written "Label: {n}"
 // (no singular|plural pair outside en/de). Source: docs/i18n-draft/tr.tsv via scripts/i18n-from-tsv.py.
 import type { MessageKey } from './en';
@@ -18,6 +18,9 @@ export const tr: Record<MessageKey, string> = {
   'cards.emptyImport': 'Başka bir uygulamadan içe aktar',
   'cards.deleted': '“{name}” silindi',
   'cards.settings': 'Ayarlar',
+  'cards.sortFilter': 'Sırala ve filtrele',
+  'cards.expiresSoon': 'Yakında bitiyor',
+  'cards.expired': 'Süresi doldu',
   'sort.manual': 'Elle',
   'sort.name': 'Ad',
   'sort.most_used': 'En çok kullanılan',
@@ -188,6 +191,7 @@ export const tr: Record<MessageKey, string> = {
   'widget.empty': 'Tillcard’a bir kart ekle, burada görünsün.',
   'widget.noCode': 'Kodu göstermek için kartı aç',
   'settings.till': 'Kasada',
+  'settings.till.on': 'Parlaklık ve ekran açık',
   'settings.sort': 'Kart listesinin sırası',
   'settings.country': 'Mağaza önerileri için ülke',
   'settings.country.device': 'Telefonun bölgesi',

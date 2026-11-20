@@ -1,4 +1,4 @@
-// Arabic UI texts — MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
+// Arabic UI texts: MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
 // native speaker. Same keys and {placeholders} as en.ts (scripts/check-i18n.mjs). Counts are written "Label: {n}"
 // (no singular|plural pair outside en/de). Source: docs/i18n-draft/ar.tsv via scripts/i18n-from-tsv.py.
 import type { MessageKey } from './en';
@@ -18,6 +18,9 @@ export const ar: Record<MessageKey, string> = {
   'cards.emptyImport': 'استيراد من تطبيق آخر',
   'cards.deleted': 'تم حذف «{name}»',
   'cards.settings': 'الإعدادات',
+  'cards.sortFilter': 'الفرز والتصفية',
+  'cards.expiresSoon': 'تنتهي قريبًا',
+  'cards.expired': 'منتهية',
   'sort.manual': 'يدوي',
   'sort.name': 'الاسم',
   'sort.most_used': 'الأكثر استخدامًا',
@@ -31,7 +34,7 @@ export const ar: Record<MessageKey, string> = {
   'card.number': 'الرقم',
   'card.copy': 'نسخ',
   'card.copied': 'تم النسخ',
-  'card.noCode': 'لا يوجد رمز شريطي — اعرض الرقم عند الصندوق',
+  'card.noCode': 'لا يوجد رمز شريطي: اعرض الرقم عند الصندوق',
   'card.brightness': 'الشاشة على أقصى سطوع',
   'card.brightnessFailed': 'تعذّر رفع السطوع',
   'card.dense': 'قد يكون هذا الرمز كثيفًا جدًا لبعض الماسحات. اضغط عليه لعرضه بملء الشاشة.',
@@ -188,6 +191,7 @@ export const ar: Record<MessageKey, string> = {
   'widget.empty': 'أضف بطاقة في Tillcard وستظهر هنا.',
   'widget.noCode': 'افتح البطاقة لعرض رمزها',
   'settings.till': 'عند الصندوق',
+  'settings.till.on': 'السطوع والشاشة قيد التشغيل',
   'settings.sort': 'ترتيب قائمة البطاقات',
   'settings.country': 'البلد لاقتراحات المتاجر',
   'settings.country.device': 'منطقة الهاتف',

@@ -1,4 +1,4 @@
-// Simplified Chinese UI texts — MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
+// Simplified Chinese UI texts: MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
 // native speaker. Same keys and {placeholders} as en.ts (scripts/check-i18n.mjs). Counts are written "Label: {n}"
 // (no singular|plural pair outside en/de). Source: docs/i18n-draft/zh-CN.tsv via scripts/i18n-from-tsv.py.
 import type { MessageKey } from './en';
@@ -18,6 +18,9 @@ export const zhCN: Record<MessageKey, string> = {
   'cards.emptyImport': '从其他应用导入',
   'cards.deleted': '已删除“{name}”',
   'cards.settings': '设置',
+  'cards.sortFilter': '排序与筛选',
+  'cards.expiresSoon': '即将到期',
+  'cards.expired': '已过期',
   'sort.manual': '手动',
   'sort.name': '名称',
   'sort.most_used': '最常用',
@@ -31,7 +34,7 @@ export const zhCN: Record<MessageKey, string> = {
   'card.number': '卡号',
   'card.copy': '复制',
   'card.copied': '已复制',
-  'card.noCode': '没有条形码——在收银台出示卡号',
+  'card.noCode': '没有条形码：在收银台出示卡号',
   'card.brightness': '屏幕已调至最亮',
   'card.brightnessFailed': '无法调高亮度',
   'card.dense': '这个码对某些扫描器可能太密。点按可全屏显示。',
@@ -188,6 +191,7 @@ export const zhCN: Record<MessageKey, string> = {
   'widget.empty': '在 Tillcard 中添加卡片后，它会显示在这里。',
   'widget.noCode': '打开卡片以显示条码',
   'settings.till': '在收银台',
+  'settings.till.on': '亮度与屏幕常亮',
   'settings.sort': '卡片列表顺序',
   'settings.country': '商店建议的国家/地区',
   'settings.country.device': '手机所在地区',

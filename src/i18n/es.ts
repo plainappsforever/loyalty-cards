@@ -1,4 +1,4 @@
-// Spanish UI texts — MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
+// Spanish UI texts: MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
 // native speaker. Same keys and {placeholders} as en.ts (scripts/check-i18n.mjs). Counts are written "Label: {n}"
 // (no singular|plural pair outside en/de). Source: docs/i18n-draft/es.tsv via scripts/i18n-from-tsv.py.
 import type { MessageKey } from './en';
@@ -18,6 +18,9 @@ export const es: Record<MessageKey, string> = {
   'cards.emptyImport': 'Importar desde otra app',
   'cards.deleted': '«{name}» eliminada',
   'cards.settings': 'Ajustes',
+  'cards.sortFilter': 'Ordenar y filtrar',
+  'cards.expiresSoon': 'Caduca pronto',
+  'cards.expired': 'Caducada',
   'sort.manual': 'Manual',
   'sort.name': 'Nombre',
   'sort.most_used': 'Más usadas',
@@ -188,6 +191,7 @@ export const es: Record<MessageKey, string> = {
   'widget.empty': 'Añade una tarjeta en Tillcard y aparecerá aquí.',
   'widget.noCode': 'Abre la tarjeta para mostrar su código',
   'settings.till': 'En caja',
+  'settings.till.on': 'Brillo y pantalla activos',
   'settings.sort': 'Orden de la lista',
   'settings.country': 'País para sugerencias de tiendas',
   'settings.country.device': 'Región del teléfono',

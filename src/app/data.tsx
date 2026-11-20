@@ -8,7 +8,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { Button } from '@/components/button';
 import { ThemedText } from '@/components/themed-text';
-import { Spacing } from '@/constants/theme';
+import { Radius, Spacing } from '@/constants/theme';
 import { useSQLiteContext } from '@/db/provider';
 import { getSettings, updateSetting } from '@/db/settings';
 import { useLanguage, useT } from '@/hooks/use-t';
@@ -105,5 +105,5 @@ export default function DataScreen() {
 const styles = StyleSheet.create({
   content: { padding: Spacing.three, gap: Spacing.two },
   section: { marginTop: Spacing.four },
-  ready: { borderRadius: 12, padding: Spacing.three, gap: Spacing.two },
+  ready: { borderRadius: Radius.card, padding: Spacing.three, gap: Spacing.two },
 });

@@ -1,4 +1,4 @@
-// Vietnamese UI texts — MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
+// Vietnamese UI texts: MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
 // native speaker. Same keys and {placeholders} as en.ts (scripts/check-i18n.mjs). Counts are written "Label: {n}"
 // (no singular|plural pair outside en/de). Source: docs/i18n-draft/vi.tsv via scripts/i18n-from-tsv.py.
 import type { MessageKey } from './en';
@@ -18,6 +18,9 @@ export const vi: Record<MessageKey, string> = {
   'cards.emptyImport': 'Nhập từ ứng dụng khác',
   'cards.deleted': 'Đã xóa “{name}”',
   'cards.settings': 'Cài đặt',
+  'cards.sortFilter': 'Sắp xếp và lọc',
+  'cards.expiresSoon': 'Sắp hết hạn',
+  'cards.expired': 'Hết hạn',
   'sort.manual': 'Thủ công',
   'sort.name': 'Tên',
   'sort.most_used': 'Dùng nhiều nhất',
@@ -31,7 +34,7 @@ export const vi: Record<MessageKey, string> = {
   'card.number': 'Số thẻ',
   'card.copy': 'Sao chép',
   'card.copied': 'Đã sao chép',
-  'card.noCode': 'Không có mã vạch — đưa số thẻ ở quầy thu ngân',
+  'card.noCode': 'Không có mã vạch: đưa số thẻ ở quầy thu ngân',
   'card.brightness': 'Màn hình ở độ sáng tối đa',
   'card.brightnessFailed': 'Không thể tăng độ sáng',
   'card.dense': 'Mã này có thể quá dày với một số máy quét. Chạm vào để xem toàn màn hình.',
@@ -188,6 +191,7 @@ export const vi: Record<MessageKey, string> = {
   'widget.empty': 'Thêm thẻ trong Tillcard để thẻ hiện ở đây.',
   'widget.noCode': 'Mở thẻ để hiện mã',
   'settings.till': 'Tại quầy thu ngân',
+  'settings.till.on': 'Độ sáng và màn hình bật',
   'settings.sort': 'Thứ tự danh sách thẻ',
   'settings.country': 'Quốc gia cho gợi ý cửa hàng',
   'settings.country.device': 'Vùng của điện thoại',

@@ -12,7 +12,7 @@ import { AppState, Pressable, ScrollView, StyleSheet, Switch, TextInput, View } 
 import { Button } from '@/components/button';
 import { Chip } from '@/components/chip';
 import { ThemedText } from '@/components/themed-text';
-import { Spacing } from '@/constants/theme';
+import { Radius, Spacing } from '@/constants/theme';
 import { codeOf, getCard, updateCard, type Card } from '@/db/cards';
 import { listCategories, type Category } from '@/db/categories';
 import { useSQLiteContext } from '@/db/provider';
@@ -439,7 +439,7 @@ export default function EditScreen() {
 
 const styles = StyleSheet.create({
   content: { padding: Spacing.three, gap: Spacing.two, paddingBottom: Spacing.six },
-  input: { minHeight: 48, borderRadius: 12, paddingHorizontal: Spacing.three, fontSize: 16 },
+  input: { minHeight: 48, borderRadius: Radius.card, paddingHorizontal: Spacing.three, fontSize: 16 },
   mono: { fontVariant: ['tabular-nums'], letterSpacing: 0.5 },
   multiline: { minHeight: 90, paddingTop: Spacing.three, textAlignVertical: 'top' },
   wrap: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
@@ -447,6 +447,6 @@ const styles = StyleSheet.create({
   swatch: { width: 40, height: 40, borderRadius: 20, borderWidth: 3 },
   photos: { flexDirection: 'row', gap: Spacing.two },
   photo: { width: '100%', aspectRatio: 1.586, borderRadius: 10 },
-  confirm: { borderWidth: 2, borderRadius: 12, padding: Spacing.three, gap: Spacing.two },
+  confirm: { borderWidth: 2, borderRadius: Radius.card, padding: Spacing.three, gap: Spacing.two },
   confirmNumber: { fontSize: 24, lineHeight: 30, fontWeight: 700 },
 });

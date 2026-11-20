@@ -13,7 +13,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { Button } from '@/components/button';
 import { ThemedText } from '@/components/themed-text';
-import { Spacing } from '@/constants/theme';
+import { Radius, Spacing } from '@/constants/theme';
 import { FORMATS, formatFromHint, type FormatId } from '@/engine/barcode/formats';
 import { CHAINS } from '@/engine/chains';
 import { useT } from '@/hooks/use-t';
@@ -125,6 +125,6 @@ export default function PhotoScreen() {
 
 const styles = StyleSheet.create({
   content: { padding: Spacing.three, gap: Spacing.three },
-  row: { flexDirection: 'row', gap: Spacing.three, borderRadius: 12, padding: Spacing.three, alignItems: 'center' },
+  row: { flexDirection: 'row', gap: Spacing.three, borderRadius: Radius.card, padding: Spacing.three, alignItems: 'center' },
   thumb: { width: 72, height: 72, borderRadius: 8, backgroundColor: '#ffffff' },
 });

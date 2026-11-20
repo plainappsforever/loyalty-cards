@@ -22,7 +22,8 @@ describe('screen-reader labels', () => {
 
   test('colour swatches, list tiles and the torch carry a label; the torch state is a state, not a glyph', () => {
     expect(read('card/[id]/edit.tsx')).toMatch(/testID=\{`color-\$\{i\}`\} accessibilityRole="button" accessibilityLabel=/);
-    expect(read('index.tsx')).toMatch(/accessibilityLabel=\{item\.favourite \?/);
+    expect(read('index.tsx')).toMatch(/accessibilityLabel=\{card\.favourite \?/);
+    expect(read('../components/poster.tsx')).toMatch(/accessibilityLabel=\{card\.favourite \?/);
     expect(read('add/scan.tsx')).toMatch(/accessibilityLabel=\{t\('scan\.torch'\)\} accessibilityState=\{\{ selected: torch \}\}/);
   });
 

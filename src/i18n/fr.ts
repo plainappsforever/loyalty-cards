@@ -1,4 +1,4 @@
-// French UI texts — MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
+// French UI texts: MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
 // native speaker. Same keys and {placeholders} as en.ts (scripts/check-i18n.mjs). Counts are written "Label: {n}"
 // (no singular|plural pair outside en/de). Source: docs/i18n-draft/fr.tsv via scripts/i18n-from-tsv.py.
 import type { MessageKey } from './en';
@@ -18,6 +18,9 @@ export const fr: Record<MessageKey, string> = {
   'cards.emptyImport': 'Importer depuis une autre app',
   'cards.deleted': '« {name} » supprimée',
   'cards.settings': 'Réglages',
+  'cards.sortFilter': 'Trier et filtrer',
+  'cards.expiresSoon': 'Expire bientôt',
+  'cards.expired': 'Expirée',
   'sort.manual': 'Manuel',
   'sort.name': 'Nom',
   'sort.most_used': 'Les plus utilisées',
@@ -188,6 +191,7 @@ export const fr: Record<MessageKey, string> = {
   'widget.empty': 'Ajoutez une carte dans Tillcard et elle apparaîtra ici.',
   'widget.noCode': 'Ouvrez la carte pour afficher son code',
   'settings.till': 'À la caisse',
+  'settings.till.on': 'Luminosité et écran actifs',
   'settings.sort': 'Ordre de la liste',
   'settings.country': 'Pays pour les suggestions de magasins',
   'settings.country.device': 'Région du téléphone',

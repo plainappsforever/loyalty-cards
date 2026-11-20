@@ -9,7 +9,7 @@ import { ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native'
 import { Button } from '@/components/button';
 import { CodeView } from '@/components/code-view';
 import { ThemedText } from '@/components/themed-text';
-import { Spacing } from '@/constants/theme';
+import { Radius, Spacing } from '@/constants/theme';
 import { getCard, type Card } from '@/db/cards';
 import { useSQLiteContext } from '@/db/provider';
 import { buildCatimaShareUrl } from '@/engine/catima/share-url';
@@ -93,6 +93,6 @@ export default function ShareScreen() {
 
 const styles = StyleSheet.create({
   content: { padding: Spacing.three, gap: Spacing.three },
-  qr: { alignItems: 'center', backgroundColor: '#ffffff', borderRadius: 12, paddingVertical: Spacing.three },
+  qr: { alignItems: 'center', backgroundColor: '#ffffff', borderRadius: Radius.card, paddingVertical: Spacing.three },
   center: { textAlign: 'center' },
 });

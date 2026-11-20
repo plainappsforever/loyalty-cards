@@ -35,6 +35,7 @@ let designs: [String: Design] = [
   "intervals": Design(name: "intervals", bg: 0xB43308, accent: 0xFFE082, note: "segmented ring, one segment lit"),
   "offscan": Design(name: "offscan", bg: 0x0D47A1, accent: 0x69F0AE, note: "page with a scan line"),
   "tillcard": Design(name: "tillcard", bg: 0x5E35B1, accent: 0xB2FF59, note: "stacked cards, three-bar mark"),
+  "tillcard2": Design(name: "tillcard2", bg: 0x6E3FA3, accent: 0xC29BF0, note: "one card with barcode, running off the right edge (1.1.0)"),
   "plainweeks": Design(name: "plainweeks", bg: 0x1F6F68, accent: 0xFFE9A8, note: "crescent with a leaf"),
   "mood": Design(name: "mood", bg: 0xAD1457, accent: 0xFFEB3B, note: "one calm face"),
   "cardscan": Design(name: "cardscan", bg: 0x263238, accent: 0x4DD0E1, note: "card inside corner frame"),
@@ -173,6 +174,33 @@ func drawGlyph(_ ctx: CGContext, box: CGRect, _ look: Look) {
     ctx.setFillColor(main)
     ctx.fillPath()
     for (x, w) in [(300.0, 52.0), (404.0, 112.0), (568.0, 52.0)] { clear(ctx, rrect(CGFloat(x), 515, CGFloat(w), 230, 14)) }
+  case "tillcard2":
+    // 1.1.0: one white card, wider than the icon, running off the right edge; a band along its top; barcode bars that
+    // run off with it. Mono layer: the bars and a band line are punched through.
+    let card = rrect(110, 300, 1400, 470, 70)
+    ctx.addPath(card)
+    ctx.setFillColor(main)
+    ctx.fillPath()
+    ctx.saveGState()
+    ctx.addPath(card)
+    ctx.clip()
+    if look == .colour {
+      ctx.setFillColor(acc)
+      ctx.fill(CGRect(x: 0, y: 300, width: 1600, height: 110))
+    } else {
+      clear(ctx, CGPath(rect: CGRect(x: 0, y: 410, width: 1600, height: 16), transform: nil))
+    }
+    ctx.restoreGState()
+    for (x, w) in [(190.0, 34.0), (250.0, 68.0), (350.0, 24.0), (400.0, 52.0), (500.0, 34.0), (570.0, 86.0), (690.0, 24.0), (750.0, 52.0), (850.0, 34.0), (920.0, 68.0), (1020.0, 34.0), (1100.0, 70.0), (1200.0, 40.0), (1290.0, 60.0)] {
+      let bar = rrect(CGFloat(x), 470, CGFloat(w), 240, 6)
+      if look == .colour {
+        ctx.addPath(bar)
+        ctx.setFillColor(rgb(0x16181A))
+        ctx.fillPath()
+      } else {
+        clear(ctx, bar)
+      }
+    }
   case "plainweeks":
     // A crescent, with a leaf growing in its opening. Nothing that says pregnancy.
     let outer = CGPath(ellipseIn: CGRect(x: 160, y: 200, width: 680, height: 680), transform: nil)
@@ -279,17 +307,38 @@ save(glyphLayer(1024, fraction: 0.74, .colour).makeImage()!, images.appendingPat
 save(solid(1024), images.appendingPathComponent("android-icon-background.png"))
 save(glyphLayer(1024, fraction: 0.74, .mono).makeImage()!, images.appendingPathComponent("android-icon-monochrome.png"))
 // Splash: the glyph alone on transparent; the splash background colour in app.config.ts is the icon colour.
-save(glyphLayer(1024, fraction: 0.9, .colour).makeImage()!, images.appendingPathComponent("splash-icon.png"))
+// tillcard2: a white card on the light splash background would vanish, so the splash shows the whole icon as a rounded tile.
+let splashImage: CGImage = {
+  if design.name != "tillcard2" { return glyphLayer(1024, fraction: 0.9, .colour).makeImage()! }
+  let ctx = canvas(1024)
+  ctx.addPath(rrect(0, 0, 1024, 1024, 230))
+  ctx.clip()
+  ctx.translateBy(x: 0, y: 1024)
+  ctx.scaleBy(x: 1, y: -1)
+  ctx.draw(storeIcon, in: CGRect(x: 0, y: 0, width: 1024, height: 1024))
+  return ctx.makeImage()!
+}()
+save(splashImage, images.appendingPathComponent("splash-icon.png"))
 // iOS 26 Icon Composer bundle (app.config.ts ios.icon): the transparent glyph layer over a solid fill.
 save(glyphLayer(1024, fraction: 0.9, .colour).makeImage()!, iconAssets.appendingPathComponent("glyph.png"))
 let r = String(format: "%.5f", Double((design.bg >> 16) & 255) / 255)
 let g = String(format: "%.5f", Double((design.bg >> 8) & 255) / 255)
 let b = String(format: "%.5f", Double(design.bg & 255) / 255)
-let json = """
-{
+// tillcard2: dark appearance swaps the fill for the dark background token #1D1E26; the tinted appearance is made by iOS
+// from the glyph layer (motif alone). Not seen on a device yet.
+let fillBlock = design.name == "tillcard2" ? """
+  "fill-specializations" : [
+    { "value" : { "solid" : "extended-srgb:0.43137,0.24706,0.63922,1.00000" } },
+    { "appearance" : "dark", "value" : { "solid" : "extended-srgb:0.11373,0.11765,0.14902,1.00000" } }
+  ],
+""" : """
   "fill" : {
     "solid" : "extended-srgb:\(r),\(g),\(b),1.00000"
   },
+"""
+let json = """
+{
+\(fillBlock)
   "groups" : [
     {
       "layers" : [

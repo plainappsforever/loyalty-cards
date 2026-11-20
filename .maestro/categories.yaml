@@ -79,9 +79,17 @@ tags:
 - assertVisible: "Groceries.*"
 - runFlow: subflows/back.yaml
 - tapOn:
+    id: sort-filter
+- tapOn:
     id: category-chip-0
+- tapOn:
+    id: filter-done
 - assertVisible: "1 card"
 - assertVisible: "Kaffeehaus Lila"
 - tapOn:
+    id: sort-filter
+- tapOn:
     id: category-all
+- tapOn:
+    id: filter-done
 - assertVisible: "10 cards"

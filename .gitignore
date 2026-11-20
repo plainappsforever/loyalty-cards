@@ -50,10 +50,3 @@ __pycache__/
 
 # local Expo modules: Gradle output (P5)
 modules/*/android/build/
-keystore.properties
-*.keystore
-google-services.json
-GoogleService-Info.plist
-.env
-.env.*
-test/fixtures/real/

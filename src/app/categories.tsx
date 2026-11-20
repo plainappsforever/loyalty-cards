@@ -6,7 +6,7 @@ import { Keyboard, Pressable, ScrollView, StyleSheet, TextInput, View } from 're
 
 import { Button } from '@/components/button';
 import { ThemedText } from '@/components/themed-text';
-import { Spacing } from '@/constants/theme';
+import { Radius, Spacing } from '@/constants/theme';
 import { createCategory, deleteCategory, listCategories, renameCategory, setCategoryOrder, type Category } from '@/db/categories';
 import { useSQLiteContext } from '@/db/provider';
 import { useT } from '@/hooks/use-t';
@@ -117,7 +117,7 @@ export default function CategoriesScreen() {
 const styles = StyleSheet.create({
   content: { padding: Spacing.three, gap: Spacing.two },
   row: { flexDirection: 'row', gap: Spacing.two, alignItems: 'center' },
-  input: { minHeight: 48, borderRadius: 12, paddingHorizontal: Spacing.three, fontSize: 16 },
-  item: { borderRadius: 12, padding: Spacing.three, gap: Spacing.two },
+  input: { minHeight: 48, borderRadius: Radius.card, paddingHorizontal: Spacing.three, fontSize: 16 },
+  item: { borderRadius: Radius.card, padding: Spacing.three, gap: Spacing.two },
   actions: { flexDirection: 'row', gap: Spacing.four, alignItems: 'center' },
 });

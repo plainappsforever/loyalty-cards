@@ -1,4 +1,4 @@
-// Hindi UI texts — MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
+// Hindi UI texts: MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
 // native speaker. Same keys and {placeholders} as en.ts (scripts/check-i18n.mjs). Counts are written "Label: {n}"
 // (no singular|plural pair outside en/de). Source: docs/i18n-draft/hi.tsv via scripts/i18n-from-tsv.py.
 import type { MessageKey } from './en';
@@ -18,6 +18,9 @@ export const hi: Record<MessageKey, string> = {
   'cards.emptyImport': 'दूसरे ऐप से इम्पोर्ट करें',
   'cards.deleted': '“{name}” हटाया गया',
   'cards.settings': 'सेटिंग्स',
+  'cards.sortFilter': 'क्रमबद्ध करें और फ़िल्टर',
+  'cards.expiresSoon': 'जल्द समाप्त',
+  'cards.expired': 'समाप्त',
   'sort.manual': 'मैन्युअल',
   'sort.name': 'नाम',
   'sort.most_used': 'सबसे ज़्यादा इस्तेमाल',
@@ -31,7 +34,7 @@ export const hi: Record<MessageKey, string> = {
   'card.number': 'नंबर',
   'card.copy': 'कॉपी करें',
   'card.copied': 'कॉपी हो गया',
-  'card.noCode': 'बारकोड नहीं — काउंटर पर नंबर दिखाएँ',
+  'card.noCode': 'बारकोड नहीं: काउंटर पर नंबर दिखाएँ',
   'card.brightness': 'स्क्रीन पूरी चमक पर',
   'card.brightnessFailed': 'चमक नहीं बढ़ाई जा सकी',
   'card.dense': 'यह कोड कुछ स्कैनरों के लिए बहुत घना हो सकता है। पूरी स्क्रीन के लिए इसे टैप करें।',
@@ -188,6 +191,7 @@ export const hi: Record<MessageKey, string> = {
   'widget.empty': 'Tillcard में कोई कार्ड जोड़ें, वह यहाँ दिखेगा।',
   'widget.noCode': 'कोड दिखाने के लिए कार्ड खोलें',
   'settings.till': 'काउंटर पर',
+  'settings.till.on': 'चमक और स्क्रीन चालू',
   'settings.sort': 'कार्ड सूची का क्रम',
   'settings.country': 'दुकान सुझावों के लिए देश',
   'settings.country.device': 'फ़ोन का क्षेत्र',

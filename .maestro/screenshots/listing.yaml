@@ -1,0 +1,88 @@
+appId: ${APP_ID}
+name: Listing screenshots - cards list, card, add, share, settings (RELEASE_KIT 3f; run by scripts/screenshots.sh, not part of the suite)
+tags:
+  - screenshots
+---
+# env: SHOTS = "en" or "de" (file-name prefix), SEED = seed query (default set=ten). Only testIDs are used for navigation, so the
+# same steps run in both languages; the seeded chain names are fictional (D16). Each shot waits for its screen first.
+# A preview build with data asks for the typed word WIPE before the seed wipes anything (D54); subflows/seed.yaml types it.
+- runFlow: ../subflows/launch.yaml
+- runFlow:
+    file: seed.yaml
+    env:
+      SEED: set=store-demo&lang=${SHOTS}
+- extendedWaitUntil:
+    visible:
+      id: cards-count
+    timeout: 15000
+- takeScreenshot: ${SHOTS}-01-cards
+# 2. A card open: the large code, the number, Copy, the brightness line (EAN-13, Nordmarkt = first tile in the Manual order)
+- tapOn:
+    id: tile-0
+- extendedWaitUntil:
+    visible:
+      id: card-code
+    timeout: 15000
+- waitForAnimationToEnd
+- takeScreenshot: ${SHOTS}-02-card
+- runFlow: ../subflows/back.yaml
+# 3. Add card > Type the number: the form filled in (name, number, colour, ranked barcode types with the preview), never saved
+- tapOn:
+    id: add-card
+- extendedWaitUntil:
+    visible:
+      id: add-type
+    timeout: 10000
+- tapOn:
+    id: add-type
+- extendedWaitUntil:
+    visible:
+      id: edit-screen
+    timeout: 10000
+# number first: typing the name shows known-shop suggestions under it, which moves the number field down
+- tapOn:
+    id: edit-number
+- inputText: "4006381333931"
+- tapOn:
+    id: edit-name
+- inputText: Riverside Books
+# iOS cannot hide this keyboard; the Return key of the single-line Name field does it
+- pressKey: Enter
+- tapOn:
+    id: color-4
+- waitForAnimationToEnd
+- takeScreenshot: ${SHOTS}-03-add
+# leave on purpose (clears the draft), then close the Add sheet by relaunching (the cards stay)
+- runFlow: ../subflows/back.yaml
+- launchApp:
+    stopApp: true
+- extendedWaitUntil:
+    visible:
+      id: home-screen
+    timeout: 20000
+# 4. Share with family: the QR of a card (Kaffeehaus Lila = second tile; the favourite Nordmarkt comes first)
+- tapOn:
+    id: tile-1
+- extendedWaitUntil:
+    visible:
+      id: card-share
+    timeout: 15000
+- tapOn:
+    id: card-share
+- extendedWaitUntil:
+    visible:
+      id: share-qr
+    timeout: 15000
+- waitForAnimationToEnd
+- takeScreenshot: ${SHOTS}-04-share
+- runFlow: ../subflows/back.yaml
+- runFlow: ../subflows/back.yaml
+# 5. Settings (language, widgets, brightness)
+- runFlow: ../subflows/open-settings.yaml
+# scrolled to the end: widgets, About, privacy, Licences
+- scrollUntilVisible:
+    element:
+      id: open-licenses
+    direction: DOWN
+- waitForAnimationToEnd
+- takeScreenshot: ${SHOTS}-05-settings

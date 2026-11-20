@@ -82,9 +82,13 @@ tags:
     id: search-input
 - eraseText: 20
 - tapOn:
+    id: sort-filter
+- tapOn:
     id: sort-most_used
 - assertVisible:
     id: sort-most_used
     selected: true
 - tapOn:
     id: sort-manual
+- tapOn:
+    id: filter-done

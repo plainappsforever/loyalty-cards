@@ -4,7 +4,7 @@ import { gs1CheckDigit } from '@/engine/barcode/check-digit';
 import type { FormatId } from '@/engine/barcode/formats';
 import type { NewCard } from '@/db/cards';
 
-export const SEED_SETS = ['empty', 'ten', 'two-hundred', 'five-hundred'] as const;
+export const SEED_SETS = ['empty', 'ten', 'two-hundred', 'five-hundred', 'store-demo'] as const;
 export type SeedSet = (typeof SEED_SETS)[number];
 
 const CHAINS: { name: string; color: string; format: FormatId }[] = [
@@ -95,11 +95,42 @@ function expand(code7: string): string {
 }
 
 export function seedCount(set: SeedSet): number {
-  return set === 'empty' ? 0 : set === 'ten' ? 10 : set === 'two-hundred' ? 200 : 500;
+  return set === 'empty' ? 0 : set === 'store-demo' ? STORE_DEMO.length : set === 'ten' ? 10 : set === 'two-hundred' ? 200 : 500;
 }
 
+/** Store screenshots (RELEASE_KIT 3f): fictional chains with realistic notes, varied colours, one favourite, nothing expired. */
+const STORE_DEMO: { name: string; format: FormatId; number: string; color: string; note: string; noteDe: string; days: number | null; favourite?: boolean; balance?: string }[] = [
+  { name: 'Nordmarkt', format: 'ean13', number: '4006381333931', color: '#1f6f43', note: 'Double points on Tuesdays', noteDe: 'Dienstags doppelte Punkte', days: null, favourite: true, balance: '12.50' },
+  { name: 'Kaffeehaus Lila', format: 'qr', number: 'CARD-482916037254', color: '#6b2fa0', note: 'Every tenth coffee is free', noteDe: 'Jeder zehnte Kaffee gratis', days: null },
+  { name: 'Drogerie Sonne', format: 'code128', number: '7390218465', color: '#e0a100', note: '', noteDe: '', days: null },
+  { name: 'Bauhof Plus', format: 'itf', number: '5081927364', color: '#c0392b', note: 'Trade discount 5 %', noteDe: 'Handwerkerrabatt 5 %', days: 300 },
+  { name: 'Bücherecke', format: 'code39', number: 'LC4820517', color: '#2c3e50', note: 'Member since 2023', noteDe: 'Mitglied seit 2023', days: null },
+  { name: 'Fjordapotheke', format: 'ean8', number: '40063812', color: '#1abc9c', note: '', noteDe: '', days: null },
+  { name: 'Velo Depot', format: 'codabar', number: 'A40916723B', color: '#e67e22', note: 'Free service after 5 stamps', noteDe: 'Gratis-Service nach 5 Stempeln', days: 150 },
+  { name: 'Hafenkino', format: 'pdf417', number: 'PDF2049187365', color: '#34495e', note: 'Ten visits, the eleventh is free', noteDe: 'Zehn Besuche, der elfte ist gratis', days: 200 },
+  { name: 'Casa Pasta', format: 'aztec', number: 'AZ5019283746', color: '#8e44ad', note: '', noteDe: '', days: null },
+];
+
 /** The cards of a seed set, ids `seed-<n>`, timestamps spread over the last 90 days before `now`. */
-export function seedCards(set: SeedSet, now = 1_760_000_000_000): NewCard[] {
+export function seedCards(set: SeedSet, now = 1_760_000_000_000, lang: 'en' | 'de' = 'en'): NewCard[] {
+  if (set === 'store-demo') {
+    const real = Date.now();
+    return STORE_DEMO.map((c, i) => ({
+      id: `seed-${i + 1}`,
+      name: c.name,
+      number: c.number,
+      format: c.format,
+      color: c.color,
+      note: lang === 'de' ? c.noteDe : c.note,
+      balance: c.balance ?? '',
+      balanceCurrency: c.balance ? 'EUR' : '',
+      expiry: c.days === null ? null : real + c.days * 86_400_000,
+      favourite: c.favourite === true,
+      archived: false,
+      useCount: 9 - i,
+      lastUsedAt: real - (i + 1) * 86_400_000,
+    }));
+  }
   const rand = prng(set.length * 7919 + 17);
   const n = seedCount(set);
   const cards: NewCard[] = [];

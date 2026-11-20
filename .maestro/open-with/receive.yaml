@@ -36,10 +36,18 @@ appId: ${APP_ID}
 # 44 imported: 40 in the list, 4 archived in the Catima file (its `archive` column) behind the Archived chip
 - assertVisible: "40 cards"
 - tapOn:
-    id: show-archived
-- assertVisible: "4 cards"
+    id: sort-filter
 - tapOn:
     id: show-archived
+- tapOn:
+    id: filter-done
+- assertVisible: "4 cards"
+- tapOn:
+    id: sort-filter
+- tapOn:
+    id: show-archived
+- tapOn:
+    id: filter-done
 - assertVisible: "40 cards"
 # a Catima PNG photo became our JPEG (native) and shows on the card
 - tapOn:

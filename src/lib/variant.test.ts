@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { isTestVariant, seedNeedsConfirmation, wipeConfirmed, WIPE_WORD } from './variant';
+import { debugReadoutsVisible, isTestVariant, STORE_SHOTS_KEY, seedNeedsConfirmation, wipeConfirmed, WIPE_WORD } from './variant';
 
 describe('isTestVariant (D54: fail closed)', () => {
   test('open only for development and preview', () => {
@@ -36,5 +36,30 @@ describe('debug/seed never hard-deletes without a typed word in preview (F5)', (
     expect(src.match(/wipeAllCards\(db\)/g)).toHaveLength(1);
     expect(src.indexOf('seedNeedsConfirmation(')).toBeLessThan(src.indexOf('await seed();'));
     expect(src).toContain('disabled={!wipeConfirmed(typed)}');
+  });
+});
+
+describe('store-shots switch hides the debug read-outs (test builds only)', () => {
+  test('read-outs show in preview/development, hide while store_shots=1, never show elsewhere', () => {
+    expect(STORE_SHOTS_KEY).toBe('store_shots');
+    for (const v of ['preview', 'development']) {
+      expect(debugReadoutsVisible(v, null)).toBe(true);
+      expect(debugReadoutsVisible(v, '0')).toBe(true);
+      expect(debugReadoutsVisible(v, '1')).toBe(false);
+    }
+    for (const v of ['production', undefined, '', 'prod']) {
+      expect(debugReadoutsVisible(v, null)).toBe(false);
+      expect(debugReadoutsVisible(v, '1')).toBe(false);
+    }
+  });
+
+  test('the seed route sets it only for store-demo and clears it otherwise; the screens read it', () => {
+    const read = (f: string) => fs.readFileSync(path.join(__dirname, f), 'utf8');
+    const seed = read('../app/debug/seed.tsx');
+    expect(seed).toContain("set === 'store-demo'");
+    expect(seed).toContain('STORE_SHOTS_KEY');
+    expect(seed).toContain('deleteSetting(db, STORE_SHOTS_KEY)');
+    expect(read('../app/card/[id]/index.tsx')).toContain('debugReadoutsVisible(');
+    expect(read('../app/settings.tsx')).toContain('debugReadoutsVisible(');
   });
 });

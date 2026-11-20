@@ -1,4 +1,4 @@
-// Indonesian UI texts — MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
+// Indonesian UI texts: MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
 // native speaker. Same keys and {placeholders} as en.ts (scripts/check-i18n.mjs). Counts are written "Label: {n}"
 // (no singular|plural pair outside en/de). Source: docs/i18n-draft/id.tsv via scripts/i18n-from-tsv.py.
 import type { MessageKey } from './en';
@@ -18,6 +18,9 @@ export const id: Record<MessageKey, string> = {
   'cards.emptyImport': 'Impor dari aplikasi lain',
   'cards.deleted': '“{name}” dihapus',
   'cards.settings': 'Pengaturan',
+  'cards.sortFilter': 'Urutkan dan filter',
+  'cards.expiresSoon': 'Segera kedaluwarsa',
+  'cards.expired': 'Kedaluwarsa',
   'sort.manual': 'Manual',
   'sort.name': 'Nama',
   'sort.most_used': 'Paling sering',
@@ -31,7 +34,7 @@ export const id: Record<MessageKey, string> = {
   'card.number': 'Nomor',
   'card.copy': 'Salin',
   'card.copied': 'Disalin',
-  'card.noCode': 'Tanpa barcode — tunjukkan nomor di kasir',
+  'card.noCode': 'Tanpa barcode: tunjukkan nomor di kasir',
   'card.brightness': 'Layar pada kecerahan penuh',
   'card.brightnessFailed': 'Kecerahan tidak dapat dinaikkan',
   'card.dense': 'Kode ini mungkin terlalu rapat untuk beberapa pemindai. Ketuk untuk layar penuh.',
@@ -188,6 +191,7 @@ export const id: Record<MessageKey, string> = {
   'widget.empty': 'Tambahkan kartu di Tillcard dan kartu akan muncul di sini.',
   'widget.noCode': 'Buka kartu untuk menampilkan kodenya',
   'settings.till': 'Di kasir',
+  'settings.till.on': 'Kecerahan dan layar aktif',
   'settings.sort': 'Urutan daftar kartu',
   'settings.country': 'Negara untuk saran toko',
   'settings.country.device': 'Wilayah ponsel',

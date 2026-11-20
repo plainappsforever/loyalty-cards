@@ -1,4 +1,4 @@
-// Japanese UI texts — MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
+// Japanese UI texts: MACHINE DRAFT (P7, 2026-10-26): translated from en.ts by the build agent, NOT reviewed by a
 // native speaker. Same keys and {placeholders} as en.ts (scripts/check-i18n.mjs). Counts are written "Label: {n}"
 // (no singular|plural pair outside en/de). Source: docs/i18n-draft/ja.tsv via scripts/i18n-from-tsv.py.
 import type { MessageKey } from './en';
@@ -18,6 +18,9 @@ export const ja: Record<MessageKey, string> = {
   'cards.emptyImport': 'ほかのアプリから読み込む',
   'cards.deleted': '「{name}」を削除しました',
   'cards.settings': '設定',
+  'cards.sortFilter': '並べ替えと絞り込み',
+  'cards.expiresSoon': 'まもなく期限切れ',
+  'cards.expired': '期限切れ',
   'sort.manual': '手動',
   'sort.name': '名前',
   'sort.most_used': 'よく使う順',
@@ -188,6 +191,7 @@ export const ja: Record<MessageKey, string> = {
   'widget.empty': 'Tillcard でカードを追加すると、ここに表示されます。',
   'widget.noCode': 'カードを開いてコードを表示',
   'settings.till': 'レジで',
+  'settings.till.on': '明るさと画面オン',
   'settings.sort': 'カード一覧の並び順',
   'settings.country': 'お店の候補の国',
   'settings.country.device': '電話の地域',

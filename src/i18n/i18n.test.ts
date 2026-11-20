@@ -30,7 +30,7 @@ describe('i18n parity', () => {
     for (const l of LANGUAGES) expect(LANGUAGE_NAMES[l].length).toBeGreaterThan(0);
     expect(Object.keys(messages).sort()).toEqual([...LANGUAGES].sort());
     expect(translate('fr', 'cards.title')).toBe('Cartes');
-    // outside en/de a count is "Label: {n}" — no singular|plural pair the en/de picker would split
+    // outside en/de a count is "Label: {n}": no singular|plural pair the en/de picker would split
     for (const [lang, dict] of Object.entries(messages)) if (lang !== 'en' && lang !== 'de') for (const text of Object.values(dict!)) expect(text).not.toContain('|');
     expect(translate('de', 'cards.title')).toBe(de['cards.title']);
   });

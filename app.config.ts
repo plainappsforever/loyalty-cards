@@ -1,5 +1,7 @@
 import type { ConfigContext, ExpoConfig } from 'expo/config';
 
+import brand from './src/constants/brand.json';
+
 // One codebase, three installable variants that can sit side by side on a device.
 // Select with APP_VARIANT (set by scripts/native.sh and eas.json).
 // Identifiers: com.plainapps.<app> (owner decision 2026-10-15 for the portfolio; card-scanner D10 pattern). The product
@@ -28,6 +30,13 @@ if (!(variant in VARIANTS)) {
   throw new Error(`Unknown APP_VARIANT "${variant}". Use development, preview or production.`);
 }
 const { name, id, scheme } = VARIANTS[variant];
+
+// D24: splash and Android icon background come from the app's identity file (src/constants/brand.json), never a literal
+// here; src/constants/brand.test.ts fails a preview/production config that still carries the template placeholder.
+const IDENTITY = {
+  splash: { light: brand.light.background, dark: brand.dark.background },
+  iconBackground: brand.light.accent,
+};
 const others = Object.values(VARIANTS).filter((v) => v.id !== id);
 const release = variant !== 'development';
 const IOS_LOCALIZATIONS = ['en', 'de', 'es', 'pt-BR', 'fr', 'it', 'tr', 'ru', 'id', 'hi', 'ja', 'zh-Hans', 'ko', 'vi'];
@@ -37,6 +46,8 @@ const IOS_LOCALIZATIONS = ['en', 'de', 'es', 'pt-BR', 'fr', 'it', 'tr', 'ru', 'i
 // Android has its own RemoteViews widgets in modules/cards-widget (expo-widgets is excluded from Android autolinking in
 // package.json, mood-journal D68).
 const widgetsEnabled = process.env.WIDGETS !== '0';
+// APPLE_TEAM_ID (optional, not a secret) becomes ios.appleTeamId (DEVELOPMENT_TEAM in the generated project) for archives; interval-timer pattern.
+const appleTeamId = process.env.APPLE_TEAM_ID || undefined;
 
 // Release variants block Android permissions that library manifests merge in and nothing in the app uses
 // (mood-journal D70, `aapt dump permissions` of its first preview APK; template D10). Each line says who adds the
@@ -68,15 +79,16 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name,
   slug: 'loyalty-cards',
-  version: '1.0.0',
+  version: '1.1.0',
   orientation: 'portrait',
   icon: './assets/images/icon.png',
   scheme,
   userInterfaceStyle: 'automatic',
   ios: {
     bundleIdentifier: id,
+    ...(appleTeamId ? { appleTeamId } : {}),
     // F7 (review): explicit, start at 1; raise by one for every upload (App Store build number / Play versionCode, F-Droid reads it).
-    buildNumber: '1',
+    buildNumber: '2',
     icon: './assets/expo.icon',
     // P8b (App Store export compliance): the app uses no encryption beyond the system's (ITSAppUsesNonExemptEncryption).
     config: { usesNonExemptEncryption: false },
@@ -90,9 +102,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   android: {
     package: id,
-    versionCode: 1,
+    versionCode: 2,
     adaptiveIcon: {
-      backgroundColor: '#5E35B1',
+      backgroundColor: IDENTITY.iconBackground,
       foregroundImage: './assets/images/android-icon-foreground.png',
       backgroundImage: './assets/images/android-icon-background.png',
       monochromeImage: './assets/images/android-icon-monochrome.png',
@@ -109,7 +121,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     // P8b: no push entitlement (expo-widgets adds aps-environment although the widgets use no push; read from the preview build).
     './plugins/without-push-entitlement.js',
     'expo-router',
-    ['expo-splash-screen', { backgroundColor: '#5E35B1', image: './assets/images/splash-icon.png', imageWidth: 76 }],
+    ['expo-splash-screen', { backgroundColor: IDENTITY.splash.light, dark: { backgroundColor: IDENTITY.splash.dark }, image: './assets/images/splash-icon.png', imageWidth: 96 }],
     'expo-sqlite',
     'expo-localization',
     // Dev builds reopen the last Metro server directly, so Maestro can launch them unattended. Development only: release
